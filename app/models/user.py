@@ -19,6 +19,11 @@ class User(db.Model, UserMixin):
 
     status = db.relationship("Status", lazy="joined")
     profile_image = db.relationship("Image", lazy="joined")
+    my_workspaces = db.relationship("WorkspaceMember", cascade="all, delete-orphan")
+    my_channels = db.relationship("ChannelMember", foreign_key="ChannelMember.user_id", cascade="all, delete-orphan")
+    sent_messages = db.relationship("Messages", cascade="all, delete-orphan")
+    workspace_invitations = db.relationship("WorkspaceInvite", foreign_keys="WorkspaceInvite.invited_user_id", cascade="all, delete-orphan")
+
 
     @property
     def password(self):

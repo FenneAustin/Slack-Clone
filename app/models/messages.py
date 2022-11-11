@@ -1,5 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from flask_login import UserMixin
+from datetime import datetime
 
 
 class Message(db.Model, UserMixin):
@@ -12,6 +13,7 @@ class Message(db.Model, UserMixin):
     chat_id = db.Column(db.Integer)
     channel_id = db.Column(db.Integer)
     text = db.Column(db.String(255))
+    sent_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
     def to_dict(self):
         return {
