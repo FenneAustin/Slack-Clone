@@ -15,15 +15,15 @@ class User(db.Model, UserMixin):
     first_name = db.Column(db.String(255), nullable=False)
     last_name = db.Column(db.String(255), nullable=False)
     status_id = db.Column(db.Integer, db.ForeignKey('statuses.id'))
-    profile_image_id = db.Column(db.integer, db.ForeignKey('images.id'))
+    profile_image_id = db.Column(db.Integer, db.ForeignKey('images.id'))
 
     status = db.relationship("Status", lazy="joined")
     profile_image = db.relationship("Image", lazy="joined")
-    my_workspaces = db.relationship("WorkspaceMember", cascade="all, delete-orphan")
-    my_channels = db.relationship("ChannelMember", foreign_key="ChannelMember.user_id", cascade="all, delete-orphan")
-    sent_messages = db.relationship("Messages", cascade="all, delete-orphan")
+    my_workspaces = db.relationship("WorkspaceMember", foreign_keys="WorkspaceMember.user_id", cascade="all, delete-orphan")
+    my_channels = db.relationship("ChannelMember", foreign_keys="ChannelMember.user_id", cascade="all, delete-orphan")
+    sent_messages = db.relationship("Message", cascade="all, delete-orphan")
     workspace_invitations = db.relationship("WorkspaceInvite", foreign_keys="WorkspaceInvite.invited_user_id", cascade="all, delete-orphan")
-
+    owned_workspaces = db.relationship("Workspace", foreign_keys="Workspace.owner_id", cascade="all, delete-orphan")
 
     @property
     def password(self):

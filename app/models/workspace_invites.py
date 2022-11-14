@@ -9,7 +9,11 @@ class WorkspaceInvite(db.Model, UserMixin):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    invited_user_id = db.Column(db.Integer, nullable=False)
+    invited_user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    workspace_id = db.Column(db.Integer, db.ForeignKey('workspaces.id'))
+
+    invited_user = db.relationship("User", foreign_keys=[invited_user_id], back_populates="workspace_invitations")
+    workspace = db.relationship("Workspace", foreign_keys=[workspace_id], back_populates="invitations")
 
     def to_dict(self):
         return {

@@ -10,10 +10,15 @@ class Message(db.Model, UserMixin):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    chat_id = db.Column(db.Integer)
-    channel_id = db.Column(db.Integer)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    chat_id = db.Column(db.Integer, db.ForeignKey('chats.id'))
+    channel_id = db.Column(db.Integer, db.ForeignKey('channels.id'))
     text = db.Column(db.String(255))
     sent_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+
+    user = db.relationship("User")
+    direct_message = db.relationship("Chat")
+
 
     def to_dict(self):
         return {

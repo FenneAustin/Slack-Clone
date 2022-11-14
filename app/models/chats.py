@@ -9,8 +9,14 @@ class Chat(db.Model, UserMixin):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    user_one_id = db.Column(db.Integer, nullable=False)
-    user_two_id = db.Column(db.Integer, nullable=False)
+    workspace_id = db.Column(db.Integer, db.ForeignKey('workspaces.id'))
+    user_one_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    user_two_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+
+    user_one = db.relationship("User", foreign_keys=[user_one_id])
+    user_two = db.relationship("User", foreign_keys=[user_two_id])
+    workspace = db.relationship("Workspace", foreign_keys=[workspace_id])
+    messages = db.relationship("Message",  cascade="all, delete-orphan")
 
 
     def to_dict(self):

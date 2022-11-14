@@ -1,21 +1,22 @@
-from app.models import db, User, environment, SCHEMA
+from app.models import db, User, environment, SCHEMA, Channel
 
 
 # Adds a demo user, you can add other users here if you want
-def seed_users():
-    demo = User(
-        first_name='Demo', last_name='lition', email='demo@aa.io', password='password')
-    marnie = User(
-       first_name='marnie', last_name="kraber", email='marnie@aa.io', password='password')
-    bobbie = User(
-        first_name='bobbie', last_name="singer", email='bobbie@aa.io', password='password')
-    austin = User(
-        first_name='austin', last_name='fenn', email='austin@aa.io', password='password')
+def seed_create_channels():
+    demo_add_channel_1 = Channel(
+         workspace_id=1, name="live-questions")
+    demo_add_channel_2 = Channel(
+         workspace_id=2, name="project-grading")
+    demo_add_channel_3 = Channel(
+         workspace_id=3, name="study-group")
+    demo_add_channel_4 = Channel(
+         workspace_id=4, name="just-chatting")
 
-    db.session.add(demo)
-    db.session.add(marnie)
-    db.session.add(bobbie)
-    db.session.add(austin)
+
+    db.session.add(demo_add_channel_1)
+    db.session.add(demo_add_channel_2)
+    db.session.add(demo_add_channel_3)
+    db.session.add(demo_add_channel_4)
     db.session.commit()
 
 

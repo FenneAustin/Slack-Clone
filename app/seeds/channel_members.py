@@ -1,21 +1,22 @@
-from app.models import db, User, environment, SCHEMA
+from app.models import db, User, environment, SCHEMA, ChannelMember
 
 
 # Adds a demo user, you can add other users here if you want
-def seed_users():
-    demo = User(
-        first_name='Demo', last_name='lition', email='demo@aa.io', password='password')
-    marnie = User(
-       first_name='marnie', last_name="kraber", email='marnie@aa.io', password='password')
-    bobbie = User(
-        first_name='bobbie', last_name="singer", email='bobbie@aa.io', password='password')
-    austin = User(
-        first_name='austin', last_name='fenn', email='austin@aa.io', password='password')
+def seed_channel_members():
+    demo_add_channelmember_1 = ChannelMember(
+         user_id=1, workspace_id=1, permission_id=1)
+    demo_add_channelmember_2 = ChannelMember(
+         user_id=2, workspace_id=1, permission_id=1)
+    demo_add_channelmember_3 = ChannelMember(
+         user_id=3, workspace_id=1, permission_id=1)
+    demo_add_channelmember_4 = ChannelMember(
+         user_id=4, workspace_id=1, permission_id=1)
 
-    db.session.add(demo)
-    db.session.add(marnie)
-    db.session.add(bobbie)
-    db.session.add(austin)
+
+    db.session.add(demo_add_channelmember_1)
+    db.session.add(demo_add_channelmember_2)
+    db.session.add(demo_add_channelmember_3)
+    db.session.add(demo_add_channelmember_4)
     db.session.commit()
 
 

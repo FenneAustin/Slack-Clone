@@ -1,21 +1,21 @@
-from app.models import db, User, environment, SCHEMA
+from app.models import db, User, environment, SCHEMA, Workspace
 
 
 # Adds a demo user, you can add other users here if you want
-def seed_users():
-    demo = User(
-        first_name='Demo', last_name='lition', email='demo@aa.io', password='password')
-    marnie = User(
-       first_name='marnie', last_name="kraber", email='marnie@aa.io', password='password')
-    bobbie = User(
-        first_name='bobbie', last_name="singer", email='bobbie@aa.io', password='password')
-    austin = User(
-        first_name='austin', last_name='fenn', email='austin@aa.io', password='password')
+def seed_workspaces():
+    demo_workspace_1 = Workspace(
+         owner_id=1, name='demo workspace')
+    demo_workspace_2 = Workspace(
+        owner_id=2, name='demo workspace 2')
+    demo_workspace_3 = Workspace(
+        owner_id=3, name='demo workspace 3')
+    demo_workspace_4 = Workspace(
+        owner_id=4, name='demo workspace 4')
 
-    db.session.add(demo)
-    db.session.add(marnie)
-    db.session.add(bobbie)
-    db.session.add(austin)
+    db.session.add(demo_workspace_1)
+    db.session.add(demo_workspace_2)
+    db.session.add(demo_workspace_3)
+    db.session.add(demo_workspace_4)
     db.session.commit()
 
 
