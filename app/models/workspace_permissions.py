@@ -13,6 +13,5 @@ class WorkspacePermission(db.Model, UserMixin):
 
     def to_dict(self):
         return {
-            'id': self.id,
             'permission': self.permission
         }

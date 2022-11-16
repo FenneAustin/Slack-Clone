@@ -14,12 +14,12 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
     first_name = db.Column(db.String(255), nullable=False)
     last_name = db.Column(db.String(255), nullable=False)
-    status_id = db.Column(db.Integer, db.ForeignKey('statuses.id'))
-    profile_image_id = db.Column(db.Integer, db.ForeignKey('images.id'))
+    status_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('statuses.id')))
+    profile_image_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('images.id')))
 
     status = db.relationship("Status", lazy="joined")
     profile_image = db.relationship("Image", lazy="joined")
-    my_workspaces = db.relationship("WorkspaceMember", foreign_keys="WorkspaceMember.user_id", cascade="all, delete-orphan")
+    my_workspaces = db.relationship("WorkspaceMember", foreign_keys="WorkspaceMember.user_id", cascade="all, delete-orphan", lazy="dynamic")
     my_channels = db.relationship("ChannelMember", foreign_keys="ChannelMember.user_id", cascade="all, delete-orphan")
     sent_messages = db.relationship("Message", cascade="all, delete-orphan")
     workspace_invitations = db.relationship("WorkspaceInvite", foreign_keys="WorkspaceInvite.invited_user_id", cascade="all, delete-orphan")
@@ -44,3 +44,6 @@ class User(db.Model, UserMixin):
             'first_name':  self.first_name,
             'last_name': self.last_name
         }
+
+    def my_workspaces_list(self):
+        return self.my_workspaces.all()
