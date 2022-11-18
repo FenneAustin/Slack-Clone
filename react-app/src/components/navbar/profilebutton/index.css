@@ -1,0 +1,51 @@
+.default-profile {
+  width: 28px;
+  height: auto;
+  margin-left: 15px;
+  margin-top: 4px;
+  margin-right: 2px;
+  margin-bottom: 4px;
+}
+
+.flyout-container {
+  display: inline-block;
+  position: relatiive;
+  height: 100%;
+  width: 100%;
+}
+
+.flyout {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.user-pic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-bottom: 30px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+
+
+.profile-dropdown {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  background-color: white;
+  border-radius: 10px;
+  min-width: 200px;
+  min-height: 150px;
+  gap: 10px;
+  left: 10px;
+  bottom: 19px;
+  border: 1px lightgray solid;
+}
+
+.logout-btn {
+  margin-bottom: 20px;
+}

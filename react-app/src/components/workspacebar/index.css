@@ -1,6 +1,8 @@
 .workspace-bar {
-    background-color: #581454
+    background-color: #581454;
+    position: relative;
 }
+
 
 
 .workspace-btns {

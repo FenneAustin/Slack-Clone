@@ -28,6 +28,7 @@ function App() {
 
   return (
     <BrowserRouter>
+      {loaded && (
       <Switch>
         <Route path='/login' exact={true}>
           <LoginForm />
@@ -48,6 +49,8 @@ function App() {
           <SplashPage />
         </Route>
       </Switch>
+      )
+    }
     </BrowserRouter>
   );
 }
