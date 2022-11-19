@@ -17,11 +17,13 @@ const Home = () => {
         setSelectedWorkspace(id)
     }
 
+    const workspace = useSelector(state => state.workspace)
+
 
     return (
       <div className="home-page">
         <WorkspaceBar className="workspace-bar" switchWorkspace={handleWorkspaceSwitch} user={sessionUser}/>
-        <WorkspaceTitleBar className="title-container" workspaceId={selectedWorkspace}/>
+        <WorkspaceTitleBar className="title-container" workspace={workspace[selectedWorkspace]}/>
         <WorkspaceChannels className="channels-container" workspaceId={selectedWorkspace}/>
         <WorkspaceDirectMsg className="messages-container" />
         <Content className="content-container" />

@@ -1,0 +1,9 @@
+.editor {
+    max-width: 100%;
+}
+
+
+.bundled-editor {
+    max-width: 81%;
+    border: 2px black solid;
+}

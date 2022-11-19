@@ -2,6 +2,8 @@ import { useEffect } from "react"
 import {useDispatch, useSelector} from "react-redux"
 import "./index.css"
 import { getAllWorkspaceChannels } from "../../store/channels"
+import { NavLink } from "react-router-dom"
+
 
 const WorkspaceChannels = ({workspaceId}) => {
 
@@ -19,9 +21,11 @@ const WorkspaceChannels = ({workspaceId}) => {
         <div className="channels-container">
             <h4>Channels</h4>
             {channels.map((channel, i) => {
-                return(
-                <div key={i}>{channel.name}</div>
-                )
+                return (
+                  <NavLink to ="/">
+                    <div key={i}>{channel.name}</div>
+                  </NavLink>
+                );
             })}
         </div>
     )
