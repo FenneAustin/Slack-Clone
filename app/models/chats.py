@@ -22,6 +22,6 @@ class Chat(db.Model, UserMixin):
     def to_dict(self):
         return {
             'id': self.id,
-            'user_one_id': self.user_one_id,
-            'user_two_id': self.user_two_id,
+            'user_one': self.user_one.to_dict(),
+            'user_two': self.user_two.to_dict(),
         }

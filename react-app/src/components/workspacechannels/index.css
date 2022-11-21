@@ -2,4 +2,7 @@
     background-color: #581454;
     height: 100%;
     width: 100%;
+    border-left: .5px #cea8d1 solid;
+    border-bottom: .5px #cea8d1 solid;
+    border-top: .5px #cea8d1 solid;
 }

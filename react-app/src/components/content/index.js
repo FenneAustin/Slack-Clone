@@ -1,13 +1,15 @@
 import React, {useState} from 'react'
 import {useParams} from 'react-router-dom'
 import TextEditor from './editor/TextEditor';
-
+import MessageFeed from '../messagefeed';
+import './index.css'
 const Content = () => {
 
 
     return (
       <div className="content-container">
-            <TextEditor />
+            <MessageFeed />
+            <TextEditor className="text-editor"/>
       </div>
     );
 }

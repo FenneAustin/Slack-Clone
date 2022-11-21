@@ -1,9 +1,21 @@
 .editor {
     max-width: 100%;
+    margin: 5px;
 }
 
 
 .bundled-editor {
-    max-width: 81%;
-    border: 2px black solid;
+    max-width: 100%;
+    border: 2px lightgray solid;
+    margin: 20px;
+    border-radius: 7px;
+}
+
+.send-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    float: right;
+    margin-right: 10px;
+    margin-bottom: 4px;
 }

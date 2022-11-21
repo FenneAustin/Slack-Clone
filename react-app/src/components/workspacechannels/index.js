@@ -22,7 +22,7 @@ const WorkspaceChannels = ({workspaceId}) => {
             <h4>Channels</h4>
             {channels.map((channel, i) => {
                 return (
-                  <NavLink to ="/">
+                  <NavLink to ={`/channels/${channel.id}`}>
                     <div key={i}>{channel.name}</div>
                   </NavLink>
                 );
