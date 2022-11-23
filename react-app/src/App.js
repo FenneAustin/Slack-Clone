@@ -29,11 +29,20 @@ function App() {
 
   return (
     <BrowserRouter>
-      {loaded && curr ?(
-        <Route path='/'>
-          <Home />
-        </Route> ) :
-         (<Route path='/' >
+      {loaded && curr ? (
+        <>
+          <Route path="/" exact={true}>
+            <Home />
+          </Route>
+          <Route path="/chats/:chatId" exact={true}>
+            <Home />
+          </Route>
+          <Route path="/channels/:channelId" exact={true}>
+            <Home />
+          </Route>
+        </>
+      ) : (
+        <Route path="/">
           <SplashPage />
         </Route>
       )}

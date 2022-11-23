@@ -10,10 +10,21 @@ from .api.auth_routes import auth_routes
 from .api.workspace_routes import workspace_routes
 from .api.channel_routes import channel_routes
 from .api.chat_routes import chat_routes
+from .api.message_routes import message_routes
 from .seeds import seed_commands
 from .config import Config
+from flask_socketio import SocketIO, emit, send
 
 app = Flask(__name__, static_folder='../react-app/build', static_url_path='/')
+
+if os.environ.get('FLASK_ENV') == 'production':
+    origins = [
+        'http://slack-clone.herokuapp.com',
+        'https://slack-clone.herokuapp.com'
+    ]
+else:
+    origins = "*"
+socketio = SocketIO(cors_allowed_origins=origins, logger=True, engineio_logger=True)
 
 # Setup login manager
 login = LoginManager(app)
@@ -34,8 +45,10 @@ app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(workspace_routes, url_prefix='/api/workspaces')
 app.register_blueprint(channel_routes, url_prefix='/api/channels')
 app.register_blueprint(chat_routes, url_prefix='/api/chats')
+app.register_blueprint(message_routes, url_prefix='/api/messages')
 db.init_app(app)
 Migrate(app, db)
+socketio.init_app(app)
 
 # Application Security
 CORS(app)
@@ -91,3 +104,10 @@ def api_help():
                     app.view_functions[rule.endpoint].__doc__ ]
                     for rule in app.url_map.iter_rules() if rule.endpoint != 'static' }
     return route_list
+
+@socketio.on("CHAT")
+def update_messages(data):
+    emit("UPDATE_CHAT", data, broadcast=True)
+
+if __name__ == "__main__":
+    socketio.run(app)

@@ -4,12 +4,14 @@ import session from './session'
 import workspace from './workspace'
 import channel from './channels'
 import chat from "./chat"
+import message from "./message"
 
 const rootReducer = combineReducers({
   session,
   workspace,
   channel,
-  chat
+  chat,
+  message
 });
 
 

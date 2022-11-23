@@ -19,11 +19,14 @@ const WorkspaceChannels = ({workspaceId}) => {
 
     return (
         <div className="channels-container">
-            <h4>Channels</h4>
+            <h4 className="column-title">Channels</h4>
             {channels.map((channel, i) => {
                 return (
-                  <NavLink to ={`/channels/${channel.id}`}>
-                    <div key={i}>{channel.name}</div>
+                  <NavLink
+                    className="navigation-btn"
+                    to={`/channels/${channel.id}`}
+                  >
+                    <div className="navigation-info" key={i}>{channel.name}</div>
                   </NavLink>
                 );
             })}

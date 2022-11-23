@@ -23,7 +23,6 @@ class Message(db.Model, UserMixin):
     def to_dict(self):
         return {
             'id': self.id,
-            'chat_id': self.chat_id,
-            'channel_id': self.channel_id,
+            'user' : self.user_id.to_dict(),
             'text': self.text
         }

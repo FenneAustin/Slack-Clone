@@ -6,3 +6,19 @@
     border-bottom: .5px #cea8d1 solid;
     border-top: .5px #cea8d1 solid;
 }
+
+.column-title {
+    color: #cea8d1;
+    margin-top: 10px;
+    margin-left: 20px;
+}
+
+
+.navigation-btn {
+    color: #cea8d1;
+    text-decoration: none;
+}
+
+.navigation-info {
+    margin-left: 40px;
+}

@@ -19,15 +19,15 @@ const WorkspaceDirectMsg = ({workspaceId}) => {
 
     return (
       <div className="messages-container">
-        <h4>messages</h4>
+        <h4 className="column-title">Direct messages</h4>
         {chats.map((chat,i ) => {
 
             const selectedUser = chat.user_one.email == sessionUser.email ? chat.user_two : chat.user_one;
 
             return (
-              <NavLink to={`/chats/${chat.id}`}>
-                <div>
-                    {selectedUser.first_name}, {selectedUser.last_name}
+              <NavLink className="navigation-btn" to={`/chats/${chat.id}`}>
+                <div className="navigation-info">
+                  {selectedUser.first_name}, {selectedUser.last_name}
                 </div>
               </NavLink>
             );

@@ -16,7 +16,6 @@ const Home = () => {
 
     function handleWorkspaceSwitch(id){
         setSelectedWorkspace(id)
-        history.push("/");
     }
 
     const workspace = useSelector(state => state.workspace)
