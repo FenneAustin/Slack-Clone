@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux"
 import "./index.css"
 import { getAllWorkspaceChannels } from "../../store/channels"
 import { NavLink } from "react-router-dom"
+import { TbHash } from "react-icons/tb";
 
 
 const WorkspaceChannels = ({workspaceId}) => {
@@ -22,12 +23,11 @@ const WorkspaceChannels = ({workspaceId}) => {
             <h4 className="column-title">Channels</h4>
             {channels.map((channel, i) => {
                 return (
-                  <NavLink
-                    className="navigation-btn"
-                    to={`/channels/${channel.id}`}
-                  >
-                    <div className="navigation-info" key={i}>{channel.name}</div>
-                  </NavLink>
+                    <NavLink className="channels-list" to={`/channels/${channel.id}`}>
+                      <TbHash className="channel-hash" />
+                      <div className="channel-name" key={i}> {channel.name} </div>
+                    </NavLink>
+
                 );
             })}
         </div>

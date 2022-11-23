@@ -25,10 +25,9 @@ const WorkspaceDirectMsg = ({workspaceId}) => {
             const selectedUser = chat.user_one.email == sessionUser.email ? chat.user_two : chat.user_one;
 
             return (
-              <NavLink className="navigation-btn" to={`/chats/${chat.id}`}>
-                <div className="navigation-info">
+              <NavLink className="channels-list" to={`/chats/${chat.id}`}>
+                  <img className="profile-dm" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6sGddmMZFZCqb7aJFx5eV-8FGj2gJWz7abGntj8IuyYdAv7W2HEJyi5WY3xbpLLzf-Zg&usqp=CAU" alt="" />
                   {selectedUser.first_name}, {selectedUser.last_name}
-                </div>
               </NavLink>
             );
         })}

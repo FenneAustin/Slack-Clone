@@ -2,3 +2,18 @@
     background-color: #581454;
     border-left: .5px #cea8d1 solid;
 }
+
+.navigation-info {
+    background: #581454;
+    align-items: center;
+}
+
+
+
+.profile-dm {
+    max-width: 20px;
+    border-radius: 50%;
+    margin-left: 15px;
+    margin-right: 10px;
+    margin-top: 5px;
+}

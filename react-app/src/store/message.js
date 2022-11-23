@@ -57,7 +57,7 @@ export default function messagesReducer(state = initialState, action) {
   switch (action.type) {
     case GET_CUR_MESSAGES:
       let redoState = {};
-      if (action.channels)
+      if (action.messages)
         action.messages.forEach((message) => (redoState[message.id] = message));
       return redoState;
     case CREATE_MESSAGE:

@@ -7,6 +7,7 @@ from .chats import seed_chats
 from .workspace_members import seed_workspaces_members
 from .workspace_permissions import seed_workspacepermission
 from .workspaces import seed_workspaces
+from .messages import seed_messages
 
 from app.models.db import db, environment, SCHEMA
 
@@ -32,6 +33,7 @@ def seed():
     seed_channelpermission()
     seed_channel_members()
     seed_chats()
+    seed_messages()
 
 
     # Add other seed functions here

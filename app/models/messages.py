@@ -17,12 +17,12 @@ class Message(db.Model, UserMixin):
     sent_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
     user = db.relationship("User")
-    direct_message = db.relationship("Chat")
+    direct_message = db.relationship("Chat", back_populates="messages")
 
 
     def to_dict(self):
         return {
             'id': self.id,
-            'user' : self.user_id.to_dict(),
+            'user' : self.user.to_dict(),
             'text': self.text
         }

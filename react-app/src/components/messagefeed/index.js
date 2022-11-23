@@ -2,6 +2,7 @@ import React,{useEffect, useState} from "react";
 import {useLocation, useParams} from 'react-router-dom'
 import { getAllDMMessages } from "../../store/message";
 import {useDispatch, useSelector} from 'react-redux'
+import MessageEditor from "./editor/index.js"
 
 
 const MessageFeed = () => {
@@ -12,6 +13,8 @@ const MessageFeed = () => {
     const { channelId } = useParams();
     const location = useLocation();
     const type = location.pathname;
+
+    const Messages = Object.values(useSelector((state) => state.message))
 
     useEffect(() => {
         console.log(location.pathname)
@@ -29,7 +32,11 @@ const MessageFeed = () => {
 
     return (
         <div>
-            hello
+            {Messages.map((message,i) => {
+               return(<div className="message-container">
+                    <MessageEditor messageId={message.id} text={message.text}/>
+                </div>)
+            })}
         </div>
     )
 }

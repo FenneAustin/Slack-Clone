@@ -16,7 +16,7 @@ class Chat(db.Model, UserMixin):
     user_one = db.relationship("User", foreign_keys=[user_one_id])
     user_two = db.relationship("User", foreign_keys=[user_two_id])
     workspace = db.relationship("Workspace", foreign_keys=[workspace_id])
-    messages = db.relationship("Message",  cascade="all, delete-orphan")
+    messages = db.relationship("Message",  foreign_keys="Message.chat_id", cascade="all, delete-orphan")
 
 
     def to_dict(self):
@@ -24,4 +24,8 @@ class Chat(db.Model, UserMixin):
             'id': self.id,
             'user_one': self.user_one.to_dict(),
             'user_two': self.user_two.to_dict(),
+        }
+    def chat_messages(self):
+        return {
+            'messages': self.messages.to_dict()
         }

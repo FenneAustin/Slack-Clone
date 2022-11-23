@@ -13,12 +13,23 @@
     margin-left: 20px;
 }
 
+.navigation-info {
+    margin-left: 10px;
+}
 
-.navigation-btn {
+.channels-list {
     color: #cea8d1;
+    align-items: center;
+    display: flex;
+    cursor: pointer;
     text-decoration: none;
 }
 
-.navigation-info {
-    margin-left: 40px;
+.channels-list:hover {
+    background-color: #350d36;
+}
+
+
+.channel-hash {
+    margin-left: 15px;
 }
