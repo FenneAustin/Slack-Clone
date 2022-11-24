@@ -1,0 +1,7 @@
+.text-profile-pic {
+    max-width: 40px;
+}
+
+.message-feed{
+    overflow-y: auto;
+}

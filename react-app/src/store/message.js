@@ -51,6 +51,25 @@ export const getAllChannelMessages = (channelId) => async (dispatch) => {
   }
 };
 
+//thunk to create a message
+export const createNewMessage = (message) => async (dispatch) => {
+  const res = await csrfFetch("/api/messages/new", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(message),
+  });
+
+  if (res.ok) {
+    const data = await res.json();
+    console.log(data);
+    dispatch(createMessage(data.message));
+  } else {
+    console.log("error");
+  }
+};
+
 const initialState = {};
 export default function messagesReducer(state = initialState, action) {
   let newState = { ...state };

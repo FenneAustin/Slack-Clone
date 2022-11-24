@@ -24,5 +24,6 @@ class Message(db.Model, UserMixin):
         return {
             'id': self.id,
             'user' : self.user.to_dict(),
-            'text': self.text
+            'text': self.text,
+            'sent_date': self.sent_date,
         }
