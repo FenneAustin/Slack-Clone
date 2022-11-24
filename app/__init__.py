@@ -105,9 +105,11 @@ def api_help():
                     for rule in app.url_map.iter_rules() if rule.endpoint != 'static' }
     return route_list
 
-@socketio.on("CHAT")
-def update_messages(data):
-    emit("UPDATE_CHAT", data, broadcast=True)
+@socketio.on("message")
+def handle_message(msg):
+    print(msg)
+    send(msg, broadcast=True)
+    return None
 
 if __name__ == "__main__":
     socketio.run(app)
