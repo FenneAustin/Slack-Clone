@@ -1,38 +1,61 @@
-import React, { useEffect } from "react"
-import "./index.css"
-import {useDispatch, useSelector} from 'react-redux'
-import { getAllWorkspaceChats } from "../../store/chat"
-import { NavLink } from 'react-router-dom'
+import React, { useEffect, useContext } from "react";
+import "./index.css";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllWorkspaceChats } from "../../store/chat";
+import { NavLink } from "react-router-dom";
+import { getAllDMMessages } from "../../store/message";
+import { clearWorkspaceChannelId, setChatId } from "../../store/ui";
+import { socket, SocketContext } from "../../context/socket";
+import {
+  joinRoomThunk,
+  leaveRoomThunk,
+  socketRoomSelector,
+} from "../../store/socketrooms";
 
-const WorkspaceDirectMsg = ({workspaceId}) => {
 
-    const dispatch = useDispatch()
+const WorkspaceDirectMsg = ({ workspaceId }) => {
+  const socket = useContext(SocketContext);
+  const dispatch = useDispatch();
+  const chats = Object.values(useSelector((state) => state.chat));
+  const sessionUser = useSelector((state) => state.session.user);
+  const room = useSelector(socketRoomSelector);
 
-    useEffect(() => {
-        if(workspaceId !== null) {
-            dispatch(getAllWorkspaceChats(workspaceId))
-        }
-    }, [workspaceId])
+  useEffect(() => {
+    if (workspaceId !== null) {
+      dispatch(getAllWorkspaceChats(workspaceId));
+    }
+  }, [workspaceId]);
 
-    const chats = Object.values(useSelector((state) => state.chat))
-    const sessionUser = useSelector((state) => state.session.user)
+  const handleChatClick = (id) => {
+    dispatch(getAllDMMessages(id))
+    dispatch(clearWorkspaceChannelId())
+    dispatch(setChatId(id))
+    if(room) {
+      dispatch(leaveRoomThunk(room, socket))
+    }
+    const data = { 'id': id, 'roomtype': "chat" };
+    dispatch(joinRoomThunk(data, socket))
+  }
 
-    return (
-      <div className="messages-container">
-        <h4 className="column-title">Direct messages</h4>
-        {chats.map((chat,i ) => {
+  return (
+    <div className="messages-container">
+      <h4 className="column-title">Direct messages</h4>
+      {chats.map((chat, i) => {
+        const selectedUser = chat.user_one.email == sessionUser.email ? chat.user_two: chat.user_one;
 
-            const selectedUser = chat.user_one.email == sessionUser.email ? chat.user_two : chat.user_one;
-
-            return (
-              <NavLink className="channels-list" to={`/chats/${chat.id}`}>
-                  <img className="profile-dm" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6sGddmMZFZCqb7aJFx5eV-8FGj2gJWz7abGntj8IuyYdAv7W2HEJyi5WY3xbpLLzf-Zg&usqp=CAU" alt="" />
-                  {selectedUser.first_name}, {selectedUser.last_name}
-              </NavLink>
-            );
-        })}
-      </div>
-    );
-}
+        return (
+          <div className="channels-list" key={i} onClick={() => handleChatClick(chat.id)}>
+            <img
+              className="profile-dm"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6sGddmMZFZCqb7aJFx5eV-8FGj2gJWz7abGntj8IuyYdAv7W2HEJyi5WY3xbpLLzf-Zg&usqp=CAU"
+              alt=""
+            />
+            {selectedUser.first_name}, {selectedUser.last_name}
+          </div>
+        );
+      })}
+    </div>
+  );
+};
 
 export default WorkspaceDirectMsg;

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import LoginForm from './components/auth/LoginForm';
-import SignUpForm from './components/auth/SignUpForm';
-import NavBar from './components/NavBar';
-import ProtectedRoute from './components/auth/ProtectedRoute';
-import UsersList from './components/UsersList';
-import User from './components/User';
+// import LoginForm from './components/auth/LoginForm';
+// import SignUpForm from './components/auth/SignUpForm';
+// import NavBar from './components/NavBar';
+// import ProtectedRoute from './components/auth/ProtectedRoute';
+// import UsersList from './components/UsersList';
+// import User from './components/User';
 import { authenticate } from './store/session';
 import SplashPage from './pages/splashpage/SplashPage'
 import Home from "./pages/home/index"
@@ -31,13 +31,7 @@ function App() {
     <BrowserRouter>
       {loaded && curr ? (
         <>
-          <Route path="/" exact={true}>
-            <Home />
-          </Route>
-          <Route path="/chats/:chatId" exact={true}>
-            <Home />
-          </Route>
-          <Route path="/channels/:channelId" exact={true}>
+          <Route path="/">
             <Home />
           </Route>
         </>

@@ -96,8 +96,9 @@ export default function workspaceReducer(state = initialState, action) {
   let newState = { ...state };
   switch (action.type) {
     case GET_USER_WORKSPACES:
-      if (action.workspaces)
+      if (action.workspaces) {
       action.workspaces.forEach((workspace) => (newState[workspace.id] = workspace));
+      }
       return newState;
     case CREATE_WORKSPACE:
       newState[action.workspace.id] = action.workspace;

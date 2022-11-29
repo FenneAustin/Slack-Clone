@@ -4,4 +4,16 @@
 
 .message-feed{
     overflow-y: auto;
+    max-height: 80vh;
+}
+
+
+.msg-header {
+    display: flex;
+    align-items: center;
+}
+
+
+.message-container:hover{
+    background-color: lightgray;
 }

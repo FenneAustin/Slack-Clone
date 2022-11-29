@@ -4,6 +4,7 @@ const GET_CUR_MESSAGES = "GET_CUR_MESSAGES";
 const CREATE_MESSAGE = "CREATE_MESSAGE";
 const UPDATE_MESSAGE = "UPDATE_MESSAGE";
 const DELETE_MESSAGE = "DELETE_MESSAGE";
+const CLEAR_MESSAGES = "CLEAR_MESSAGES";
 
 const getMessages = (messages) => {
   return {
@@ -32,6 +33,12 @@ const deleteMessage = (messageId) => {
     messageId,
   };
 };
+
+export const clearMessages = () => {
+  return {
+    type: CLEAR_MESSAGES,
+  };
+}
 
 export const getAllDMMessages = (chatId) => async (dispatch) => {
   const res = await csrfFetch(`/api/messages/chats/${chatId}`);
@@ -87,6 +94,9 @@ export default function messagesReducer(state = initialState, action) {
       return newState;
     case DELETE_MESSAGE:
       delete newState[action.messageId];
+      return newState;
+    case CLEAR_MESSAGES:
+      newState = {};
       return newState;
     default:
       return state;

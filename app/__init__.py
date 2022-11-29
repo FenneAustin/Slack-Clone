@@ -13,7 +13,7 @@ from .api.chat_routes import chat_routes
 from .api.message_routes import message_routes
 from .seeds import seed_commands
 from .config import Config
-from flask_socketio import SocketIO, emit, send
+from flask_socketio import SocketIO, emit, send, join_room, leave_room
 
 app = Flask(__name__, static_folder='../react-app/build', static_url_path='/')
 
@@ -105,11 +105,33 @@ def api_help():
                     for rule in app.url_map.iter_rules() if rule.endpoint != 'static' }
     return route_list
 
-@socketio.on("message")
-def handle_message(msg):
-    print(msg)
-    send(msg, broadcast=True)
-    return None
+
+
+# @socketio.on('connection')
+# def connect(socket):
+#     print('connected')
+
+@socketio.on('UPDATE_CHAT_MESSAGES')
+def update_chat_messages(data):
+    room = f'{data["id"]}{data["roomtype"]}'
+    emit("UPDATE_CHAT_MESSAGES", data, to=room)
+
+@socketio.on('UPDATE_CHANNEL_MESSAGES')
+def update_channel_messages(data):
+    room = f'{data["id"]}{data["roomtype"]}'
+    emit("UPDATE_CHANNEL_MESSAGES",data, to=room)
+
+
+@socketio.on('join')
+def on_join(data):
+    print(data)
+    join_room(f'{data["id"]}{data["roomtype"]}')
+    print('joined room')
+
+@socketio.on('leave')
+def on_leave(data):
+    leave_room(f'{data["id"]}{data["roomtype"]}')
+    print('left room')
 
 if __name__ == "__main__":
     socketio.run(app)

@@ -5,13 +5,17 @@ import workspace from './workspace'
 import channel from './channels'
 import chat from "./chat"
 import message from "./message"
+import ui from "./ui"
+import socket from "./socketrooms"
 
 const rootReducer = combineReducers({
   session,
   workspace,
   channel,
   chat,
-  message
+  message,
+  ui,
+  socket
 });
 
 

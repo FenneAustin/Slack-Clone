@@ -1,35 +1,57 @@
-import React, { useEffect, useState} from "react";
-import {useSelector} from 'react-redux'
-import "./index.css"
-import WorkspaceBar from "../../components/workspacebar"
-import WorkspaceTitleBar from "../../components/workspacetitlebar"
-import WorkspaceChannels from "../../components/workspacechannels"
-import WorkspaceDirectMsg from "../../components/workspacedirectmsg"
-import Content from "../../components/content"
-import {useHistory} from "react-router-dom"
+import React, { useEffect, useState, useContext } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import "./index.css";
+import WorkspaceBar from "../../components/workspacebar";
+import WorkspaceTitleBar from "../../components/workspacetitlebar";
+import WorkspaceChannels from "../../components/workspacechannels";
+import WorkspaceDirectMsg from "../../components/workspacedirectmsg";
+import Content from "../../components/content";
+import { setWorkspace,clearChatId,clearWorkspaceChannelId } from "../../store/ui";
+import {clearMessages} from "../../store/message"
 
 const Home = () => {
+  const dispatch = useDispatch();
+  const sessionUser = useSelector((state) => state.session.user);
+  const curWorkspace = useSelector((state) => state.ui.workspaceId);
+  const workspace = useSelector((state) => state.workspace);
 
-    const history = useHistory();
-    const [selectedWorkspace, setSelectedWorkspace] = useState(1)
-    const sessionUser = useSelector(state => state.session.user);
+  useEffect(() => {
 
-    function handleWorkspaceSwitch(id){
-        setSelectedWorkspace(id)
+    if (curWorkspace == null && Object.keys(workspace).length > 0) {
+      dispatch(setWorkspace(Object.values(workspace)[0].id));
     }
+  }, [workspace, curWorkspace, dispatch]);
 
-    const workspace = useSelector(state => state.workspace)
+  function handleWorkspaceSwitch(id) {
+    dispatch(clearMessages())
+    dispatch(setWorkspace(id));
+    dispatch(clearChatId());
+    dispatch(clearWorkspaceChannelId());
+  }
 
-    return (
-      <div className="home-page">
-        <WorkspaceBar className="workspace-bar" switchWorkspace={handleWorkspaceSwitch} user={sessionUser}/>
-        <WorkspaceTitleBar className="title-container" workspace={workspace[selectedWorkspace]}/>
-        <WorkspaceChannels className="channels-container" workspaceId={selectedWorkspace}/>
-        <WorkspaceDirectMsg className="messages-container" workspaceId={selectedWorkspace} />
-        <Content className="content-container" />
-      </div>
-    );
-}
+  return (
+    <div className="home-page">
+      <WorkspaceBar
+        className="workspace-bar"
+        switchWorkspace={handleWorkspaceSwitch}
+        user={sessionUser}
+        selectedWorkspace={curWorkspace}
+      />
+      <WorkspaceTitleBar
+        className="title-container"
+        workspace={workspace[curWorkspace]}
+      />
+      <WorkspaceChannels
+        className="channels-container"
+        workspaceId={curWorkspace}
+      />
+      <WorkspaceDirectMsg
+        className="messages-container"
+        workspaceId={curWorkspace}
+      />
+      <Content className="content-container" />
+    </div>
+  );
+};
 
-
-export default Home
+export default Home;

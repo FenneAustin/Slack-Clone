@@ -4,8 +4,10 @@ import { getAllUserWorkspaces } from "../../store/workspace";
 import "./index.css"
 import workspaceicon from "../../assets/images/slack-default.svg"
 import ProfileButton from "../navbar/profilebutton";
+import WorkspaceBtn from "./workspacebtn";
+import AddWorkspaceModal from "./addworkspace/addWorkspaceModal";
 
-const WorkspaceBar = ({switchWorkspace, user }) => {
+const WorkspaceBar = ({switchWorkspace, user, selectedWorkspace }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -18,12 +20,15 @@ const WorkspaceBar = ({switchWorkspace, user }) => {
     <div className="workspace-bar">
       <div className="workspace-btn-container">
         {workspaces.map((workspace, i) => {
+
           return (
-            <button key={i} className="workspace-btns" onClick={() => switchWorkspace(workspace.id)}>
-              <img src={workspaceicon} className="workspace-icon" />
-            </button>
+            // <button key={i} className="workspace-btns" onClick={() => switchWorkspace(workspace.id)}>
+            //   <img src={workspaceicon} className="workspace-icon" />
+            // </button>
+            <WorkspaceBtn key={i} workspace={workspace} switchWorkspace={switchWorkspace}  selectedWorkspace={selectedWorkspace}/>
           );
         })}
+        <AddWorkspaceModal />
         <ProfileButton user={user} />
       </div>
     </div>
