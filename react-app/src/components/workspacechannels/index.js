@@ -1,13 +1,16 @@
 import { useEffect, useContext} from "react"
 import {useDispatch, useSelector} from "react-redux"
 import "./index.css"
-import { getAllWorkspaceChannels } from "../../store/channels"
+import { getAllWorkspaceChannels, getAllUserChannels } from "../../store/channels"
 import { NavLink } from "react-router-dom"
 import { TbHash } from "react-icons/tb";
 import { setWorkspaceChannelId, clearChatId } from "../../store/ui"
-import { getAllChannelMessages } from "../../store/message"
+import { clearMessages, getAllChannelMessages } from "../../store/message"
 import { socket, SocketContext } from "../../context/socket"
 import { joinRoomThunk, leaveRoomThunk, socketRoomSelector } from "../../store/socketrooms"
+import { AiOutlinePlus } from "react-icons/ai";
+import AddChannelModal from "./addChannels/index.js";
+import { hideAllChannels } from "../../store/ui"
 
 const WorkspaceChannels = ({workspaceId}) => {
 
@@ -16,15 +19,18 @@ const WorkspaceChannels = ({workspaceId}) => {
     const room = useSelector(socketRoomSelector)
 
 
-    useEffect(()=> {
+    useEffect(async()=> {
         if(workspaceId !== null){
-           dispatch(getAllWorkspaceChannels(workspaceId))
+          await dispatch(getAllWorkspaceChannels(workspaceId));
+          await dispatch(getAllUserChannels(workspaceId));
         }
     }, [workspaceId])
 
     const channels = Object.values(useSelector((state) => state.channel));
 
     const handleChannelClick = (id) => {
+        dispatch(hideAllChannels())
+        dispatch(clearMessages())
         dispatch(getAllChannelMessages(id))
         dispatch(clearChatId())
         dispatch(setWorkspaceChannelId(id))
@@ -37,19 +43,29 @@ const WorkspaceChannels = ({workspaceId}) => {
     }
 
     return (
-        <div className="channels-container">
-            <h4 className="column-title">Channels</h4>
-            {channels.map((channel, i) => {
-                return (
-                    <div className="channels-list" key={i} onClick={() => handleChannelClick(channel.id)}>
-                      <TbHash className="channel-hash" />
-                      <div className="channel-name" key={i}> {channel.name} </div>
-                    </div>
-
-                );
-            })}
+      <div className="channels-container">
+        <div className="channel-title-container">
+          <h4 className="column-title">Channels</h4>
+          <button className="add-channels-btn"><AiOutlinePlus /></button>
         </div>
-    )
+        {channels.map((channel, i) => {
+          return (
+            <div
+              className="channels-list"
+              key={i}
+              onClick={() => handleChannelClick(channel.id)}
+            >
+              <TbHash className="channel-hash" />
+              <div className="channel-name" key={i}>
+                {" "}
+                {channel.name}{" "}
+              </div>
+            </div>
+          );
+        })}
+        <AddChannelModal />
+      </div>
+    );
 }
 
 export default WorkspaceChannels

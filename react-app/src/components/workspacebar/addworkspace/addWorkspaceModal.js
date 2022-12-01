@@ -10,6 +10,7 @@ const AddWorkspaceModal = () => {
   const [showCreateWorkspaceModal, setShowCreateWorkspaceModal] = useState(false);
   const [showFindWorkspaceModal, setShowFindWorkspaceModal] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const openMenu = () => {
     if (showMenu) return;
@@ -28,6 +29,12 @@ const AddWorkspaceModal = () => {
       return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
+  const handleCreateWorkspace = () => {
+    setShowCreateWorkspaceModal(true);
+    setShowMenu(false);
+    setShowModal(true);
+  }
+
 
 
   return (
@@ -37,15 +44,15 @@ const AddWorkspaceModal = () => {
       </button>
       {showMenu && (
         <div className="add-menu">
-          <div className="add-menu-item" onClick={() => setShowCreateWorkspaceModal(true)}>Create a new workspace</div>
+          <div className="add-menu-item" onClick={() => handleCreateWorkspace()}>Create a new workspace</div>
           <div className="add-menu-item" onClick={() => setShowFindWorkspaceModal(true)}>Find a workspace</div>
         </div>)
       }
-      {/* {showModal && (
+      {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <CreateWorkspaceForm closeModal={()=> setShowModal(false)}/>
         </Modal>
-      )} */}
+      )}
     </div>
   );
 }

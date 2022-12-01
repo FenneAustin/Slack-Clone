@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllUserWorkspaces } from "../../store/workspace";
+import { getAllUserWorkspaces,  } from "../../store/workspace";
 import "./index.css"
 import workspaceicon from "../../assets/images/slack-default.svg"
 import ProfileButton from "../navbar/profilebutton";
@@ -29,7 +29,6 @@ const WorkspaceBar = ({switchWorkspace, user, selectedWorkspace }) => {
           );
         })}
         <AddWorkspaceModal />
-        <ProfileButton user={user} />
       </div>
     </div>
   );

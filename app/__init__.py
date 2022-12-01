@@ -124,7 +124,6 @@ def update_channel_messages(data):
 
 @socketio.on('join')
 def on_join(data):
-    print(data)
     join_room(f'{data["id"]}{data["roomtype"]}')
     print('joined room')
 

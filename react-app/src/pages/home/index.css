@@ -3,10 +3,11 @@
   height: 100vh;
   display: grid;
   grid-template-columns: 0.25fr repeat(4, 1fr);
-  grid-template-rows: 0.25fr repeat(4, 1fr);
+  grid-template-rows: 0.17fr 0.3fr .3fr repeat(3, 1fr);
   grid-template-areas:
+  "header header header header header"
   "nav title content content content"
-  "nav channels content content content"
+  "nav misc content content content"
   "nav channels content content content"
   "nav msg content content content"
   "nav msg content content content";
@@ -14,10 +15,22 @@
   grid-row-gap: 0px;
 }
 
+.topnav {
+  grid-area: header;
+  width: 100%;
+  height: 100%;
+}
+
 .workspace-bar {
   grid-area: nav;
   width: 100%;
   height: 100vh;
+}
+
+.misc-container {
+  grid-area: misc;
+  width: 100%;
+  height: 100%;
 }
 .title-container {
   grid-area: title;

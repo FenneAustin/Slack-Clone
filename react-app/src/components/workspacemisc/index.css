@@ -1,0 +1,27 @@
+.misc-container{
+    background-color: #581454;
+    border-left: .5px #cea8d1 solid;
+    border-top: .5px #cea8d1 solid;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    align-content: center;
+}
+
+.Dm-btn{
+
+    background: none;
+    border: none;
+    color: white;
+    align-items: center;
+    cursor: pointer;
+}
+
+.all-channels-btn {
+
+    background: none;
+    border: none;
+    color: white;
+    align-items: center;
+    cursor: pointer;
+}

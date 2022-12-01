@@ -3,7 +3,7 @@ import "./index.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllWorkspaceChats } from "../../store/chat";
 import { NavLink } from "react-router-dom";
-import { getAllDMMessages } from "../../store/message";
+import { clearMessages, getAllDMMessages } from "../../store/message";
 import { clearWorkspaceChannelId, setChatId } from "../../store/ui";
 import { socket, SocketContext } from "../../context/socket";
 import {
@@ -11,6 +11,7 @@ import {
   leaveRoomThunk,
   socketRoomSelector,
 } from "../../store/socketrooms";
+import { AiOutlinePlus } from "react-icons/ai";
 
 
 const WorkspaceDirectMsg = ({ workspaceId }) => {
@@ -27,6 +28,7 @@ const WorkspaceDirectMsg = ({ workspaceId }) => {
   }, [workspaceId]);
 
   const handleChatClick = (id) => {
+    dispatch(clearMessages());
     dispatch(getAllDMMessages(id))
     dispatch(clearWorkspaceChannelId())
     dispatch(setChatId(id))
@@ -39,12 +41,24 @@ const WorkspaceDirectMsg = ({ workspaceId }) => {
 
   return (
     <div className="messages-container">
-      <h4 className="column-title">Direct messages</h4>
+      <div className="messages-title-container">
+        <h4 className="column-title">Direct messages</h4>
+        <button className="new-msg-btn">
+          <AiOutlinePlus />
+        </button>
+      </div>
       {chats.map((chat, i) => {
-        const selectedUser = chat.user_one.email == sessionUser.email ? chat.user_two: chat.user_one;
+        const selectedUser =
+          chat.user_one.email == sessionUser.email
+            ? chat.user_two
+            : chat.user_one;
 
         return (
-          <div className="channels-list" key={i} onClick={() => handleChatClick(chat.id)}>
+          <div
+            className="channels-list"
+            key={i}
+            onClick={() => handleChatClick(chat.id)}
+          >
             <img
               className="profile-dm"
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6sGddmMZFZCqb7aJFx5eV-8FGj2gJWz7abGntj8IuyYdAv7W2HEJyi5WY3xbpLLzf-Zg&usqp=CAU"

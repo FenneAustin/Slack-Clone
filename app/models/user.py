@@ -1,6 +1,8 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from .channel_members import ChannelMember
+from .channels import Channel
 
 
 class User(db.Model, UserMixin):
@@ -20,11 +22,12 @@ class User(db.Model, UserMixin):
     status = db.relationship("Status", lazy="joined")
     profile_image = db.relationship("Image", lazy="joined")
     my_workspaces = db.relationship("WorkspaceMember", foreign_keys="WorkspaceMember.user_id", cascade="all, delete-orphan", lazy="dynamic")
-    my_channels = db.relationship("ChannelMember", foreign_keys="ChannelMember.user_id", cascade="all, delete-orphan")
+    my_channels = db.relationship("ChannelMember", foreign_keys="ChannelMember.user_id", cascade="all, delete-orphan", lazy="dynamic")
     sent_messages = db.relationship("Message", cascade="all, delete-orphan")
     workspace_invitations = db.relationship("WorkspaceInvite", foreign_keys="WorkspaceInvite.invited_user_id", cascade="all, delete-orphan")
-    owned_workspaces = db.relationship("Workspace", foreign_keys="Workspace.owner_id", cascade="all, delete-orphan")
+    owned_workspaces = db.relationship("Workspace", foreign_keys="Workspace.owner_id", lazy="dynamic",cascade="all, delete-orphan")
 
+    # back_populates="owner"
     @property
     def password(self):
         return self.hashed_password
@@ -47,3 +50,14 @@ class User(db.Model, UserMixin):
 
     def my_workspaces_list(self):
         return self.my_workspaces.all()
+
+
+    # get all the channels that the user is a member of in a workspace by the channel relationship on the channel member model
+    def my_channels_list(self):
+        # return self.my_channels.filter(ChannelMember.channel.workspace_id == workspace_id)
+        return self.my_channels.all()
+        # return {channel.id: channel.to_dict() for channel in self.my_channels if channel.workspace_id == workspace_id}
+
+
+    def my_owned_list(self):
+        return self.owned_workspaces.all()

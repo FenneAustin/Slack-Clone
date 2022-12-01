@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from app.forms import workspace_form
+from app.forms.workspace_form import WorkspaceForm
 from app.models import User, db, Workspace, Image
 
 
@@ -13,18 +13,17 @@ workspace_routes = Blueprint('workspace', __name__)
 @workspace_routes.route('/', methods=['POST'])
 @login_required
 def create_workspace():
-    form = workspace_form()
+    form = WorkspaceForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-
         workspace = Workspace(
-           owner_id = current_user.id,
            name = form.data['name'],
+           owner_id = current_user.id,
         )
 
         db.session.add(workspace)
         db.session.commit()
-        return workspace.to_dict()
+        return jsonify({'workspace': workspace.to_dict()})
     else:
         return jsonify({'message': 'Worskpaces needs to have required fields'}), 400
 
@@ -47,8 +46,10 @@ def get_my_workspaces():
     if (cur_user):
         # workspace_list = cur_user.my_workspaces_list()
         workspace_list = cur_user.my_workspaces_list()
+        owner_list = cur_user.my_owned_list()
         workspaces = [workspace.workspace_info() for workspace in workspace_list]
-        return jsonify({'workspaces': workspaces})
+        owners = [workspace.to_dict() for workspace in owner_list]
+        return jsonify({'workspaces': workspaces + owners})
 
 # edit a workspace
 

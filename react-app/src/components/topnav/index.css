@@ -1,0 +1,11 @@
+.topnav {
+    background-color: #360d37;
+    border-bottom: .5px #cea8d1 solid;
+
+}
+
+.profile-btn-topnav {
+    width: 100px;
+    float: right;
+    margin-right: 0px;
+}

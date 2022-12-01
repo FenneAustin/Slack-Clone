@@ -18,9 +18,10 @@ const FeedHeader = () => {
             {chat.user_one.id === sessionUser.id
               ? chat.user_two.first_name
               : chat.user_one.first_name}
+              {" "}
             {chat.user_one.id === sessionUser.id
-              ? chat.user_one.last_name
-              : chat.user_two.last_name}
+              ? chat.user_two.last_name
+              : chat.user_one.last_name}
           </h1>
         )}
         {channelId && <h1>{channel.name}</h1>}

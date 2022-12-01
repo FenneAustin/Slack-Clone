@@ -13,6 +13,7 @@ class Channel(db.Model, UserMixin):
     name = db.Column(db.String(255), nullable=False)
 
     workspace = db.relationship("Workspace", back_populates="channels")
+    channel_members = db.relationship("ChannelMember", back_populates="channel")
 
     def to_dict(self):
         return {

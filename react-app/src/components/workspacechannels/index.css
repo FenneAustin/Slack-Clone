@@ -9,8 +9,6 @@
 
 .column-title {
     color: #cea8d1;
-    margin-top: 10px;
-    margin-left: 20px;
 }
 
 .navigation-info {
@@ -32,4 +30,24 @@
 
 .channel-hash {
     margin-left: 15px;
+}
+
+.add-channels-btn {
+    background: none;
+    border: none;
+    color: white;
+    align-items: center;
+    cursor: pointer;
+}
+
+
+.channel-title-container {
+
+    display: flex;
+    align-items: center;
+    vertical-align: center;
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+    margin-top: 10px;
 }

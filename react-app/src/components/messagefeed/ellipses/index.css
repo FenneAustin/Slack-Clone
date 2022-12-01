@@ -1,0 +1,59 @@
+.ellipse-container {
+  position: relative;
+  cursor: pointer;
+  align-items: center;
+  height: 100%;
+}
+
+.edit-ellipse {
+  align-items: center;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+.edit-ellipse:hover {
+  background-color: lightgray;
+}
+
+.ellipse-dropdown {
+  /* display: none !important; */
+  flex-direction: column;
+  position: absolute;
+  background-color: white;
+  border-radius: 10px;
+  min-width: 30px;
+  min-height: 30px;
+  max-width: 30px;
+  max-width: 30px;
+  gap: 10px;
+  left: 0px;
+  top: 10px;
+  border: 1px lightgray solid;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  z-index: 200;
+}
+
+.ellipse-dropdown li {
+  list-style: none;
+  display: table-cell;
+  padding-right: 30px;
+  padding-left: 30px;
+
+}
+
+.edit-message-btn {
+  background: none;
+  border: none;
+}
+
+.delete-message-btn {
+  background: none;
+  border: none;
+}

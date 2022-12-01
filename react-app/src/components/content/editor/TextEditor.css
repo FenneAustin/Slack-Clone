@@ -3,6 +3,9 @@
     margin: 5px;
 }
 
+.ProseMirror {
+  outline: none;
+}
 
 .bundled-editor {
     max-width: 100%;

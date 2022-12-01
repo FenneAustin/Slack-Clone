@@ -63,7 +63,7 @@ const TextEditor = () => {
 
     return (
       <div className="bundled-editor">
-        <MenuBar />
+        <MenuBar editor={editor}/>
         <EditorContent editor={editor} className="editor" />
         <button className="send-btn" onClick={() => handleSubmit()}>
           <GrSend />

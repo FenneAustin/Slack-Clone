@@ -5,12 +5,17 @@ import {useDispatch, useSelector} from 'react-redux'
 import MessageEditor from "./editor/index.js"
 import './index.css';
 import {SocketContext} from '../../context/socket'
+import MessageToolbar from "./messagetoolbar/index.js"
+import Message from "./message/index.js";
 
 const MessageFeed = () => {
 
   const dispatch = useDispatch();
-  const Messages = Object.values(useSelector((state) => state.message));
+  const Messages = Object.values(useSelector(state => state.message));
   const socket = useContext(SocketContext);
+  const sessionUser = useSelector((state) => state.session.user);
+
+  console.log('messages', Messages)
 
 
   useEffect(() => {
@@ -27,21 +32,9 @@ const MessageFeed = () => {
 
   return (
     <div className="message-feed">
-      {Messages.map((message, i) => {
+      {(Messages).map((message, i) => {
         return (
-          <div className="message-container" key={i}>
-            <div className="msg-header">
-            <img
-              className="text-profile-pic"
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6sGddmMZFZCqb7aJFx5eV-8FGj2gJWz7abGntj8IuyYdAv7W2HEJyi5WY3xbpLLzf-Zg&usqp=CAU"
-              alt=""
-            />
-            <div>
-              {message.user.first_name} {message.user.last_name}
-            </div>
-            </div>
-            <MessageEditor messageId={message.id} text={message.text} />
-          </div>
+          <Message message={message} key={i} user={sessionUser} />
         );
       })}
     </div>

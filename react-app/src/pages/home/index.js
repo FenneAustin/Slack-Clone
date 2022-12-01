@@ -8,6 +8,10 @@ import WorkspaceDirectMsg from "../../components/workspacedirectmsg";
 import Content from "../../components/content";
 import { setWorkspace,clearChatId,clearWorkspaceChannelId } from "../../store/ui";
 import {clearMessages} from "../../store/message"
+import { hideAllChannels } from "../../store/ui";
+import WorkspaceMisc from "../../components/workspacemisc/index.js";
+import { getAllUserChannels } from "../../store/channels";
+import TopNav from "../../components/topnav";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -23,6 +27,7 @@ const Home = () => {
   }, [workspace, curWorkspace, dispatch]);
 
   function handleWorkspaceSwitch(id) {
+    dispatch( hideAllChannels());
     dispatch(clearMessages())
     dispatch(setWorkspace(id));
     dispatch(clearChatId());
@@ -31,6 +36,10 @@ const Home = () => {
 
   return (
     <div className="home-page">
+      <TopNav
+        className="topnav"
+        user={sessionUser}
+      />
       <WorkspaceBar
         className="workspace-bar"
         switchWorkspace={handleWorkspaceSwitch}
@@ -39,6 +48,10 @@ const Home = () => {
       />
       <WorkspaceTitleBar
         className="title-container"
+        workspace={workspace[curWorkspace]}
+      />
+      <WorkspaceMisc
+        className="misc-container"
         workspace={workspace[curWorkspace]}
       />
       <WorkspaceChannels

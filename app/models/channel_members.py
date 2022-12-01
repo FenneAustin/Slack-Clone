@@ -10,11 +10,11 @@ class ChannelMember(db.Model, UserMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
-    workspace_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('workspaces.id')), nullable=False)
+    channel_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('channels.id')), nullable=False)
     permission_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('channel_permissions.id')), nullable=False)
 
     user = db.relationship("User", back_populates="my_channels")
-
+    channel = db.relationship("Channel", foreign_keys=[channel_id],back_populates="channel_members", lazy="joined")
 
     def to_dict(self):
         return {

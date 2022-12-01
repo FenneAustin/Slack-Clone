@@ -4,10 +4,19 @@ const GET_CUR_CHANNELS = "GET_CUR_CHANNELS";
 const CREATE_CHANNEL = "CREATE_CHANNEL";
 const UPDATE_CHANNEL = "UPDATE_CHANNEL";
 const DELETE_CHANNEL = "DELETE_CHANNEL";
+const GET_CUR_USER_CHANNELS = "GET_CUR_USER_CHANNELS";
 
 const getWorkspaceChannels = (channels) => {
   return {
     type: GET_CUR_CHANNELS,
+    channels,
+  };
+};
+
+const getCurrentUserChannels = (channels) => {
+  console.log(channels)
+  return {
+    type: GET_CUR_USER_CHANNELS,
     channels,
   };
 };
@@ -43,13 +52,23 @@ export const getAllWorkspaceChannels = (workspaceId) => async (dispatch) => {
   }
 };
 
-export const createNewChannel = (channel) => async (dispatch) => {
-  const { workspaceId, name } = channel;
+// get all channels the current user is a member of
+export const getAllUserChannels = (workspace_id) => async (dispatch) => {
+  const res = await csrfFetch(`/api/channels/${workspace_id}/user`);
 
-  const res = await csrfFetch(`/api/channels/${workspaceId}/create`, {
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(getCurrentUserChannels(data.channels));
+  }
+};
+
+export const createNewChannel = (channel) => async (dispatch) => {
+  const { workspace_Id, name } = channel;
+
+  const res = await csrfFetch(`/api/channels/${workspace_Id}/create`, {
     method: "POST",
     body: JSON.stringify({
-      workspaceId,
+      workspace_Id,
       name,
     }),
   });
@@ -86,7 +105,9 @@ export const deleteAWorkspace = (channelId) => async (dispatch) => {
   return response;
 };
 
-const initialState = {};
+const initialState = {
+  
+};
 export default function channelsReducer(state = initialState, action) {
   let newState = { ...state };
   switch (action.type) {
@@ -105,6 +126,11 @@ export default function channelsReducer(state = initialState, action) {
       return newState;
     case DELETE_CHANNEL:
       delete newState[action.channelId];
+      return newState;
+    case GET_CUR_USER_CHANNELS:
+      if(action.channels){
+        newState.usersChannels = action.channels
+      }
       return newState;
     default:
       return state;

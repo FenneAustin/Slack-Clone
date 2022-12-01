@@ -1,0 +1,42 @@
+.all-channels-page-title {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.all-channels-title-create-btn {
+    background: none;
+    border: 1px gray solid;
+    border-radius: 3px;
+}
+
+
+.channels-count-total {
+    margin-top: 50px;
+    border-bottom: 1px gray solid;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+
+.all-channels-create-btn-bot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.create-channel-all {
+  background-color: #00785b;
+  border-radius: 5px;
+  color: #FFFFFF;
+  font-weight: bold;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 40px;
+  outline: 0;
+  padding: 0 17px;
+  position: relative;
+  text-align: center;
+  border: none;
+}

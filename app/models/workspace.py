@@ -15,9 +15,9 @@ class Workspace(db.Model, UserMixin):
     workspace_image_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('images.id'), ondelete="SET NULL"))
 
 
-    owner = db.relationship("User", back_populates="owned_workspaces")
+    owner = db.relationship("User",back_populates="owned_workspaces")
     members = db.relationship("WorkspaceMember", cascade="all, delete-orphan")
-    channels = db.relationship("Channel", cascade="all, delete-orphan")
+    channels = db.relationship("Channel", cascade="all, delete-orphan", lazy="joined")
     workspace_image = db.relationship("Image", lazy="joined")
     invitations = db.relationship("WorkspaceInvite", foreign_keys="WorkspaceInvite.workspace_id", cascade="all, delete-orphan")
     chats = db.relationship('Chat', cascade="all, delete-orphan")

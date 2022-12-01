@@ -1,0 +1,11 @@
+.bold,.italic, .strike, .code {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.bold-is-active, .italic-is-active, .strike-is-active, .code-is-active {
+    background: none;
+    border: none;
+    cursor: pointer;
+}

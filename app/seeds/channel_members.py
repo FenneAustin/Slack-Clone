@@ -4,13 +4,13 @@ from app.models import db, User, environment, SCHEMA, ChannelMember
 # Adds a demo user, you can add other users here if you want
 def seed_channel_members():
     demo_add_channelmember_1 = ChannelMember(
-         user_id=1, workspace_id=1, permission_id=1)
+         user_id=1, channel_id=1, permission_id=1)
     demo_add_channelmember_2 = ChannelMember(
-         user_id=2, workspace_id=1, permission_id=1)
+         user_id=2, channel_id=1, permission_id=1)
     demo_add_channelmember_3 = ChannelMember(
-         user_id=3, workspace_id=1, permission_id=1)
+         user_id=3, channel_id=1, permission_id=1)
     demo_add_channelmember_4 = ChannelMember(
-         user_id=4, workspace_id=1, permission_id=1)
+         user_id=4, channel_id=1, permission_id=1)
 
 
     db.session.add(demo_add_channelmember_1)

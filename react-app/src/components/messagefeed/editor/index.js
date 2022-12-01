@@ -1,9 +1,14 @@
 import React, {useState, useEffect} from "react"
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
+import {useSelector} from "react-redux"
 
-const MessageEditor = ({messageId, text}) => {
-    const [editable, setEditable] = useState(false)
+import "./index.css"
+
+const MessageEditor = ({messageId, text, editable }) => {
+    // const [editable, setEditable] = useState(false)
+
+
 
     const editor = useEditor({
       editable,
@@ -25,18 +30,10 @@ const MessageEditor = ({messageId, text}) => {
 
 
     return (
-      <>
-        <div className="checkbox">
-          <input
-            type="checkbox"
-            id="editable"
-            value={editable}
-            onChange={(event) => setEditable(event.target.checked)}
-          />
-          <label htmlFor="editable">editable</label>
-        </div>
+      <div className="message-container-text" >
+          {/* <input type="checkbox" id="editable" value={editable} onChange={(event) => setEditable(event.target.checked)}/> */}
         <EditorContent editor={editor} />
-      </>
+      </div>
     );
 
 }

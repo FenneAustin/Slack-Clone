@@ -1,25 +1,25 @@
-import React, { useState, useEffect, useContext } from "react";
-import {useParams, useLocation} from 'react-router-dom'
-import TextEditor from './editor/TextEditor';
-import MessageFeed from '../messagefeed';
+import React from "react";
 import './index.css'
-import { getAllDMMessages, getAllChannelMessages } from "../../store/message";
-import { useDispatch, useSelector } from "react-redux";
-import FeedHeader from "./header/index.js";
-
+import {  useSelector } from "react-redux";
+import BrowseChannels from "../browsechannels/index.js";
+import MessageContent from "./messageContent/index.js";
 
 const Content = () => {
 
-  return (
-    <div className="content-container">
-      <div>
-        <FeedHeader />
-        <MessageFeed />
-      </div>
-      <TextEditor className="text-editor" />
-    </div>
-  );
-}
+  const channelsui = useSelector((state) => state.ui.showAllChannels);
+  const showChannelMessages = useSelector((state) => state.ui.channelId);
+  const showDirectMessages = useSelector((state) => state.ui.chatId);
 
+   return (
+     <div className="content-container">
+       {channelsui ? <BrowseChannels />  : null}
+       { showChannelMessages ? <MessageContent /> : null }
+       { showDirectMessages ? <MessageContent /> : null }
+
+     </div>
+   );
+
+
+  }
 
 export default Content;

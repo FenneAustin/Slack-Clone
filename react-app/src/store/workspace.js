@@ -16,6 +16,7 @@ const getUserWorkspaces = (workspaces) => {
 }
 
 const createWorkspace = (workspace) => {
+  console.log(workspace)
     return {
         type: CREATE_WORKSPACE,
         workspace,
@@ -59,13 +60,13 @@ export const createNewWorkspace = (workspace) => async (dispatch) => {
 
   if (res.ok) {
     const newWorkspace = await res.json();
-    dispatch(createWorkspace(newWorkspace))
+    dispatch(createWorkspace(newWorkspace.workspace))
   }
 
   return res
 }
 
-export const editWorskapce = (workspace, id) => async (dispatch) => {
+export const editWorkspace = (workspace, id) => async (dispatch) => {
     const res = await csrfFetch(`/api/workspaces/${id}`, {
       method: 'PUT',
       body: JSON.stringify(workspace)
