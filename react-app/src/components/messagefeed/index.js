@@ -15,7 +15,6 @@ const MessageFeed = () => {
   const socket = useContext(SocketContext);
   const sessionUser = useSelector((state) => state.session.user);
 
-  console.log('messages', Messages)
 
 
   useEffect(() => {

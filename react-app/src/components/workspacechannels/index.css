@@ -17,6 +17,7 @@
 
 .channels-list {
     color: #cea8d1;
+    font-size: 18px;
     align-items: center;
     display: flex;
     cursor: pointer;
@@ -29,6 +30,7 @@
 
 
 .channel-hash {
+    font-size: 20px;
     margin-left: 15px;
 }
 

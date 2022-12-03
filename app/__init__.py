@@ -11,6 +11,7 @@ from .api.workspace_routes import workspace_routes
 from .api.channel_routes import channel_routes
 from .api.chat_routes import chat_routes
 from .api.message_routes import message_routes
+from .api.invitations_routes import invitations_routes
 from .seeds import seed_commands
 from .config import Config
 from flask_socketio import SocketIO, emit, send, join_room, leave_room
@@ -46,6 +47,7 @@ app.register_blueprint(workspace_routes, url_prefix='/api/workspaces')
 app.register_blueprint(channel_routes, url_prefix='/api/channels')
 app.register_blueprint(chat_routes, url_prefix='/api/chats')
 app.register_blueprint(message_routes, url_prefix='/api/messages')
+app.register_blueprint(invitations_routes, url_prefix='/api/invitations')
 db.init_app(app)
 Migrate(app, db)
 socketio.init_app(app)

@@ -2,18 +2,35 @@ import React, {useState, useEffect} from "react"
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import {useSelector} from "react-redux"
-
 import "./index.css"
+import CharacterCount from "@tiptap/extension-character-count";
 
-const MessageEditor = ({messageId, text, editable }) => {
-    // const [editable, setEditable] = useState(false)
+const MessageEditor = ({messageId, text, editable, handleCancel, handleSave }) => {
 
+    const [messageContext, setMessageContext] = useState(text);
+    const [originalText, setOriginalText] = useState(text);
+    const message = useSelector((state) => state.message[messageId]);
+
+    useEffect(() => {
+      setOriginalText(message.text);
+      setMessageContext(message.text);
+      // set editor text content to message text
+      if(editor) editor.commands.setContent(message.text);
+
+    }, [message]);
 
 
     const editor = useEditor({
       editable,
       content: text,
-      extensions: [StarterKit],
+      extensions: [StarterKit,
+      CharacterCount.configure({
+        limit: 200,
+      })
+    ],
+      onUpdate({ editor }) {
+        setMessageContext(editor.getText());
+      }
     });
 
     useEffect(() => {
@@ -29,10 +46,22 @@ const MessageEditor = ({messageId, text, editable }) => {
     }
 
 
+
+
+
     return (
-      <div className="message-container-text" >
-          {/* <input type="checkbox" id="editable" value={editable} onChange={(event) => setEditable(event.target.checked)}/> */}
+      <div className="message-container-text">
+        {/* <input type="checkbox" id="editable" value={editable} onChange={(event) => setEditable(event.target.checked)}/> */}
         <EditorContent editor={editor} />
+        {editable ? (
+          <div>
+            <button onClick={() =>
+              {handleCancel()
+              editor.commands.setContent(originalText)}
+              }>Cancel</button>
+            <button onClick={() => handleSave(messageId,messageContext )}>Save</button>
+          </div>
+        ) : null}
       </div>
     );
 

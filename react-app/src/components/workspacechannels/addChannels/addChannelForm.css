@@ -1,0 +1,104 @@
+.title-for-create-channel{
+    font-size: 30px;
+    font-weight: 600;
+    color: #000000;
+    margin-bottom: 20px;
+    margin-left: 25px;
+    margin-top: 20px;
+}
+
+
+.description-for-create-channel {
+    font-size: 20px;
+    color: #000000;
+    margin-bottom: 20px;
+    margin-left: 25px;
+    margin-top: 20px;
+    margin-right: 25px;
+}
+
+
+.input-label-name {
+    font-size: 15px;
+    color: #000000;
+    margin-bottom: 5px;
+    margin-left: 25px;
+    margin-top: 20px;
+    margin-right: 25px;
+}
+
+.name-input-create {
+    width: 90%;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid #000000;
+    margin-left: 25px;
+    margin-right: 25px;
+    padding-left: 10px;
+}
+
+.description-label-create {
+    font-size: 15px;
+    color: #000000;
+    margin-bottom: 5px;
+    margin-left: 25px;
+    margin-top: 20px;
+    margin-right: 25px;
+}
+
+
+.description-input-create {
+    display: block;
+    width: 90%;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid #000000;
+    margin-left: 25px;
+    margin-right: 25px;
+    padding-left: 10px;
+}
+
+.create-channel-btn-modal {
+  position: absolute;
+  right: 0;
+  margin-right: 40px;
+  margin-top: 240px;
+  background-color: #00785b;
+  border-radius: 5px;
+  color: #FFFFFF;
+  font-weight: bold;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 40px;
+  outline: 0;
+  padding: 0 17px;
+  text-align: center;
+  border: none;
+}
+
+.create-channel-btn-modal-empty {
+  position: absolute;
+  right: 0;
+  margin-right: 40px;
+  margin-top: 240px;
+  background-color: lightgray;
+  border-radius: 5px;
+  color: #FFFFFF;
+  font-weight: bold;
+  display: inline-block;
+  line-height: 40px;
+  outline: 0;
+  padding: 0 17px;
+  text-align: center;
+  border: none;
+}
+
+.create-btn-container {
+    width: 100%;
+    position: relative;
+}
+
+
+.errors-container {
+    margin: auto;
+}

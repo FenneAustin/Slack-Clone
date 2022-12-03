@@ -74,3 +74,23 @@ def delete_message(message_Id):
             return jsonify({'message': 'none'}), 404
     else:
         return jsonify({'message': 'none'}), 404
+
+
+
+#edit a message
+@message_routes.route('/edit/<int:message_Id>', methods=['PUT'])
+@login_required
+def edit_message(message_Id):
+    form = request.get_json()
+    cur_user = User.query.get(current_user.id)
+
+    if (cur_user):
+        message = Message.query.get(message_Id)
+        if (message):
+            message.text = form['message']
+            db.session.commit()
+            return jsonify({'message': message.to_dict()}), 200
+        else:
+            return jsonify({'message': 'none'}), 404
+    else:
+        return jsonify({'message': 'none'}), 404

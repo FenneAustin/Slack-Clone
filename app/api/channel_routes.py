@@ -67,6 +67,33 @@ def get_user_channels(workspace_Id):
     else:
         return jsonify({'message': 'User not found'}), 404
 
-# edit a workspace
+# user leaves a channel
+@channel_routes.route('/<int:channel_Id>/leave', methods=['DELETE'])
+@login_required
+def leave_channel(channel_Id):
+    cur_user = User.query.get(current_user.id)
+    if (cur_user):
+        channel_member = ChannelMember.query.filter(ChannelMember.user_id == cur_user.id, ChannelMember.channel_id == channel_Id).first()
+        db.session.delete(channel_member)
+        db.session.commit()
+        return jsonify({'message': 'User left channel'}), 200
+    else:
+        return jsonify({'message': 'User not found'}), 404
 
-# delete a workspace
+# user joins a channel
+@channel_routes.route('/<int:channel_Id>/join', methods=['POST'])
+@login_required
+def join_channel(channel_Id):
+    cur_user = User.query.get(current_user.id)
+    if (cur_user):
+        channel_member = ChannelMember(
+            user_id = cur_user.id,
+            channel_id = channel_Id,
+            permission_id = 2
+        )
+        db.session.add(channel_member)
+        db.session.commit()
+        return jsonify({'message': 'User joined channel'}), 200
+    else:
+        return jsonify({'message': 'User not found'}), 404
+        

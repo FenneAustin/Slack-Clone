@@ -8,6 +8,14 @@
 
 .add-new-container {
     position: relative;
+    margin-bottom: 10px;
+    width: 100%;
+
+}
+.add-button {
+    display: block;
+    margin-right: auto;
+    margin-left: 12px;
 }
 
 .add-new-channel {
@@ -50,7 +58,7 @@
 }
 
 .add-workspace-icon-add {
-    font-size: 15px;
+    font-size: 18px;
     color: #cea8d1;
     background: #522452;
     border-radius: 4px;
@@ -60,4 +68,5 @@
 
 .add-channels-text {
     color: #cea8d1;
+    font-size: 15px;
 }

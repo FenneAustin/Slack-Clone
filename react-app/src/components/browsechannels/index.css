@@ -1,21 +1,35 @@
 .all-channels-page-title {
     display: flex;
     justify-content: space-between;
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-top: 30px;
 }
 
+.title-text-all-channels {
+    font-size: 20px;
+    font-weight: 600;
+
+}
 
 .all-channels-title-create-btn {
     background: none;
-    border: 1px gray solid;
+    font-size: 13px;
+    border: 1px lightgray solid;
     border-radius: 3px;
+    background: none;
+}
+
+.channel-count-text {
+    margin-left: 10px;
 }
 
 
 .channels-count-total {
     margin-top: 50px;
-    border-bottom: 1px gray solid;
-    margin-left: 10px;
-    margin-right: 10px;
+    border-bottom: 1px lightgray solid;
+    margin-left: 40px;
+    margin-right: 40px;
 }
 
 
@@ -26,7 +40,9 @@
 }
 
 
+
 .create-channel-all {
+  margin-top: 40px;
   background-color: #00785b;
   border-radius: 5px;
   color: #FFFFFF;

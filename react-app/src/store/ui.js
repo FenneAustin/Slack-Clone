@@ -1,5 +1,5 @@
-
 export const SET_WORKSPACE = "ui/SHOW_SERVER";
+
 export const CLEAR_WORKSPACE = "ui/CLEAR_SERVER";
 export const SET_CHAT_ID = "ui/SET_CHAT";
 export const CLEAR_CHAT_ID = "ui/CLEAR_CHAT";

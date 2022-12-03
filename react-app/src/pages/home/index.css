@@ -2,8 +2,8 @@
   width: 100%;
   height: 100vh;
   display: grid;
-  grid-template-columns: 0.25fr repeat(4, 1fr);
-  grid-template-rows: 0.17fr 0.3fr .3fr repeat(3, 1fr);
+  grid-template-columns: 60px 260px repeat(3, 1fr);
+  grid-template-rows: 45px 0.1fr .3fr repeat(3, 1fr);
   grid-template-areas:
   "header header header header header"
   "nav title content content content"

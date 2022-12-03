@@ -1,0 +1,51 @@
+.add-people-btns {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    vertical-align: middle;
+}
+
+.add-new-teammate-container {
+    position: relative;
+}
+
+.add-people-button {
+    display: block;
+    margin-right: auto;
+    margin-left: 12px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+
+
+
+.add-new-teammate-container {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    vertical-align: middle;
+    margin-top: 10px;
+}
+
+
+.add-new-teammate-container:hover {
+    background-color: #350d36;
+}
+
+.add-teammate-icon-add {
+    font-size: 18px;
+    color: #cea8d1;
+    background: #522452;
+    border-radius: 4px;
+    margin-right: 5px;
+    padding: 3px;
+}
+
+.add-teammate-text {
+    color: #cea8d1;
+    font-size: 15px;
+}

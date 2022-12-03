@@ -12,16 +12,20 @@
 
     background: none;
     border: none;
-    color: white;
+    color: #cea8d1;
     align-items: center;
     cursor: pointer;
+}
+
+.misc-icon {
+    color: #cea8d1;
 }
 
 .all-channels-btn {
 
     background: none;
     border: none;
-    color: white;
+    color: #cea8d1;
     align-items: center;
     cursor: pointer;
 }

@@ -11,6 +11,7 @@ class Channel(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     workspace_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('workspaces.id')), nullable=False)
     name = db.Column(db.String(255), nullable=False)
+    description = db.Column(db.String(255), nullable=True)
 
     workspace = db.relationship("Workspace", back_populates="channels")
     channel_members = db.relationship("ChannelMember", back_populates="channel")
@@ -20,4 +21,6 @@ class Channel(db.Model, UserMixin):
             'id': self.id,
             'workspace_id': self.workspace_id,
             'name': self.name,
+            'description': self.description,
+            'total_members': len(self.channel_members)
         }

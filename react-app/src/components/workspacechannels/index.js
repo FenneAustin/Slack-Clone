@@ -21,12 +21,12 @@ const WorkspaceChannels = ({workspaceId}) => {
 
     useEffect(async()=> {
         if(workspaceId !== null){
-          await dispatch(getAllWorkspaceChannels(workspaceId));
           await dispatch(getAllUserChannels(workspaceId));
+          await dispatch(getAllWorkspaceChannels(workspaceId));
         }
     }, [workspaceId])
 
-    const channels = Object.values(useSelector((state) => state.channel));
+    const channels = Object.values(useSelector((state) => state.channel.usersChannels));
 
     const handleChannelClick = (id) => {
         dispatch(hideAllChannels())

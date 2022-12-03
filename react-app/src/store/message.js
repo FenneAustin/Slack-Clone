@@ -77,6 +77,38 @@ export const createNewMessage = (message) => async (dispatch) => {
   }
 };
 
+//thunk to update a message
+export const updateExistingMessage = (messageId, message) => async (dispatch) => {
+  const res = await csrfFetch(`/api/messages/edit/${messageId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(message),
+  });
+
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(updateMessage(data.message));
+  } else {
+    console.log("error");
+  }
+};
+
+//thunk to delete a message
+export const deleteExistingMessage = (messageId) => async (dispatch) => {
+  const res = await csrfFetch(`/api/messages/delete/${messageId}`, {
+    method: "DELETE",
+  });
+
+  if (res.ok) {
+    dispatch(deleteMessage(messageId));
+  } else {
+    console.log("error");
+  }
+};
+
+
 const initialState = {};
 export default function messagesReducer(state = initialState, action) {
   let newState = { ...state };
@@ -90,7 +122,7 @@ export default function messagesReducer(state = initialState, action) {
       newState[action.message.id] = action.message;
       return newState;
     case UPDATE_MESSAGE:
-      newState[action.channel.id] = action.channel;
+      newState[action.message.id] = action.message;
       return newState;
     case DELETE_MESSAGE:
       delete newState[action.messageId];

@@ -5,6 +5,8 @@ const CREATE_CHANNEL = "CREATE_CHANNEL";
 const UPDATE_CHANNEL = "UPDATE_CHANNEL";
 const DELETE_CHANNEL = "DELETE_CHANNEL";
 const GET_CUR_USER_CHANNELS = "GET_CUR_USER_CHANNELS";
+const LEAVE_CHANNEL = "LEAVE_CHANNEL";
+const JOIN_CHANNEL = "JOIN_CHANNEL";
 
 const getWorkspaceChannels = (channels) => {
   return {
@@ -38,6 +40,21 @@ const updateChannel = (channel) => {
 const deleteChannel = (channelId) => {
   return {
     type: DELETE_CHANNEL,
+    channelId,
+  };
+};
+
+const leaveAChannel = (channelId) => {
+  return {
+    type: LEAVE_CHANNEL,
+    channelId,
+  };
+};
+
+// join a channel
+const joinAChannel = (channelId) => {
+  return {
+    type: JOIN_CHANNEL,
     channelId,
   };
 };
@@ -93,20 +110,43 @@ export const editChannel = (channel, id) => async (dispatch) => {
   }
 };
 
-export const deleteAWorkspace = (channelId) => async (dispatch) => {
-  const res = await csrfFetch(`/api/workspaces/${channelId}`, {
+export const removeChannel = (channelId) => async (dispatch) => {
+  const res = await csrfFetch(`/api/channels/${channelId}`, {
     method: "DELETE",
   });
 
-  const response = await res.json();
-  if (res.status === 200) {
+  if (res.ok) {
     dispatch(deleteChannel(channelId));
   }
-  return response;
 };
 
+// leave a channel
+export const leaveChannel = (channelId) => async (dispatch) => {
+  const res = await csrfFetch(`/api/channels/${channelId}/leave`, {
+    method: "DELETE",
+  });
+
+  if (res.ok) {
+    dispatch(leaveAChannel(channelId));
+  }
+};
+
+
+// join a channel
+export const joinChannel = (channelId) => async (dispatch) => {
+  const res = await csrfFetch(`/api/channels/${channelId}/join`, {
+    method: "POST",
+  });
+
+  if (res.ok) {
+    dispatch(joinAChannel(channelId));
+  }
+};
+
+
+
 const initialState = {
-  
+  usersChannels: { 1: { id: 1, name: "general" } }
 };
 export default function channelsReducer(state = initialState, action) {
   let newState = { ...state };
@@ -117,9 +157,11 @@ export default function channelsReducer(state = initialState, action) {
         action.channels.forEach(
           (channel) => (redoState[channel.id] = channel)
         );
+        redoState.usersChannels = newState.usersChannels
       return redoState;
     case CREATE_CHANNEL:
       newState[action.channel.id] = action.channel;
+      newState.usersChannels = {...newState.usersChannels, [action.channel.id]: action.channel}
       return newState;
     case UPDATE_CHANNEL:
       newState[action.channel.id] = action.channel;
@@ -127,11 +169,20 @@ export default function channelsReducer(state = initialState, action) {
     case DELETE_CHANNEL:
       delete newState[action.channelId];
       return newState;
+    case JOIN_CHANNEL:
+      newState.usersChannels = {...newState.usersChannels, [action.channelId]: newState[action.channelId]}
+      return newState;
     case GET_CUR_USER_CHANNELS:
       if(action.channels){
-        newState.usersChannels = action.channels
+           newState.usersChannels = {}
+        action.channels.forEach(
+          (channel) => (newState.usersChannels[channel.id] = channel)
+        );
+
       }
       return newState;
+    case LEAVE_CHANNEL:
+      delete newState.usersChannels[action.channelId];
     default:
       return state;
   }

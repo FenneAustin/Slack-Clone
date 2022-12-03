@@ -1,8 +1,28 @@
 .selected-workspace-btn {
     width: 100%;
-    background-color: black;
+    align-items: center;
+    align-content: center;
 }
 
 .workspace-btn {
+    width: 55px;
+    align-items: center;
+    padding: none;
+    display: grid;
+}
+
+ .workspace-btns {
     width: 100%;
+    background: none;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    margin: auto;
+    padding: none;
+    align-items: center;
+}
+.workspace-icon {
+
+    width: 50px;
+    padding: none;
 }
