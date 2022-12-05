@@ -27,7 +27,8 @@ class Workspace(db.Model, UserMixin):
             'id': self.id,
             'owner_id': self.owner_id,
             'name': self.name,
-            'workspace_image_id': self.workspace_image_id
+            # get the image url from the image model
+            'workspace_image': self.workspace_image.to_dict() if self.workspace_image else None,
         }
     def basic_info(self):
         return {

@@ -8,6 +8,7 @@ from .workspace_members import seed_workspaces_members
 from .workspace_permissions import seed_workspacepermission
 from .workspaces import seed_workspaces
 from .messages import seed_messages
+from .images import seed_images
 
 from app.models.db import db, environment, SCHEMA
 
@@ -25,6 +26,7 @@ def seed():
         # the schema name (see comment in users.py undo_users function).
         # Make sure to add all your other model's undo functions below
         undo_users()
+    seed_images()
     seed_users()
     seed_workspaces()
     seed_workspacepermission()

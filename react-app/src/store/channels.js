@@ -64,7 +64,6 @@ export const getAllWorkspaceChannels = (workspaceId) => async (dispatch) => {
 
   if (res.ok) {
     const data = await res.json();
-    console.log(data)
     dispatch(getWorkspaceChannels(data.channels));
   }
 };
@@ -183,6 +182,7 @@ export default function channelsReducer(state = initialState, action) {
       return newState;
     case LEAVE_CHANNEL:
       delete newState.usersChannels[action.channelId];
+      return newState
     default:
       return state;
   }

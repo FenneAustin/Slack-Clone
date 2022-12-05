@@ -2,8 +2,8 @@
     background-color: #581454;
     border-left: .5px #cea8d1 solid;
     border-top: .5px #cea8d1 solid;
-    justify-content: center;
-    text-align: center;
+    justify-content:left;
+    text-align: left;
     align-items: center;
     align-content: center;
 }
@@ -15,10 +15,33 @@
     color: #cea8d1;
     align-items: center;
     cursor: pointer;
+    font-size: 15px;
 }
 
 .misc-icon {
     color: #cea8d1;
+    margin-left: 18px;
+    font-size: 20px;
+}
+
+.dm-container-misc{
+ /*finished this when you come back*/
+    color: #cea8d1;
+    font-size: 18px;
+    align-items: center;
+    display: flex;
+    cursor: pointer;
+    text-decoration: none;
+    margin-top: 10px;
+}
+
+.all-channels-container-misc {
+    color: #cea8d1;
+    font-size: 18px;
+    align-items: center;
+    display: flex;
+    cursor: pointer;
+    text-decoration: none;
 }
 
 .all-channels-btn {
@@ -28,4 +51,5 @@
     color: #cea8d1;
     align-items: center;
     cursor: pointer;
+    font-size: 15px;
 }

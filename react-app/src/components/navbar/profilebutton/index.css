@@ -23,10 +23,11 @@
 }
 
 .user-pic {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
+  width: 31px;
+  height: 31px;
+  border-radius: 5px;
   background-size: cover;
+  object-fit: cover;
   background-repeat: no-repeat;
   background-position: center center;
 }

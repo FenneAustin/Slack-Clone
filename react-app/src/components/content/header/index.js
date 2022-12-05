@@ -1,6 +1,7 @@
 import React from 'react'
 import "./index.css"
 import {useSelector} from 'react-redux'
+import  PeopleList  from './peoplelist/index.js'
 
 const FeedHeader = () => {
 
@@ -25,6 +26,7 @@ const FeedHeader = () => {
           </h1>
         )}
         {channelId && <h1>{channel.name}</h1>}
+        {channelId && <PeopleList channelId={channelId}/>}
       </div>
     );
 }

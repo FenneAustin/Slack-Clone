@@ -42,7 +42,7 @@ class User(db.Model, UserMixin):
     def to_dict(self):
         return {
             'id': self.id,
-            'profile_image_id': self.profile_image_id,
+            'profile_image': self.profile_image.to_dict() if self.profile_image else None,
             'email': self.email,
             'first_name':  self.first_name,
             'last_name': self.last_name

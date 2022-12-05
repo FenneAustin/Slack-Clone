@@ -4,13 +4,13 @@ from app.models import db, User, environment, SCHEMA
 # Adds a demo user, you can add other users here if you want
 def seed_users():
     demo = User(
-        first_name='Demo', last_name='lition', email='demo@aa.io', password='password')
+        first_name='Demo', last_name='lition', email='demo@aa.io', password='password', profile_image_id=1)
     marnie = User(
-       first_name='marnie', last_name="kraber", email='marnie@aa.io', password='password')
+       first_name='marnie', last_name="kraber", email='marnie@aa.io', password='password', profile_image_id=2)
     bobbie = User(
-        first_name='bobbie', last_name="singer", email='bobbie@aa.io', password='password')
+        first_name='bobbie', last_name="singer", email='bobbie@aa.io', password='password', profile_image_id=3)
     austin = User(
-        first_name='austin', last_name='fenn', email='austin@aa.io', password='password')
+        first_name='austin', last_name='fenn', email='austin@aa.io', password='password', profile_image_id=4)
 
     db.session.add(demo)
     db.session.add(marnie)

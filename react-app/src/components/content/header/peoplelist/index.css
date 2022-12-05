@@ -1,0 +1,14 @@
+.user-list-preview {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    border-radius: 4px;
+}
+
+.user-list-btn {
+    width: 32px;
+    height: 25px;
+    background: none;
+    border: 1px solid lightgray;
+
+}

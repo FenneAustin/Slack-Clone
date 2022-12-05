@@ -1,0 +1,35 @@
+.edit-channel-name-btn {
+    margin-top: 20px;
+    background: none;
+    display: flex;
+    justify-content: space-between;
+    border: none;
+    width: 90%;
+    border: 1px solid #e6e6e6;
+    border-radius: 10px;
+    height: 80px;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cur-channel-name {
+    display: flex;
+}
+
+.about-page {
+    justify-content: center;
+}
+
+.channel-info-card {
+    margin-left: 15px;
+}
+
+
+.blank-edit-btn{
+    margin-right: 15px;
+    background: none;
+    border: none;
+    color: lightskyblue;
+    font-weight: bold;
+}

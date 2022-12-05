@@ -1,19 +1,24 @@
 import { csrfFetch} from "./csrf"
 
 
-const GET_CUR_CHANNNELS_INFO = "GET_CUR_CHANNELS_INFO";
+const GET_CHANNEL_USERS = "GET_CHANNEL_USERS";
 
 
-const getCurChannelsInfo = (info) => ({
-    type: GET_CUR_CHANNNELS_INFO,
-    payload: info
+const getChannelUsers = (users) => ({
+    type: GET_CHANNEL_USERS,
+    payload: users
 })
 
-export const getCurChannelsInfoThunk = (id) => async (dispatch) => {
-    const res = await csrfFetch(`/api/channels/${id}`);
+export const getChannelUsersList = (channelId) => async (dispatch) => {
+    const res = await csrfFetch(`/api/channels/${channelId}/users`);
+
+
+    if (res.ok) {
     const data = await res.json();
-    dispatch(getCurChannelsInfo(data))
+    dispatch(getChannelUsers(data))
+    }
 }
+
 
 const initialState = {
     users: null,
@@ -22,11 +27,11 @@ const initialState = {
     name: null,
 }
 
-const channelsReducer = (state = initialState, action) => {
+export default function channelReducer(state = initialState, action){
     let newState = {...state}
     switch (action.type) {
-        case GET_CUR_CHANNNELS_INFO:
-            newState = action.payload;
+        case GET_CHANNEL_USERS:
+            newState.users = action.payload.channel_members;
             return newState;
         default:
             return state;

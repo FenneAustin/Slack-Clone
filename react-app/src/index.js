@@ -5,6 +5,7 @@ import './index.css';
 import App from './App';
 import configureStore from './store';
 import { ModalProvider } from "./context/Modal";
+import { SmallModalProvider } from "./context/smallModal";
 import { SocketContext, socket} from "./context/socket";
 
 
@@ -14,9 +15,11 @@ ReactDOM.render(
   <React.StrictMode>
     <SocketContext.Provider value={socket}>
       <Provider store={store}>
-        <ModalProvider>
-          <App />
-        </ModalProvider>
+        <SmallModalProvider>
+          <ModalProvider>
+            <App />
+          </ModalProvider>
+        </SmallModalProvider>
       </Provider>
     </SocketContext.Provider>
   </React.StrictMode>,

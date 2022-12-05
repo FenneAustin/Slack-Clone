@@ -20,6 +20,7 @@ class ChannelMember(db.Model, UserMixin):
         return {
             'id': self.id,
             'user_id': self.user_id,
-            'workspace_id': self.workspace_id,
+            'channel_id': self.channel_id,
             'permission_id': self.permission_id,
+            'user': self.user.to_dict(),
         }

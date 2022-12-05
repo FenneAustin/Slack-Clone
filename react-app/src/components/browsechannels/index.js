@@ -1,7 +1,7 @@
 import "./index.css"
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllWorkspaceChannels } from "../../store/channels";
+import { getAllUserChannels, getAllWorkspaceChannels } from "../../store/channels";
 import { TbHash } from "react-icons/tb";
 import { leaveChannel, joinChannel } from "../../store/channels";
 import ChannelCard from "./channelcard";
@@ -26,12 +26,16 @@ const BrowseChannels = () => {
         return false;
     }
 
-    const handleLeave = (id) => {
-      dispatch(leaveChannel(id));
+    const handleLeave = async (id) => {
+      await dispatch(leaveChannel(id));
+      await dispatch(getAllUserChannels(curWorkspace))
+      await dispatch(getAllWorkspaceChannels(curWorkspace));
     }
 
-    const handleJoin = (id) => {
-      dispatch(joinChannel(id));
+    const handleJoin = async (id) => {
+      await dispatch(joinChannel(id));
+      await dispatch(getAllUserChannels(curWorkspace))
+      await dispatch(getAllWorkspaceChannels(curWorkspace));
     }
 
     return (

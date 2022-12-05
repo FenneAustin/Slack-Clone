@@ -8,6 +8,7 @@ import message from "./message"
 import ui from "./ui"
 import socket from "./socketrooms"
 import invitations from "./invitations"
+import channelinfo from "./channel"
 
 const rootReducer = combineReducers({
   session,
@@ -17,7 +18,8 @@ const rootReducer = combineReducers({
   message,
   ui,
   socket,
-  invitations
+  invitations,
+  channelinfo
 });
 
 

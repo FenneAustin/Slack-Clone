@@ -96,4 +96,17 @@ def join_channel(channel_Id):
         return jsonify({'message': 'User joined channel'}), 200
     else:
         return jsonify({'message': 'User not found'}), 404
-        
+
+
+
+# get all users in a channel
+@channel_routes.route('/<int:channel_Id>/users')
+@login_required
+def get_channel_users(channel_Id):
+    cur_user = User.query.get(current_user.id)
+    if (cur_user):
+        channel_member_list = ChannelMember.query.filter(ChannelMember.channel_id == channel_Id)
+        channel_members = [channel_member.to_dict() for channel_member in channel_member_list]
+        return jsonify({'channel_members': channel_members}), 200
+    else:
+        return jsonify({'message': 'User not found'}), 404

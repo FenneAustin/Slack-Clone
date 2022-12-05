@@ -51,6 +51,18 @@ def get_my_workspaces():
         owners = [workspace.to_dict() for workspace in owner_list]
         return jsonify({'workspaces': workspaces + owners})
 
-# edit a workspace
 
-# delete a workspace
+# delete a workspace by id
+@workspace_routes.route('/<int:workspace_id>/delete', methods=['DELETE'])
+@login_required
+def delete_workspace(workspace_id):
+    workspace = Workspace.query.filter(Workspace.id == workspace_id).first()
+    if workspace:
+        if workspace.owner_id == current_user.id:
+            db.session.delete(workspace)
+            db.session.commit()
+            return jsonify({'message': 'Workspace deleted'}), 200
+        else:
+            return jsonify({'message': 'You are not the owner of this workspace'}), 401
+    else:
+        return jsonify({'message': 'Workspace could not be found'}), 404

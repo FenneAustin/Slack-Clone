@@ -4,13 +4,13 @@ from app.models import db, User, environment, SCHEMA, Workspace
 # Adds a demo user, you can add other users here if you want
 def seed_workspaces():
     demo_workspace_1 = Workspace(
-         owner_id=1, name='demo workspace')
+         owner_id=1, name='App Academy', workspace_image_id=5)
     demo_workspace_2 = Workspace(
-        owner_id=2, name='demo workspace 2')
+        owner_id=2, name='Quiver', workspace_image_id=6)
     demo_workspace_3 = Workspace(
-        owner_id=3, name='demo workspace 3')
+        owner_id=3, name='Area Designs', workspace_image_id = 7)
     demo_workspace_4 = Workspace(
-        owner_id=4, name='demo workspace 4')
+        owner_id=4, name='Aqua', workspace_image_id = 8)
 
     db.session.add(demo_workspace_1)
     db.session.add(demo_workspace_2)
