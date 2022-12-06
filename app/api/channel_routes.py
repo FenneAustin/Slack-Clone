@@ -110,3 +110,54 @@ def get_channel_users(channel_Id):
         return jsonify({'channel_members': channel_members}), 200
     else:
         return jsonify({'message': 'User not found'}), 404
+
+
+# edit a channels name
+@channel_routes.route('/<int:channel_Id>/edit', methods=['PUT'])
+@login_required
+def edit_channel(channel_Id):
+    form = ChannelForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        channel = Channel.query.get(channel_Id)
+        channel.name = form.data['name']
+        db.session.commit()
+        return channel.to_dict()
+    else:
+        return jsonify({'message': 'Channels needs to have required fields'}), 400
+
+
+# edit a channels description
+@channel_routes.route('/<int:channel_Id>/description', methods=['PUT'])
+@login_required
+def edit_channel_description(channel_Id):
+    form = ChannelForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        channel = Channel.query.get(channel_Id)
+        channel.description = form.data['description']
+        db.session.commit()
+        return channel.to_dict()
+    else:
+        return jsonify({'message': 'Channels needs to have required fields'}), 400
+
+
+
+# add a user to channel by channel id and user id
+@channel_routes.route('/<int:channel_Id>/add/<int:user_Id>', methods=['POST'])
+@login_required
+def add_user_to_channel(channel_Id, user_Id):
+    cur_user = User.query.get(current_user.id)
+    if (cur_user):
+        channel_member = ChannelMember(
+            user_id = user_Id,
+            channel_id = channel_Id,
+            permission_id = 2
+        )
+        db.session.add(channel_member)
+        db.session.commit()
+        return jsonify({'message': 'User added to channel'}), 200
+    else:
+        return jsonify({'message': 'User not found'}), 404
+
+        

@@ -14,7 +14,7 @@ import { hideAllChannels } from "../../store/ui"
 
 const WorkspaceChannels = ({workspaceId}) => {
 
-    const sockcet = useContext(SocketContext)
+    const socket = useContext(SocketContext)
     const dispatch = useDispatch()
     const room = useSelector(socketRoomSelector)
 
@@ -26,7 +26,7 @@ const WorkspaceChannels = ({workspaceId}) => {
         }
     }, [workspaceId])
 
-    const channels = Object.values(useSelector((state) => state.channel.usersChannels));
+    const channels = useSelector((state) => state.channel.usersChannels);
 
     const handleChannelClick = (id) => {
         dispatch(hideAllChannels())
@@ -48,7 +48,7 @@ const WorkspaceChannels = ({workspaceId}) => {
           <h4 className="column-title">Channels</h4>
           <button className="add-channels-btn"><AiOutlinePlus /></button>
         </div>
-        {channels.map((channel, i) => {
+        {Object.values(channels).map((channel, i) => {
           return (
             <div
               className="channels-list"

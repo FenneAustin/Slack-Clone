@@ -1,11 +1,15 @@
 import "./renamechannel.css"
 import React, {useState, useEffect} from "react"
+import { editChannel } from "../../../../../../store/channels";
+import { useDispatch } from "react-redux";
+import { getAllUserChannels } from "../../../../../../store/channels";
 
 
-const RenameChannel = ({channelName, closeModal}) => {
+const RenameChannel = ({channel, closeModal}) => {
 
-    const originalName = channelName;
-    const [name, setName] = useState(channelName);
+    const dispatch = useDispatch();
+    const originalName = channel.name;
+    const [name, setName] = useState(channel.name);
     const [hasErrors, setHasErrors] = useState(false);
     const [errors, setErrors] = useState([]);
     const [isAtCharacterLimit, setIsAtCharacterLimit] = useState(false);
@@ -14,34 +18,34 @@ const RenameChannel = ({channelName, closeModal}) => {
 
 
     useEffect(() => {
-        setErrors([])
+        setErrors('')
         setHasErrors(false);
+        setHasSubmitted(false);
+
         if (name.replaceAll(" ", "") !== name) {
             setHasErrors(true);
-            errors.push("Channel name cannot contain spaces")
+            setErrors(["Channel name cannot contain spaces", ...errors])
         }
         else if (name.replaceAll(".", "") !== name) {
             setHasErrors(true);
-            errors.push("Channel name cannot contain periods")
+            setErrors(["Channel name cannot contain periods", ...errors])
         }
-
         else if (!name.replaceAll(" ", "").length > 0) {
           setHasErrors(true);
-          errors.push("Channel name cannot be empty");
+          setErrors(["Channel name cannot be empty", ...errors]);
         }
         else if (name.toLowerCase() !== name) {
           setHasErrors(true);
-          errors.push("Channel name must be lowercase");
+          setErrors(["Channel name must be lowercase", ...errors]);
         }
-
         else if (name.length >= characterLimit) {
           setHasErrors(true);
           setIsAtCharacterLimit(true);
         }
-
         else if (name.length < characterLimit) {
           setIsAtCharacterLimit(false);
-        } else {
+        }
+        else {
         setHasErrors(false);
         setHasSubmitted(false);
         }
@@ -49,9 +53,17 @@ const RenameChannel = ({channelName, closeModal}) => {
     }, [name]);
 
     const handleSave = () => {
-        setHasSubmitted(true);
-        if (!hasErrors) {
 
+        setHasSubmitted(true);
+        if (!hasErrors && errors.length < 1) {
+          const editedchannel ={
+            'name': name,
+            'workspace_Id': channel.workspace_id,
+            'description': channel.description
+          }
+          dispatch(editChannel(editedchannel, channel.id));
+          dispatch(getAllUserChannels(channel.workspace_id))
+          closeModal();
         }
     }
 
@@ -69,30 +81,32 @@ const RenameChannel = ({channelName, closeModal}) => {
           <div className="character-limit-error">Character limit reached</div>
         )}
         <input
-          maxlength="80"
+          maxLength="80"
           className="channel-name-input-change"
           value={name}
           onChange={(e) => setName(e.target.value)}
         ></input>
         <div className="restrictions-text">
-          Names must be lowercase, without spaces or periods, and can’t be
+          Names must be lowercase, without spaces or periods, and can't be
           longer than 80 characters.
         </div>
         {hasErrors && hasSubmitted && (
-        <div>
-            {errors.map((error, i) => {
-                return (<div key={i} className="error-message">{error}</div>)})}
-        </div>
-        )}
+          <div className="error-msg">
+            {errors[0]}
+          </div>
+        )
+      }
 
         <div className="btns-update-container">
-          <button
+          <div
             className="cancel-channel-update"
             onClick={() => handleCancel()}
           >
             Cancel
-          </button>
-          <button className="save-channel-save" onClick={()=> handleSave()}>Save Changes</button>
+          </div>
+          <div className="save-channel-save" onClick={() => handleSave()}>
+            Save Changes
+          </div>
         </div>
       </div>
     );

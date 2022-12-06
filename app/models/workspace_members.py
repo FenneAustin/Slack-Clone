@@ -22,8 +22,8 @@ class WorkspaceMember(db.Model, UserMixin):
         return {
             'id': self.id,
             'user_id': self.user_id,
-            'permission': self.permission.to_dict()
+            'permission': self.permission.to_dict(),
+            'user': self.user.to_dict(),
         }
     def workspace_info(self):
         return self.workspace.to_dict()
-  

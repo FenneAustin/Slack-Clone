@@ -5,6 +5,8 @@ import { getAllUserChannels, getAllWorkspaceChannels } from "../../store/channel
 import { TbHash } from "react-icons/tb";
 import { leaveChannel, joinChannel } from "../../store/channels";
 import ChannelCard from "./channelcard";
+import AddChannelForm from "../workspacechannels/addChannels/addChannelForm";
+import { Modal } from "../../context/Modal";
 
 const BrowseChannels = () => {
 
@@ -12,6 +14,7 @@ const BrowseChannels = () => {
     const myChannels = useSelector((state) => state.channel.usersChannels);
     const dispatch = useDispatch();
     const curWorkspace = useSelector((state) => state.ui.workspaceId);
+    const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
         dispatch(getAllWorkspaceChannels(curWorkspace));
@@ -42,7 +45,7 @@ const BrowseChannels = () => {
       <div>
         <div className="all-channels-page-title">
           <div className="title-text-all-channels">All Channels</div>
-          <button className="all-channels-title-create-btn">Create Channel</button>
+          <button className="all-channels-title-create-btn" onClick={() => setShowModal(true)}>Create Channel</button>
         </div>
         <div className="channels-count-total"><div className="channel-count-text">{Object.values(channels).length} results</div></div>
         {channels.map((channel, i) => {
@@ -51,8 +54,13 @@ const BrowseChannels = () => {
           );
         })}
         <div className="all-channels-create-btn-bot">
-            <button className="create-channel-all"> Create Channel</button>
+            <button className="create-channel-all" onClick={() => setShowModal(true)}> Create Channel</button>
         </div>
+        {showModal && (
+          <Modal onClose={() => setShowModal(false)}>
+            <AddChannelForm closeModal={() => setShowModal(false)} />
+          </Modal>
+        )}
       </div>
     );
 }

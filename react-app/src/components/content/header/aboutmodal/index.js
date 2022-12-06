@@ -3,6 +3,7 @@ import "./index.css"
 import {useSelector, useDispatch} from "react-redux"
 import {TbHash} from "react-icons/tb"
 import About from "./about/index.js"
+import Members from "./members/index.js"
 
 
 const AboutModal = ({channelId}) => {
@@ -52,6 +53,7 @@ const AboutModal = ({channelId}) => {
             </div>
           </div>
           {curPage === 1 && <About channel={channel}/>}
+          {curPage === 2 && <Members />}
         </div>
       </div>
     );

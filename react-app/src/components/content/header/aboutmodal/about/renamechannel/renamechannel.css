@@ -27,6 +27,10 @@
     font-weight: bold
 }
 
+.error-msg {
+    margin-left: 20px;
+}
+
 
 .restrictions-text {
     margin-top: 2px;

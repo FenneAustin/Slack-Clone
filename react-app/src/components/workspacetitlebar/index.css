@@ -6,6 +6,11 @@
     border-left: .5px #cea8d1 solid;
 }
 
+.name-container-title{
+    display: flex;
+    margin-left: 20px;
+}
+
 
 .write-icon {
     background: #fff6ff;

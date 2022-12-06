@@ -8,22 +8,43 @@
     align-items: center;
 }
 
+.user-avatar-list {
+    margin-left: 20px;
+    width: 20px;
+    height: 20px;
+}
+.channels-list-users {
+    display: flex;
+    color: #cea8d1;
+    align-items: center;
+    font-size: 18px;
+    display: flex;
+    cursor: pointer;
+    text-decoration: none;
+    margin-top: 7px;
+    width: 100%;
+}
 
+.dm-user-name {
+    display: flex;
+    margin-left: 4px;
+}
+
+.channels-list-users:hover {
+    background-color: #350d36;
+}
 
 .profile-dm {
-    max-width: 20px;
-    border-radius: 50%;
-    margin-left: 15px;
-    margin-right: 10px;
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    object-fit: cover;
 }
 
 .messages-title-container{
     display: flex;
-    justify-content: center;
+    margin-left: 20px;
 }
-
-
-
 .new-msg-btn {
     background: none;
     border: none;

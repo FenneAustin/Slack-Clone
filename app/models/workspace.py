@@ -36,3 +36,5 @@ class Workspace(db.Model, UserMixin):
             'name': self.name,
             'workspace_image_id': self.workspace_image_id
         }
+    def users_list(self):
+        return self.members.all()

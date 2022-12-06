@@ -56,15 +56,22 @@ const WorkspaceDirectMsg = ({ workspaceId }) => {
             : chat.user_one;
 
         return (
-          <div className="channels-list" key={i} onClick={() => handleChatClick(chat.id)}>
-              <img
+          <div
+            className="channels-list-users"
+            key={i}
+            onClick={() => handleChatClick(chat.id)}
+          >
+            <div className="user-avatar-list">
+            <img
               className="profile-dm"
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6sGddmMZFZCqb7aJFx5eV-8FGj2gJWz7abGntj8IuyYdAv7W2HEJyi5WY3xbpLLzf-Zg&usqp=CAU"
-              alt=""
+              src={selectedUser.profile_image.url}
+              alt="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6sGddmMZFZCqb7aJFx5eV-8FGj2gJWz7abGntj8IuyYdAv7W2HEJyi5WY3xbpLLzf-Zg&usqp=CAU"
             />
+            </div>
+            <div className="dm-user-name">
             {selectedUser.first_name}, {selectedUser.last_name}
             </div>
-
+          </div>
         );
       })}
       <AddPeopleBtn />

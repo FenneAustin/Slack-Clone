@@ -1,3 +1,56 @@
 .feed-header {
-    border-bottom: 1px grey solid;
+    border-bottom: 0.5px lightgray solid;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.channel-add-info-container {
+    display: flex;
+    margin-right: 30px;
+    align-items: center;
+}
+
+.add-people-btn {
+    font-size: 20px;
+}
+
+.channel-name-top-bar {
+    margin-left: 20px;
+}
+
+.channel-edit-button {
+    display: flex;
+    align-items: center;
+}
+
+.channel-edit-button {
+    width: 50px;
+    height: 30px;
+    border-left: 1px gray solid;
+    border-top: 1px gray solid;
+    border-bottom: 1px gray solid;
+    border-right: 1px gray solid;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.add-people-btn-container {
+    width: 30px;
+    height: 30px;
+    border-top: 1px gray solid;
+    border-right: 1px gray solid;
+    border-bottom: 1px gray solid;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+
+.all-channel-info-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding-bottom: 7px;
+    padding-top: 7px;
 }

@@ -77,8 +77,7 @@ const Message = ({message, user}) => {
     setEditable(false);
   };
 
-  return (
-    message ? (
+  return message ? (
     <div
       className="message-container"
       onMouseOver={handleMouseOver}
@@ -86,12 +85,18 @@ const Message = ({message, user}) => {
     >
       <div className="msg-header">
         <div className="user-info">
-          <img
-            className="text-profile-pic"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6sGddmMZFZCqb7aJFx5eV-8FGj2gJWz7abGntj8IuyYdAv7W2HEJyi5WY3xbpLLzf-Zg&usqp=CAU"
-            alt=""
-          />
-          <div>
+          <div className="message-image-container">
+            <img
+              className="text-profile-pic"
+              src={
+                message.user.profile_image.url
+                  ? message.user.profile_image.url
+                  : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6sGddmMZFZCqb7aJFx5eV-8FGj2gJWz7abGntj8IuyYdAv7W2HEJyi5WY3xbpLLzf-Zg&usqp=CAU"
+              }
+              alt="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6sGddmMZFZCqb7aJFx5eV-8FGj2gJWz7abGntj8IuyYdAv7W2HEJyi5WY3xbpLLzf-Zg&usqp=CAU"
+            />
+          </div>
+          <div className="sending-user-name">
             {message?.user.first_name} {message?.user.last_name}
           </div>
         </div>
@@ -112,9 +117,7 @@ const Message = ({message, user}) => {
         handleSave={handleSave}
       />
     </div>
-    ) : null
-
-  );
+  ) : null;
 }
 
 

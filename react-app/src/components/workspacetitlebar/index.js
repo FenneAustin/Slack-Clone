@@ -16,10 +16,15 @@ const WorkspaceTitleBar = ({workspace}) =>{
     return (
       <div className="title-container">
         <div className="title-items">
-          <div className="workspace-title"> {workspace ? workspace?.name : null}</div>
-          <WorkspaceAdminBtn />
+          <div className="name-container-title">
+            <div className="workspace-title">
+              {" "}
+              {workspace ? workspace?.name : null}
+            </div>
+            <WorkspaceAdminBtn />
+          </div>
           <button className="write-btn">
-            <img src={Write} className="write-icon" onClick={handleClick}/>
+            <img src={Write} className="write-icon" onClick={handleClick} />
           </button>
         </div>
       </div>

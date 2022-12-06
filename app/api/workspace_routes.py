@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.forms.workspace_form import WorkspaceForm
-from app.models import User, db, Workspace, Image
+from app.models import User, db, Workspace, Image, WorkspaceMember
 
 
 
@@ -64,5 +64,19 @@ def delete_workspace(workspace_id):
             return jsonify({'message': 'Workspace deleted'}), 200
         else:
             return jsonify({'message': 'You are not the owner of this workspace'}), 401
+    else:
+        return jsonify({'message': 'Workspace could not be found'}), 404
+
+
+# return a list of all users in the workspace
+@workspace_routes.route('/<int:workspace_id>/users')
+@login_required
+def get_workspace_users(workspace_id):
+    workspace = Workspace.query.filter(Workspace.id == workspace_id).first()
+    print("********8888888888888888886666666668888888888888888888888******** ", workspace)
+    if workspace:
+        workspace_member_list = WorkspaceMember.query.filter(WorkspaceMember.workspace_id == workspace_id).all()
+        workspace_members = [workspace_member.to_dict() for workspace_member in workspace_member_list]
+        return jsonify({'users': workspace_members})
     else:
         return jsonify({'message': 'Workspace could not be found'}), 404

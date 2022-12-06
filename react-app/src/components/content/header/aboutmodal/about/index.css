@@ -11,6 +11,11 @@
     align-items: center;
     margin-left: auto;
     margin-right: auto;
+    cursor: pointer;
+}
+
+.edit-channel-name-btn:hover, .edit-channel-description-btn:hover, .create-by-info:hover {
+    background: lightgray;
 }
 
 .cur-channel-name {
@@ -30,6 +35,71 @@
     margin-right: 15px;
     background: none;
     border: none;
-    color: lightskyblue;
+    color: #2596be;
     font-weight: bold;
+}
+
+
+.edit-channel-description-btn {
+    margin-top: 20px;
+    background: none;
+    display: flex;
+    justify-content: space-between;
+    border: none;
+    width: 90%;
+    border: 1px solid #e6e6e6;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    height: 80px;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+}
+
+
+.create-by-info {
+    background: none;
+    display: flex;
+    justify-content: space-between;
+    border: none;
+    width: 90%;
+    border-bottom: 1px solid #e6e6e6;
+    border-right: 1px solid #e6e6e6;
+    border-left: 1px solid #e6e6e6;
+    height: 80px;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+}
+
+
+.created-by-container {
+   margin-left: 15px;
+}
+
+
+.leave-channel-btn-about {
+    color: #b42e59;
+    font-weight: bold;
+    margin-left: 15px;
+}
+
+.leave-chanel-about-page {
+    background: none;
+    display: flex;
+    justify-content: space-between;
+    border: none;
+    width: 90%;
+    border-bottom: 1px solid #e6e6e6;
+    border-right: 1px solid #e6e6e6;
+    border-left: 1px solid #e6e6e6;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    height: 50px;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
 }

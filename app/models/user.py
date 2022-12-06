@@ -26,7 +26,7 @@ class User(db.Model, UserMixin):
     sent_messages = db.relationship("Message", cascade="all, delete-orphan")
     workspace_invitations = db.relationship("WorkspaceInvite", foreign_keys="WorkspaceInvite.invited_user_id", cascade="all, delete-orphan")
     owned_workspaces = db.relationship("Workspace", foreign_keys="Workspace.owner_id", lazy="dynamic",cascade="all, delete-orphan")
-
+    owned_channels = db.relationship("Channel", foreign_keys="Channel.owner_id", lazy="dynamic",cascade="all, delete-orphan")
     # back_populates="owner"
     @property
     def password(self):

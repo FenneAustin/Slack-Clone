@@ -4,13 +4,13 @@ from app.models import db, User, environment, SCHEMA, Channel
 # Adds a demo user, you can add other users here if you want
 def seed_create_channels():
     demo_add_channel_1 = Channel(
-         workspace_id=1, name="live-questions")
+         workspace_id=1, name="live-questions", owner_id=1)
     demo_add_channel_2 = Channel(
-         workspace_id=2, name="project-grading")
+         workspace_id=2, name="project-grading", owner_id=1)
     demo_add_channel_3 = Channel(
-         workspace_id=3, name="study-group")
+         workspace_id=3, name="study-group", owner_id=1)
     demo_add_channel_4 = Channel(
-         workspace_id=4, name="just-chatting")
+         workspace_id=4, name="just-chatting", owner_id=1)
 
 
     db.session.add(demo_add_channel_1)

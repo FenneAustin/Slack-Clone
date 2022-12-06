@@ -98,9 +98,27 @@ export const createNewChannel = (channel) => async (dispatch) => {
 };
 
 export const editChannel = (channel, id) => async (dispatch) => {
-  const res = await csrfFetch(`/api/channels/${id}`, {
+
+  const { workspace_Id, name, description } = channel;
+  const res = await csrfFetch(`/api/channels/${id}/edit`, {
     method: "PUT",
-    body: JSON.stringify(channel),
+    body: JSON.stringify({ workspace_Id, name, description }),
+  });
+  if (res.ok) {
+    const updatedChannel = await res.json();
+    dispatch(updateChannel(updatedChannel));
+    return res;
+  }
+};
+
+// edit channel description
+export const editChannelDescription = (editedescription, id) => async (dispatch) => {
+
+  const {name, description, workspace_Id} = editedescription
+
+  const res = await csrfFetch(`/api/channels/${id}/description`, {
+    method: "PUT",
+    body: JSON.stringify({ workspace_Id, name, description }),
   });
   if (res.ok) {
     const updatedChannel = await res.json();
@@ -145,7 +163,7 @@ export const joinChannel = (channelId) => async (dispatch) => {
 
 
 const initialState = {
-  usersChannels: { 1: { id: 1, name: "general" } }
+  usersChannels: {  }
 };
 export default function channelsReducer(state = initialState, action) {
   let newState = { ...state };
