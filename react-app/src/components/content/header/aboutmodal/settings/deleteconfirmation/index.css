@@ -1,0 +1,82 @@
+.top-dlt-confirm {
+    display: flex;
+    justify-content: space-between;
+}
+
+.delete-channel-title{
+    margin-left: 20px;
+    margin-top: 20px;
+    font-size: 24px;
+}
+
+.close-modal-x {
+    margin-right: 20px;
+    margin-top: 20px;
+    font-size: 18px;
+    color: gray;
+    cursor: pointer;
+}
+
+.delete-channel-info {
+    width: 90%;
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+.keep-in-mind-info{
+    margin-left: 20px;
+    margin-top: 15px;
+}
+
+.list-of-info {
+    margin-left: 20px;
+
+}
+.checkbox-div {
+    display: flex;
+    align-items: center;
+}
+
+
+.bottom-info {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.cancel-deletion-btn {
+    background-color: white;
+    color: #000000;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    padding: 8px 15px;
+    font-size: 10px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.delete-btn-unchecked {
+    background-color: lightgray;
+    color: gray;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    padding: 8px 14px;
+    font-size: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.delete-channel-btn {
+    background-color: #b42e59;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 14px;
+    font-size: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-left: 10px;
+}

@@ -20,6 +20,7 @@ def create_channel(workspace_Id):
         channel = Channel(
            name = form.data['name'],
            workspace_id = workspace_Id,
+           owner_id = current_user.id,
         )
 
         db.session.add(channel)
@@ -149,6 +150,10 @@ def edit_channel_description(channel_Id):
 def add_user_to_channel(channel_Id, user_Id):
     cur_user = User.query.get(current_user.id)
     if (cur_user):
+        # check if user is already in channel
+        channel_member = ChannelMember.query.filter(ChannelMember.user_id == user_Id, ChannelMember.channel_id == channel_Id).first()
+        if (channel_member):
+            return jsonify({'message': 'User already in channel'}), 400
         channel_member = ChannelMember(
             user_id = user_Id,
             channel_id = channel_Id,
@@ -160,4 +165,33 @@ def add_user_to_channel(channel_Id, user_Id):
     else:
         return jsonify({'message': 'User not found'}), 404
 
-        
+
+# remove a user from channel by channel id and user id
+@channel_routes.route('/<int:channel_Id>/remove/<int:user_Id>', methods=['DELETE'])
+@login_required
+def remove_user_from_channel(channel_Id, user_Id):
+    cur_user = User.query.get(current_user.id)
+    if (cur_user):
+        channel_member = ChannelMember.query.filter(ChannelMember.user_id == user_Id, ChannelMember.channel_id == channel_Id).first()
+        db.session.delete(channel_member)
+        db.session.commit()
+        return jsonify({'message': 'User removed from channel'}), 200
+    else:
+        return jsonify({'message': 'User not found'}), 404
+
+
+# delete a channel by channel id
+@channel_routes.route('/<int:channel_Id>', methods=['DELETE'])
+@login_required
+def delete_channel(channel_Id):
+    cur_user = User.query.get(current_user.id)
+    if (cur_user):
+        channel = Channel.query.get(channel_Id)
+        ## check if user is owner of channel
+        if (channel.owner_id != cur_user.id):
+            return jsonify({'message': 'User is not owner of channel'}), 400
+        db.session.delete(channel)
+        db.session.commit()
+        return jsonify({'message': 'Channel deleted'}), 200
+    else:
+        return jsonify({'message': 'User not found'}), 404

@@ -6,11 +6,38 @@
     display: block;
 }
 
+.remove-user-channel-btn {
+    background: none;
+    border: none;
+    color: hsl(196, 67%, 45%);
+}
+
+.remove-user-channel-btn:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
 .user-info {
     padding-top: 5px;
     padding-bottom: 5px;
 }
 
+.modal-add-container {
+    margin-top: 5px;
+    margin-left: 20px;
+    font-size: 22px;
+    width: 35px;
+    height: 35px;
+    background: lightblue;
+    color: blue;
+    border-radius: 6px;
+    margin-right: 5px;
+}
+
+.add-users-button-contianer {
+    display: flex;
+    align-items: center;
+}
 
 .user-avatar img {
     width: 100%;

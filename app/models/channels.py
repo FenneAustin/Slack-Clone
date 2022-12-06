@@ -18,7 +18,7 @@ class Channel(db.Model, UserMixin):
 
 
     workspace = db.relationship("Workspace", back_populates="channels")
-    channel_members = db.relationship("ChannelMember", back_populates="channel")
+    channel_members = db.relationship("ChannelMember", back_populates="channel", cascade="all, delete-orphan")
     owner = db.relationship("User",back_populates="owned_channels")
 
     def to_dict(self):

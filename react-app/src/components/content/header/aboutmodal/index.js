@@ -4,6 +4,7 @@ import {useSelector, useDispatch} from "react-redux"
 import {TbHash} from "react-icons/tb"
 import About from "./about/index.js"
 import Members from "./members/index.js"
+import Settings from "./settings/index.js"
 
 
 const AboutModal = ({channelId}) => {
@@ -54,6 +55,7 @@ const AboutModal = ({channelId}) => {
           </div>
           {curPage === 1 && <About channel={channel}/>}
           {curPage === 2 && <Members />}
+          {curPage === 3 && <Settings />}
         </div>
       </div>
     );

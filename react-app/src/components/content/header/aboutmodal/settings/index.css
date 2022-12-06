@@ -1,0 +1,28 @@
+.delete-channel-page-container {
+    margin-top: 10px;
+    background: none;
+    display: flex;
+    border: none;
+    width: 90%;
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+    height: 80px;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+}
+
+.delete-channel-page-container:hover {
+    background: lightgray;
+}
+
+.trash-icon {
+    margin-left: 20px;
+    color: #b42e59;
+}
+
+.delete-channel-btn-setting{
+    margin-left: 10px;
+    color: #b42e59;
+}
