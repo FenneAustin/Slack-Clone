@@ -19,6 +19,11 @@ def seed_images():
         url =   "https://res.cloudinary.com/dugmjvzmx/image/upload/v1670102684/logotest_zmpaur.jpg")
     wkim4 = Image(
         url = "https://res.cloudinary.com/dugmjvzmx/image/upload/v1670102684/company-logo_vv2xxz.jpg")
+    defaultWorkspaceImage = Image(
+        url = "https://res.cloudinary.com/dugmjvzmx/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1670103746/default-slack_mwzbtf.png")
+    defaultUserImage = Image(
+        url = "https://res.cloudinary.com/dugmjvzmx/image/upload/v1670403150/slack-profile-img_d9dpan.png")
+
 
     db.session.add(im1)
     db.session.add(im2)
@@ -28,6 +33,8 @@ def seed_images():
     db.session.add(wkim2)
     db.session.add(wkim3)
     db.session.add(wkim4)
+    db.session.add(defaultWorkspaceImage)
+    db.session.add(defaultUserImage)
     db.session.commit()
 
 

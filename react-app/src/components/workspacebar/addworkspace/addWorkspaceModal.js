@@ -3,7 +3,9 @@ import React, { useEffect, useState } from "react";
 import plus from "../../../assets/images/+button.svg";
 import CreateWorkspaceForm from './CreateWorkspaceForm'
 import {Modal} from "../../../context/Modal"
+import {MediumModal} from "../../../context/mediumModal"
 import { AiOutlinePlus } from "react-icons/ai";
+import FindWorkspace from "../../findworkspace";
 
 const AddWorkspaceModal = () => {
 
@@ -53,6 +55,13 @@ const AddWorkspaceModal = () => {
           <CreateWorkspaceForm closeModal={()=> setShowModal(false)}/>
         </Modal>
       )}
+      {showFindWorkspaceModal && (
+        <MediumModal onClose={() => setShowFindWorkspaceModal(false)}>
+          <FindWorkspace closeModal={()=> setShowFindWorkspaceModal(false)}/>
+        </MediumModal>
+
+      )
+        }
     </div>
   );
 }

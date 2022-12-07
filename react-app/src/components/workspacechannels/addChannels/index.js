@@ -3,8 +3,12 @@ import React, { useEffect, useState } from "react";
 import AddChannelForm from "./addChannelForm.js";
 import { Modal } from "../../../context/Modal";
 import { AiOutlinePlus } from "react-icons/ai";
+import { useDispatch } from "react-redux";
+import { showAllChannels,clearChatId, clearWorkspaceChannelId } from "../../../store/ui";
 
 const AddChannelModal = () => {
+
+  const dispatch = useDispatch();
   const [showCreateChannelModal, setShowCreateChannelModal] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -26,8 +30,10 @@ const AddChannelModal = () => {
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
-  const handleBrowse = () => {
-    
+  const handleBrowse = async () => {
+        await dispatch(clearChatId());
+        await dispatch(clearWorkspaceChannelId());
+        await dispatch(showAllChannels());
   };
 
   return (
@@ -38,12 +44,18 @@ const AddChannelModal = () => {
           <div className="add-channels-text">Add channels</div>
         </div>
       </button>
+
       {showMenu && (
+
         <div className="add-new-channel">
+          <div className="buttons-add-new-channels-container">
           <div className="add-channel-item" onClick={() => setShowModal(true)}>
             Create a new channel
           </div>
-          <div className="add-channel-item" onClick={()=> handleBrowse()}>Browse channels</div>
+          <div className="add-channel-item" onClick={()=> handleBrowse()}>
+            Browse channels
+          </div>
+          </div>
         </div>
       )}
       {showModal && (

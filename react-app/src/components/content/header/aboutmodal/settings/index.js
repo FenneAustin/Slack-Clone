@@ -12,6 +12,8 @@ const Settings = () => {
     const [showDeleteModal, setShowDeleteModal] = useState(false);
 
     const channel = useSelector((state) => state.channel[state.ui.channelId]);
+    const sessionUser = useSelector((state) => state.session.user);
+
 
 
     const openModal = () => {
@@ -36,7 +38,7 @@ const Settings = () => {
           </div>
           <button className="blank-edit-btn">Edit</button>
         </div>
-
+{sessionUser.id === channel.owner_info.id && (
         <div className="delete-channel-page-container" onClick={openDeleteModal}>
           <div className="trash-icon">
             <BsTrash />
@@ -45,6 +47,7 @@ const Settings = () => {
             Delete this channel
           </div>
         </div>
+)}
         {showModal && (
           <SmallModal onClose={() => setShowModal(false)}>
             <RenameChannel

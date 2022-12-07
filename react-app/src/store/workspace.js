@@ -61,9 +61,10 @@ export const createNewWorkspace = (workspace) => async (dispatch) => {
   if (res.ok) {
     const newWorkspace = await res.json();
     dispatch(createWorkspace(newWorkspace.workspace))
+    return newWorkspace.workspace.id;
   }
 
-  return res
+
 }
 
 export const editWorkspace = (workspace, id) => async (dispatch) => {

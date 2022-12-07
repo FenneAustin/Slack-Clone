@@ -1,0 +1,164 @@
+
+
+
+.large-title-workspace-create {
+    font-size: 37px;
+    font-weight: 600;
+    margin-left: 50px;
+    margin-top: 20px;
+}
+
+
+.smaller-text-title {
+    font-size: 14px;
+    font-weight: 400;
+    margin-left: 50px;
+    margin-top: 20px;
+    margin-right: 20px;
+}
+
+
+.create-workspace-header-items {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+.close-modal-btn {
+    cursor: pointer;
+}
+
+.workspace-name-input {
+    width: 86%;
+    height: 35px;
+    font-size: 25px;
+    display: block;
+    margin: auto;
+    margin-top: 30px;
+    border-radius: 6px;
+    border: 1px solid lightgray;
+}
+
+.error-div-creating-workspace {
+    height: 20px;
+    width: 100%;
+    font-size: 14px;
+}
+.max-char {
+    font-size: 14px;
+    color: gray;
+    margin-left: 40px;
+    margin-top: 10px;
+}
+
+.first-page-next {
+  position: absolute;
+  left: 0;
+  margin-left: 40px;
+  margin-top: 40px;
+  background-color: #350d36;
+  border-radius: 5px;
+  color: #FFFFFF;
+  font-weight: bold;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 40px;
+  outline: 0;
+  padding: 0 60px;
+  text-align: center;
+  border: none;
+}
+
+
+.add-btn-create-workspace {
+  background-color: #00785b;
+  border-radius: 5px;
+  color: #FFFFFF;
+  font-weight: bold;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 40px;
+  outline: 0;
+  padding: 0 17px;
+  position: relative;
+  text-align: center;
+  border: none;
+  margin-top: 10px;
+}
+
+.add-users-btn-workspace-create{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.add-team-subtext {
+    margin-left: 40px;
+    margin-top: 5px;
+}
+
+.error-handling-div {
+    margin-top: 5px;
+    font-size: 14px;
+    height: 40px;
+    width: 100%;
+    text-align: center;
+    color: red;
+}
+
+.grey-add-btn {
+    background-color: lightgray;
+    color: gray;
+    border: 1px solid lightgray;
+    font-weight: bold;
+    cursor: pointer;
+    display: inline-block;
+    line-height: 40px;
+    outline: 0;
+    padding: 0 17px;
+    position: relative;
+    text-align: center;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+
+.final-next-btn {
+  position: absolute;
+  left: 0;
+  margin-left: 40px;
+  margin-top: 40px;
+  background-color: #350d36;
+  border-radius: 5px;
+  color: #FFFFFF;
+  font-weight: bold;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 40px;
+  outline: 0;
+  padding: 0 60px;
+  text-align: center;
+  border: none;
+}
+
+
+.no-input-final-next {
+  position: absolute;
+  left: 0;
+  margin-left: 40px;
+  margin-top: 40px;
+  background-color: lightgray;
+  border-radius: 5px;
+  color: gray;
+  font-weight: bold;
+  display: inline-block;
+  line-height: 40px;
+  outline: 0;
+  padding: 0 60px;
+  text-align: center;
+  border: none;
+}

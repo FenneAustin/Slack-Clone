@@ -2,6 +2,7 @@
     background: none;
     border: none;
     cursor: pointer;
+    overflow: visible;
 }
 
 
@@ -11,12 +12,15 @@
     align-items: center;
     text-align: center;
     vertical-align: middle;
+    overflow: visible;
 }
 
 .add-workspace-icon {
     color: white;
     font-size: 20px;
     margin-top: 10px;
+    margin-bottom: 40px;
+
 }
 
 
@@ -43,11 +47,13 @@
   padding-bottom: 10px;
   padding-top: 10px;
   text-align: left;
-  z-index: 100;
+  z-index: 999;
+  overflow: visible;
 }
 
 .add-menu-item {
     min-width: 170px;
     max-width: 170px;
+    overflow: visible;
 
 }

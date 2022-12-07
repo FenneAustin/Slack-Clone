@@ -20,16 +20,20 @@ const WorkspaceBar = ({switchWorkspace, user, selectedWorkspace }) => {
     <div className="workspace-bar">
       <div className="workspace-btn-container">
         {workspaces.map((workspace, i) => {
-
           return (
             // <button key={i} className="workspace-btns" onClick={() => switchWorkspace(workspace.id)}>
             //   <img src={workspaceicon} className="workspace-icon" />
             // </button>
-            <WorkspaceBtn key={i} workspace={workspace} switchWorkspace={switchWorkspace}  selectedWorkspace={selectedWorkspace}/>
+            <WorkspaceBtn
+              key={i}
+              workspace={workspace}
+              switchWorkspace={switchWorkspace}
+              selectedWorkspace={selectedWorkspace}
+            />
           );
         })}
-        <AddWorkspaceModal />
       </div>
+      <AddWorkspaceModal />
     </div>
   );
 };

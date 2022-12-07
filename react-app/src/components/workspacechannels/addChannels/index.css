@@ -24,21 +24,16 @@
   position: absolute;
   background-color: white;
   border-radius: 10px;
-  min-width: 10px;
-  min-height: 10px;
-  max-width:150px;
-  max-width: 150px;
+  min-width: 200px;
+  min-height: 80px;
+  max-width:200px;
+  max-height: 80px;
   gap: 10px;
   left: 10px;
   top: 17px;
   border: 1px lightgray solid;
   align-items: center;
   display: flex;
-  justify-content: center;
-  padding-left: 100px;
-  padding-right: 140px;
-  padding-bottom: 10px;
-  padding-top: 10px;
   text-align: left;
   z-index: 100;
 }
@@ -69,4 +64,28 @@
 .add-channels-text {
     color: #cea8d1;
     font-size: 15px;
+}
+
+
+.add-channel-item {
+    width: 130px;
+    cursor: pointer;
+    width: 100%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 20px;
+}
+
+.add-channel-item:hover {
+  background-color: lightblue;
+  cursor: pointer;
+}
+
+.buttons-add-new-channels-container{
+    align-items: center;
+    text-align: left;
+    justify-content: left;
+    vertical-align: middle;
+    margin-top: 10px;
+    width: 100%;
 }

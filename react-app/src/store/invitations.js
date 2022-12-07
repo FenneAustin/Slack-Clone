@@ -29,10 +29,10 @@ const deleteInvitation = (invitationId) => {
     };
 }
 
-const acceptInvitation = (invitation) => {
+const acceptInvitation = (invitationId) => {
     return {
         type: ACCEPT_INVITATION,
-        invitation,
+        invitationId,
     };
 }
 
@@ -53,7 +53,7 @@ export const acceptAnInvitation = (invitationId) => async (dispatch) => {
 
     if (res.ok) {
         const data = await res.json();
-        dispatch(acceptInvitation(data.invitation));
+        dispatch(acceptInvitation(invitationId));
 }
 }
 
@@ -68,13 +68,17 @@ export const createNewInvitation = (email, workspaceId) => async (dispatch) => {
         const data = await res.json();
         dispatch(createInvitation(data.invitation));
     }
+    else{
+        const data = await res.json();
+        return data.errors;
+    }
 }
 
 
 
 export const deleteInvitationById = (invitationId) => async (dispatch) => {
-    const res = await csrfFetch(`/api/invitations/${invitationId}`, {
-        method: "DELETE",
+    const res = await csrfFetch(`/api/invitations/${invitationId}/decline`, {
+        method: "POST",
     });
 
     if (res.ok) {
@@ -102,7 +106,7 @@ const invitationsReducer = (state = initialState, action) => {
             delete newState[action.invitationId];
             return newState;
         case ACCEPT_INVITATION:
-            delete newState[action.invitation.id];
+            delete newState[action.invitationId];
             return newState;
         default:
             return state;

@@ -1,6 +1,6 @@
 import React,{ useEffect, useState} from 'react'
 import "./index.css"
-import {Modal} from "../../context/Modal";
+import {MediumModal} from "../../context/mediumModal";
 import {AiOutlinePlus} from "react-icons/ai"
 import AddPeopleForm from "./addPeopleForm"
 
@@ -18,9 +18,9 @@ const AddPeopleBtn = () => {
           </div>
         </button>
         {showModal && (
-          <Modal onClose={() => setShowModal(false)}>
+          <MediumModal onClose={() => setShowModal(false)}>
             <AddPeopleForm closeModal={() => setShowModal(false)} />
-          </Modal>
+          </MediumModal>
         )}
       </div>
     );

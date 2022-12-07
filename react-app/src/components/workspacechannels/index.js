@@ -11,6 +11,7 @@ import { joinRoomThunk, leaveRoomThunk, socketRoomSelector } from "../../store/s
 import { AiOutlinePlus } from "react-icons/ai";
 import AddChannelModal from "./addChannels/index.js";
 import { hideAllChannels } from "../../store/ui"
+import { getChannelUsersList } from "../../store/channel"
 
 const WorkspaceChannels = ({workspaceId}) => {
 
@@ -34,6 +35,7 @@ const WorkspaceChannels = ({workspaceId}) => {
         dispatch(getAllChannelMessages(id))
         dispatch(clearChatId())
         dispatch(setWorkspaceChannelId(id))
+        dispatch(getChannelUsersList(id))
         if (room) {
             dispatch(leaveRoomThunk(room, socket))
         }

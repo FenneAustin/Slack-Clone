@@ -19,6 +19,7 @@ def create_workspace():
         workspace = Workspace(
            name = form.data['name'],
            owner_id = current_user.id,
+           workspace_image_id = 9,
         )
 
         db.session.add(workspace)
