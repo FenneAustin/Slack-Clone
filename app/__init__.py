@@ -20,8 +20,8 @@ app = Flask(__name__, static_folder='../react-app/build', static_url_path='/')
 
 if os.environ.get('FLASK_ENV') == 'production':
     origins = [
-        'http://slack-clone.herokuapp.com',
-        'https://slack-clone.herokuapp.com'
+        'http://slack-clone.onrender.com',
+        'https://slack-clone.onrender.com'
     ]
 else:
     origins = "*"
