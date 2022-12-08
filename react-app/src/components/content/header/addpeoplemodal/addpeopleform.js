@@ -68,7 +68,7 @@ const AddPeopleForm = ({closeModal}) => {
           value={searchInput}
         />
         <div className="all-users-list-container">
-          {Object.values(users)
+          {(users)
             .filter((user) => {
               const name = user.user.first_name + " " + user.user.last_name;
               return name.includes(searchInput);

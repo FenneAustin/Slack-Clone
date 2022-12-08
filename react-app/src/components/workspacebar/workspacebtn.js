@@ -32,7 +32,9 @@ export default function WorkspaceBtn({ workspace, switchWorkspace, selectedWorks
           <img
             src={workspaceIcon}
             className={"workspace-icon"}
-            onClick={() => switchWorkspace(workspace.id)}
+            onClick={async () => {
+            switchWorkspace(workspace.id)
+            }}
           />
         </div>
     );

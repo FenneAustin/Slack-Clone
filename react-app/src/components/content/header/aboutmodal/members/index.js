@@ -14,6 +14,7 @@ const Members = () => {
     const curChannel = useSelector((state) => state.ui.channelId)
     const channelOwner = useSelector((state) => state.channel[curChannel].owner_info.id)
     const curWorkspace = useSelector((state) => state.ui.workspaceId)
+    const invitedUsers = useSelector((state) => state.workspaceinfo.workspaceInvites)
 
     const removeUser = async (id) => {
       await dispatch(removeChannelUserFromChannel(curChannel, id))

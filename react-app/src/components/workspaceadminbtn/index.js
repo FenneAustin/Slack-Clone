@@ -10,6 +10,9 @@ import CreateChannelForm from "../workspacechannels/addChannels/addChannelForm";
 import FindWorkspace from "../findworkspace";
 import CreateWorkspaceForm from "../workspacebar/addworkspace/CreateWorkspaceForm"
 import EditWorkspaceDetails from "./editworkspacedetails";
+import ManageUsers from "./managemembers/index";
+import DeleteWorkspaceConfirmation from "./deleteworkspaceconfirmation/index";
+import LeaveWorkspaceConfirmation from "./leaveworkspaceconfirmation/index";
 
 const WorkspaceAdminBtn = () => {
 
@@ -28,6 +31,9 @@ const WorkspaceAdminBtn = () => {
     const [showCreateWorkspace, setShowCreateWorkspace] = useState(false);
     const [showFindWorkspace, setShowFindWorkspace] = useState(false);
     const [showEditWorkspace, setShowEditWorkspace] = useState(false);
+    const [showManageUsers, setShowManageUsers] = useState(false);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [showLeaveModal, setShowLeaveModal] = useState(false);
 
     const toggleSettingsMenu = () => {
         setSettingsIsHovered(!settingsIsHovered);
@@ -153,23 +159,28 @@ const WorkspaceAdminBtn = () => {
                   <div className="settings-title">Settings</div>
                   <div
                     className="Edit-workspace-details-container"
-                    onClick={() => setShowEditWorkspace(true)}
+                    onClick={() => {setShowEditWorkspace(true)
+                    setSettingsIsHovered(false)
+                    }}
                   >
                     <div className="work-item">Edit workspace details</div>
                   </div>
                   <div className="seperator-line"> </div>
                   <div className="settings-title">Administration</div>
                   {workspaces[curWorkspace].owner_id === sessionUser.id && (
-                    <div className="Edit-workspace-details-container">
+                    <div className="Edit-workspace-details-container" onClick={() => {
+                      setShowManageUsers(true)
+                      setSettingsIsHovered(false)
+                    }}>
                       <div className="work-item">Manage members</div>
                     </div>
                   )}
                   {workspaces[curWorkspace].owner_id === sessionUser.id && (
-                    <div className="Edit-workspace-details-container">
+                    <div className="Edit-workspace-details-container" onClick={() => {setShowDeleteModal(true)}}>
                       <div className="work-item">Delete workspace</div>
                     </div>
                   )}
-                  <div className="Edit-workspace-details-container">
+                  <div className="Edit-workspace-details-container" onClick={() => {setShowLeaveModal(true)}}>
                     <div className="work-item">Leave workspace</div>
                   </div>
                 </div>
@@ -181,7 +192,10 @@ const WorkspaceAdminBtn = () => {
             <div className="switch-to-diff-workspaces">
               <div
                 className="add-workspace-container-panel"
-                onMouseEnter={() => onAddHover()}
+                onMouseEnter={() =>{
+                  onAddHover()
+                  setSettingsIsHovered(false)}
+                }
                 onMouseLeave={() => onAddHover()}
               >
                 <button className="add-workspaces-btn-panel">
@@ -293,6 +307,28 @@ const WorkspaceAdminBtn = () => {
             />
           </Modal>
         )}
+        {showManageUsers && (
+          <Modal onClose={() => setShowManageUsers(false)}>
+            <ManageUsers closeModal={() => setShowManageUsers(false)} />
+          </Modal>
+        )}
+        {showDeleteModal && (
+          <Modal onClose={() => setShowDeleteModal(false)}>
+            <DeleteWorkspaceConfirmation
+              closeModal={() => setShowDeleteModal(false)}
+              workspace={workspaces[curWorkspace]}
+            />
+          </Modal>
+        )}
+        {showLeaveModal && (
+          <Modal onClose={() => setShowLeaveModal(false)}>
+            <LeaveWorkspaceConfirmation
+              closeModal={() => setShowLeaveModal(false)}
+              workspace={workspaces[curWorkspace]}
+            />
+          </Modal>
+        )}
+
       </div>
     );
 }

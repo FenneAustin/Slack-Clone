@@ -20,4 +20,5 @@ class WorkspaceInvite(db.Model, UserMixin):
             'id': self.id,
             'invited_user_id': self.invited_user_id,
             'workspace_info': self.workspace.to_dict(),
+            'user_info': self.invited_user.to_dict(),
         }

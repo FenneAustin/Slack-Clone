@@ -12,6 +12,7 @@ import { hideAllChannels } from "../../store/ui";
 import WorkspaceMisc from "../../components/workspacemisc/index.js";
 import { getAllUserChannels } from "../../store/channels";
 import TopNav from "../../components/topnav";
+import { clearWorkspaceUsers, getListOfUsers } from "../../store/workspaceinfo";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -32,6 +33,8 @@ const Home = () => {
     dispatch(setWorkspace(id));
     dispatch(clearChatId());
     dispatch(clearWorkspaceChannelId());
+    dispatch(clearWorkspaceUsers())
+    dispatch(getListOfUsers(id))
   }
 
   return (

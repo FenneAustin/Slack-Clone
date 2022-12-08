@@ -98,3 +98,49 @@ def send_invitation(workspace_id, email):
             return {'errors': ['Workspace not found']},404
     else:
         return {'errors': ['Current user was not found']},404
+
+
+
+
+# return a list of all users with a workspace invitation by workspace id
+@invitations_routes.route('/<int:workspace_id>/invitations')
+@login_required
+def get_users_with_invitation(workspace_id):
+    cur_user = User.query.get(current_user.id)
+    if (cur_user):
+        workspace = Workspace.query.get(workspace_id)
+        if (workspace):
+            # check if user is the owner of the workspace
+            if (cur_user.id == workspace.owner_id ):
+                # get all users with invitation
+                invitation_list = WorkspaceInvite.query.filter(WorkspaceInvite.workspace_id == workspace.id)
+                invitations = [invitation.to_dict() for invitation in invitation_list]
+                return jsonify({'invitations': invitations}), 200
+            else:
+                return {'errors': ['User is not the owner of the workspace']},404
+        else:
+            return {'errors': ['Workspace not found']},404
+    else:
+        return {'errors': ['Current user was not found']},404
+
+
+# delete a workspace invitation by invitation id
+@invitations_routes.route('/<int:invitation_id>/delete', methods=['DELETE'])
+@login_required
+def delete_invitation(invitation_id):
+    cur_user = User.query.get(current_user.id)
+    if (cur_user):
+        invitation = WorkspaceInvite.query.get(invitation_id)
+        if (invitation):
+            # check if user is the owner of the workspace
+            workspace = Workspace.query.get(invitation.workspace_id)
+            if (cur_user.id == workspace.owner_id ):
+                db.session.delete(invitation)
+                db.session.commit()
+                return {'invitation': 'deleted'}, 200
+            else:
+                return {'errors': ['User is not the owner of the workspace']},404
+        else:
+            return {'errors': ['Workspace invitation not found']},404
+    else:
+        return {'errors': ['Current user was not found']},404

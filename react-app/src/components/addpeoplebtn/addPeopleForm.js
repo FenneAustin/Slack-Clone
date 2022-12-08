@@ -3,6 +3,7 @@ import {useSelector, useDispatch} from "react-redux"
 import { createNewInvitation } from '../../store/invitations';
 import { AiOutlineClose } from "react-icons/ai";
 import "./addPeopleForm.css"
+import { getAllPendingWorkspaceInvitations } from '../../store/workspaceinfo';
 
 const AddPeopleForm = ({closeModal}) => {
 
@@ -29,7 +30,7 @@ const AddPeopleForm = ({closeModal}) => {
         }
         if (validateEmail(email) === true) {
             const data = await dispatch(createNewInvitation(email, curWorkspace))
-            console.log(data)
+
             if (data) {
                 setErrors(data);
                 setHasSubmitted(true)
@@ -37,6 +38,7 @@ const AddPeopleForm = ({closeModal}) => {
                 setSuccess(true)
                 setEmail('')
             }
+            await dispatch(getAllPendingWorkspaceInvitations(curWorkspace))
 
         } else {
             setErrors(['Please enter a valid email address'])

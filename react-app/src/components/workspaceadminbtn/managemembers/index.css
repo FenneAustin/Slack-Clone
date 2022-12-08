@@ -1,0 +1,57 @@
+.add-user-workspace-icon-btn {
+    margin-left: 6px;
+    margin-top: 5px;
+}
+
+.add-users-button-contianer {
+    margin-top: 20px;
+}
+
+.Show-users-btn {
+    cursor: pointer;
+    border-bottom: 2px solid darkgreen;
+    margin-left: 20px;
+}
+
+.Show-users-btn-notselected {
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+.Show-invites-btn {
+    cursor: pointer;
+    border-bottom: 2px solid darkgreen;
+    margin-left: 20px;
+}
+
+.Show-invites-btn-notselected {
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+.top-bar-page-select {
+    margin-top: 20px;
+    display: flex;
+    width: 100%;
+    border-bottom: 1px solid lightgray;
+}
+
+
+.manage-users-title {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+
+.close-modal-icon {
+    margin-right: 30px;
+    margin-top: 30px;
+}
+
+.manage-users-title-text {
+    margin-left: 20px;
+    margin-top: 20px;
+    font-size: 30px;
+    font-weight: bolder;
+}

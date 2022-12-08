@@ -93,7 +93,6 @@ export default function channelReducer(state = initialState, action){
             return newState;
         case REMOVE_CHANNEL_USER:
             // delete user from channel.users where the id matches the action.payload
-
             newState.users = newState.users.filter(user => user.user.id !== action.payload)
             return newState;
         default:

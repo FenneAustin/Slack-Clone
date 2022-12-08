@@ -3,13 +3,15 @@ import "./index.css"
 import Write from "../../assets/images/Write-icon.svg"
 import {useHistory} from 'react-router-dom'
 import WorkspaceAdminBtn from "../workspaceadminbtn"
+import { showWritePage } from "../../store/ui"
+import {useDispatch} from 'react-redux'
 
 const WorkspaceTitleBar = ({workspace}) =>{
 
   const history = useHistory();
-
+  const dispatch = useDispatch();
   const handleClick = () => {
-
+    dispatch(showWritePage())
   }
 
 

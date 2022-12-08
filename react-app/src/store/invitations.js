@@ -8,12 +8,14 @@ const ACCEPT_INVITATION = "ACCEPT_INVITATION";
 const DELETE_INVITATION = "DELETE_INVITATION";
 
 
+
 const getInvitations = (invitations) => {
     return {
         type: GET_INVITATIONS,
         invitations,
     };
 };
+
 
 const createInvitation = (invitation) => {
     return {

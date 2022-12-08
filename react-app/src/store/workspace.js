@@ -5,6 +5,8 @@ const GET_USER_WORKSPACES = "GET_USER_WORKSPACES";
 const CREATE_WORKSPACE = "CREATE_WORKSPACE";
 const UPDATE_WORKSPACE = "UPDATE_WORKSPACE";
 const DELETE_WORKSPACE = "DELETE_WORKSPACE";
+const LEAVE_WORKSPACE = "LEAVE_WORKSPACE";
+
 
 
 
@@ -14,6 +16,13 @@ const getUserWorkspaces = (workspaces) => {
         workspaces,
     }
 }
+
+const leaveWorkspace = (workspaceId) => {
+  return {
+    type: LEAVE_WORKSPACE,
+    workspaceId,
+  };
+};
 
 const createWorkspace = (workspace) => {
   console.log(workspace)
@@ -79,8 +88,20 @@ export const editWorkspace = (workspace, id) => async (dispatch) => {
     }
 }
 
+export const leaveAWorkspace = (workspaceId) => async (dispatch) => {
+  const res = await csrfFetch(`/api/workspaces/${workspaceId}/leave`, {
+    method: "DELETE",
+  });
+
+  const response = await res.json();
+  if (res.status === 200) {
+    dispatch(leaveWorkspace(workspaceId));
+  }
+  return response;
+};
+
 export const deleteAWorkspace = (workspaceId) => async (dispatch) => {
-  const res = await csrfFetch(`/api/workspaces/${workspaceId}`,{
+  const res = await csrfFetch(`/api/workspaces/${workspaceId}/delete`,{
     method: "DELETE",
   });
 
@@ -107,6 +128,9 @@ export default function workspaceReducer(state = initialState, action) {
       return newState;
     case UPDATE_WORKSPACE:
       newState[action.workspace.id] = action.workspace;
+      return newState;
+    case LEAVE_WORKSPACE:
+      delete newState[action.workspaceId];
       return newState;
     case DELETE_WORKSPACE:
       delete newState[action.workspaceId];

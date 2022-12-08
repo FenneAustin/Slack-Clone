@@ -14,7 +14,8 @@ const EditWorkspaceDetails = ({ workspace, closeModal }) => {
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [imgUrl, setImgUrl] = useState(workspace.workspace_image.url);
   const characterLimit = 50;
-
+  const [isAtCharacterLimitUrl, setIsAtCharacterLimitUrl] = useState(false);
+  const urlCharacterLimit = 250;
   function isValidUrl(str) {
     const regex =
       /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
@@ -45,6 +46,11 @@ const EditWorkspaceDetails = ({ workspace, closeModal }) => {
       setHasErrors(true);
       setErrors(["Please enter a valid image url", ...errors]);
     }
+    if (imgUrl.length >= urlCharacterLimit) {
+      setIsAtCharacterLimitUrl(true);
+    } else {
+      setIsAtCharacterLimitUrl(false);
+    }
   }, [name, imgUrl]);
 
 
@@ -52,10 +58,18 @@ const EditWorkspaceDetails = ({ workspace, closeModal }) => {
   const handleSave = async () => {
     setHasSubmitted(true);
     if (!hasErrors && errors.length < 1) {
-      const editedWorkspace = {
+
+      let editedWorkspace = {
         name: name,
-        workspace_Id: workspace.id,
       };
+
+      if (imgUrl !== workspace.workspace_image.url) {
+        editedWorkspace = {
+          ...editedWorkspace,
+          image: imgUrl,
+        };
+      }
+
       await dispatch(editWorkspace(editedWorkspace, workspace.id));
       await dispatch(getAllUserWorkspaces());
       closeModal();
@@ -96,11 +110,13 @@ const EditWorkspaceDetails = ({ workspace, closeModal }) => {
       </div>
       <div className="channel-name-label">Workspace image url</div>
       <input
-        maxLength="100"
         className="channel-name-input-change"
         value={imgUrl}
         onChange={(e) => setImgUrl(e.target.value)}
       ></input>
+      {isAtCharacterLimitUrl && (
+        <div className="character-limit-error">Character limit reached for urls</div>
+      )}
 
       {hasErrors && hasSubmitted && (
         <div className="error-msg">{errors[0]}</div>
