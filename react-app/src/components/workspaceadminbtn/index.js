@@ -7,12 +7,15 @@ import { MediumModal} from "../../context/mediumModal";
 import AddPeopleForm from "../addpeoplebtn/addPeopleForm";
 import { Modal} from "../../context/Modal";
 import CreateChannelForm from "../workspacechannels/addChannels/addChannelForm";
-
+import FindWorkspace from "../findworkspace";
+import CreateWorkspaceForm from "../workspacebar/addworkspace/CreateWorkspaceForm"
+import EditWorkspaceDetails from "./editworkspacedetails";
 
 const WorkspaceAdminBtn = () => {
 
     const workspaces = useSelector(state => state.workspace)
     const curWorkspace = useSelector(state => state.ui.workspaceId)
+    const sessionUser = useSelector(state => state.session.user)
 
     const [showMenu, setShowMenu] = useState(false);
     const [settingsIsHovered, setSettingsIsHovered] = useState(false);
@@ -22,6 +25,9 @@ const WorkspaceAdminBtn = () => {
     // modals
     const [showAddUsers, setShowAddUsers] = useState(false);
     const [showCreateChannel, setShowCreateChannel] = useState(false);
+    const [showCreateWorkspace, setShowCreateWorkspace] = useState(false);
+    const [showFindWorkspace, setShowFindWorkspace] = useState(false);
+    const [showEditWorkspace, setShowEditWorkspace] = useState(false);
 
     const toggleSettingsMenu = () => {
         setSettingsIsHovered(!settingsIsHovered);
@@ -143,7 +149,30 @@ const WorkspaceAdminBtn = () => {
                 <MdKeyboardArrowRight className="arrow-right" />
               </div>
               {settingsIsHovered && (
-                <div className="flyout-settings-workspace">hello</div>
+                <div className="flyout-settings-workspace">
+                  <div className="settings-title">Settings</div>
+                  <div
+                    className="Edit-workspace-details-container"
+                    onClick={() => setShowEditWorkspace(true)}
+                  >
+                    <div className="work-item">Edit workspace details</div>
+                  </div>
+                  <div className="seperator-line"> </div>
+                  <div className="settings-title">Administration</div>
+                  {workspaces[curWorkspace].owner_id === sessionUser.id && (
+                    <div className="Edit-workspace-details-container">
+                      <div className="work-item">Manage members</div>
+                    </div>
+                  )}
+                  {workspaces[curWorkspace].owner_id === sessionUser.id && (
+                    <div className="Edit-workspace-details-container">
+                      <div className="work-item">Delete workspace</div>
+                    </div>
+                  )}
+                  <div className="Edit-workspace-details-container">
+                    <div className="work-item">Leave workspace</div>
+                  </div>
+                </div>
               )}
             </div>
 
@@ -161,10 +190,49 @@ const WorkspaceAdminBtn = () => {
                 <div className="arrow-right-container">
                   <MdKeyboardArrowRight className="arrow-right" />
                 </div>
-                {addIsHovered && <div className="flyout-admin">hello</div>}
+                {addIsHovered && (
+                  <div className="flyout-admin">
+                    <div className="button-container-admin">
+                      <div
+                        className="create-btn-admin-container"
+                        onClick={() => {
+                          setShowCreateWorkspace(true);
+                          onAddHover();
+                        }}
+                      >
+                        <div
+                          className="create-workspace-admin"
+                          onClick={() => {
+                            setShowCreateWorkspace(true);
+                            onAddHover();
+                          }}
+                        >
+                          Create a new workspace
+                        </div>
+                      </div>
+                      <div
+                        className="find-new-admin-container"
+                        onClick={() => {
+                          setShowFindWorkspace(true);
+                          onAddHover();
+                        }}
+                      >
+                        <div
+                          className="find-a-new-workspace-btn"
+                          onClick={() => {
+                            setShowFindWorkspace(true);
+                            onAddHover();
+                          }}
+                        >
+                          Find a new workspace
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
 
-              <div
+              {/* <div
                 className="switch-workspaces-container-panel"
                 onMouseEnter={() => onSwitchHover()}
                 onMouseLeave={() => onSwitchHover()}
@@ -176,9 +244,22 @@ const WorkspaceAdminBtn = () => {
                   <MdKeyboardArrowRight className="arrow-right" />
                 </div>
                 {switchIsHovered && (
-                  <div className="flyout-switch-workspace">hello</div>
+                  <div className="flyout-switch-workspace">
+                    <div className="workspace-container">
+                      {workspaces &&
+                        <div>
+                            <div>Your other workspaces</div>
+
+
+
+                        </div>
+                      }
+                    </div>
+
+
+                  </div>
                 )}
-              </div>
+              </div> */}
             </div>
           </div>
         )}
@@ -190,6 +271,26 @@ const WorkspaceAdminBtn = () => {
         {showCreateChannel && (
           <Modal onClose={() => setShowCreateChannel(false)}>
             <CreateChannelForm closeModal={() => setShowCreateChannel(false)} />
+          </Modal>
+        )}
+        {showCreateWorkspace && (
+          <Modal onClose={() => setShowCreateWorkspace(false)}>
+            <CreateWorkspaceForm
+              closeModal={() => setShowCreateWorkspace(false)}
+            />
+          </Modal>
+        )}
+        {showFindWorkspace && (
+          <MediumModal onClose={() => setShowFindWorkspace(false)}>
+            <FindWorkspace closeModal={() => setShowFindWorkspace(false)} />
+          </MediumModal>
+        )}
+        {showEditWorkspace && (
+          <Modal onClose={() => setShowEditWorkspace(false)}>
+            <EditWorkspaceDetails
+              closeModal={() => setShowEditWorkspace(false)}
+              workspace={workspaces[curWorkspace]}
+            />
           </Modal>
         )}
       </div>

@@ -16,7 +16,6 @@ const getWorkspaceChannels = (channels) => {
 };
 
 const getCurrentUserChannels = (channels) => {
-  console.log(channels)
   return {
     type: GET_CUR_USER_CHANNELS,
     channels,

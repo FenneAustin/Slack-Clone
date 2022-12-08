@@ -68,7 +68,7 @@ export const createNewWorkspace = (workspace) => async (dispatch) => {
 }
 
 export const editWorkspace = (workspace, id) => async (dispatch) => {
-    const res = await csrfFetch(`/api/workspaces/${id}`, {
+    const res = await csrfFetch(`/api/workspaces/${id}/edit`, {
       method: 'PUT',
       body: JSON.stringify(workspace)
     })

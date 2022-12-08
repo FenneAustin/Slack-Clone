@@ -1,0 +1,27 @@
+
+.rename-workspace-header {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.close-icon-test {
+    margin-top: 20px;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.rename-workspace-title-admin {
+    margin-left: 20px;
+    margin-top: 20px;
+    font-size: 37px;
+    font-weight: bolder;
+}
+
+
+.edit-workspace-name-subtext {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 30px;
+}

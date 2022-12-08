@@ -81,3 +81,25 @@ def get_workspace_users(workspace_id):
         return jsonify({'users': workspace_members})
     else:
         return jsonify({'message': 'Workspace could not be found'}), 404
+
+
+# edit a worksapce by id
+@workspace_routes.route('/<int:workspace_id>/edit', methods=['PUT'])
+@login_required
+def edit_workspace(workspace_id):
+    workspace = Workspace.query.filter(Workspace.id == workspace_id).first()
+    if workspace:
+        if workspace.owner_id == current_user.id:
+            form = WorkspaceForm()
+            form['csrf_token'].data = request.cookies['csrf_token']
+            if form.validate_on_submit():
+                workspace.name = form.data['name']
+                workspace.workspace_image_id = form.data['workspace_image_id']
+                db.session.commit()
+                return jsonify({'workspace': workspace.to_dict()})
+            else:
+                return jsonify({'message': 'Worskpaces needs to have required fields'}), 400
+        else:
+            return jsonify({'message': 'You are not the owner of this workspace'}), 401
+    else:
+        return jsonify({'message': 'Workspace could not be found'}), 404
