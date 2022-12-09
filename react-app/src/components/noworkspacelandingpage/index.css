@@ -1,0 +1,119 @@
+
+.slack-logo-container{
+    max-width: 100px;
+    margin: auto;
+    padding-top: 40px;
+}
+
+.slack-logo-no-workspace {
+    width: 100%;
+}
+
+
+.top-half {
+    height: 60%;
+    background-color: #f9f6f1;
+}
+
+
+.no-workspace-landing-page {
+    height: 100vh;
+}
+
+.boom-no-workspace {
+    display: flex;
+}
+
+.left-side-no-workspace {
+    width: 50%;
+    height: 100%;
+    align-items: center;
+    display: flex;
+    justify-content: right;
+}
+.right-side-no-workspace {
+    display: flex;
+    justify-content: left;
+    width: 50%;
+    height: 100%;
+    align-items: center;
+    text-align: center;
+}
+
+.invitations-container-no-workspace {
+    margin-top: 40px;
+    width: 60%;
+    border: 1px lightgray solid;
+    border-radius: 8px;
+}
+
+.bottom-half {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.create-workspace-btn-no-workspace {
+  margin-left: 40px;
+  margin-top: 40px;
+  background-color: #350d36;
+  border-radius: 5px;
+  color: #FFFFFF;
+  font-weight: bold;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 40px;
+  outline: 0;
+  padding: 0 20px;
+  text-align: center;
+  border: none;
+}
+
+.giant-create-text {
+    font-size: 45px;
+    font-weight: bolder;
+}
+
+.subtext-boom {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+
+.left-side-content-container {
+    max-width: 400px;
+}
+
+.logout-btn-no-container {
+    width: 300px;
+    margin: auto;
+}
+.logout-btn-no-workspace {
+    margin-top: 20px;
+    background-color: white;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    display: inline-block;
+    line-height: 40px;
+    outline: 0;
+    padding: 0 20px;
+    text-align: center;
+    border: none;
+    margin-bottom: 10px;
+}
+
+
+.btn-homepage-logout {
+    background-color: none;
+    background: none;
+    border: none;
+    color: gray;
+}
+
+
+.btn-homepage-logout:hover {
+    text-decoration: underline;
+    color: lightblue;
+    cursor: pointer;
+}

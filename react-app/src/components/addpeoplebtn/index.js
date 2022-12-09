@@ -10,7 +10,7 @@ const AddPeopleBtn = () => {
 
 
     return (
-      <div className="add-new-teammate-container">
+      <div className="add-new-teammate-container" onClick={()=> setShowModal}>
         <button className="add-people-button" onClick={() => setShowModal(true)}>
           <div className="add-people-btns">
             <AiOutlinePlus className="add-teammate-icon-add" />

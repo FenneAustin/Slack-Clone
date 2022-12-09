@@ -13,12 +13,12 @@ const Content = () => {
   const showWritePage = useSelector((state) => state.ui.showWritepage);
 
    return (
-     <div className="content-container">
-       {channelsui ? <BrowseChannels />  : null}
-       { showChannelMessages ? <MessageContent /> : null }
-       { showDirectMessages ? <MessageContent /> : null }
-       { showWritePage ? <WritePage /> : null }
-     </div>
+       <div className="content-container">
+         {channelsui ? <BrowseChannels /> : null}
+         {showChannelMessages ? <MessageContent /> : null}
+         {showDirectMessages ? <MessageContent /> : null}
+         {showWritePage ? <WritePage /> : null}
+       </div>
    );
 
 

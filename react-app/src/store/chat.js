@@ -25,6 +25,20 @@ const deleteChat = (chatId) => {
   };
 };
 
+export const createNewChat = (workspaceId, userId) => async (dispatch) => {
+  const res = await csrfFetch(`/api/chats/${workspaceId}/${userId}`, {
+    method: "POST",
+    body: JSON.stringify({ userId }),
+  });
+
+  if (res.ok) {
+    const data = await res.json();
+    await dispatch(createChat(data.chat));
+    return data.chat.id;
+  }
+};
+
+
 export const getAllWorkspaceChats = (workspaceId) => async (dispatch) => {
   const res = await csrfFetch(`/api/chats/${workspaceId}/me`);
 
@@ -44,6 +58,9 @@ export default function chatsReducer(state = initialState, action) {
       if (action.chats)
         action.chats.forEach((chat) => (redoState[chat.id] = chat));
       return redoState;
+    case CREATE_CHAT:
+      newState[action.chat.id] = action.chat;
+      return newState;
     default:
       return state;
   }

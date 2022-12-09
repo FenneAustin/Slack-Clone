@@ -159,7 +159,8 @@ const WorkspaceAdminBtn = () => {
                   <div className="settings-title">Settings</div>
                   <div
                     className="Edit-workspace-details-container"
-                    onClick={() => {setShowEditWorkspace(true)
+                    onClick={() => {
+                    setShowEditWorkspace(true)
                     setSettingsIsHovered(false)
                     }}
                   >
@@ -180,9 +181,11 @@ const WorkspaceAdminBtn = () => {
                       <div className="work-item">Delete workspace</div>
                     </div>
                   )}
+                {workspaces[curWorkspace].owner_id !== sessionUser.id && (
                   <div className="Edit-workspace-details-container" onClick={() => {setShowLeaveModal(true)}}>
                     <div className="work-item">Leave workspace</div>
                   </div>
+                )}
                 </div>
               )}
             </div>
@@ -301,9 +304,7 @@ const WorkspaceAdminBtn = () => {
         )}
         {showEditWorkspace && (
           <Modal onClose={() => setShowEditWorkspace(false)}>
-            <EditWorkspaceDetails
-              closeModal={() => setShowEditWorkspace(false)}
-              workspace={workspaces[curWorkspace]}
+            <EditWorkspaceDetails closeModal={() => setShowEditWorkspace(false)} workspace={workspaces[curWorkspace]}
             />
           </Modal>
         )}

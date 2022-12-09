@@ -17,10 +17,10 @@ const WorkspaceMisc = ({workspace}) => {
 
     return (
       <div className="misc-container">
-        <div className="dm-container-misc">
+        {/* <div className="dm-container-misc">
           <TbMessages className="misc-icon"/>
           <button className="Dm-btn">Direct Messages</button>
-        </div>
+        </div> */}
         <div className="all-channels-container-misc">
           <CgPlayListSearch className="misc-icon"/>
           <button className="all-channels-btn" onClick={handleShowChannels}>All Channels</button>

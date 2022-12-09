@@ -1,14 +1,20 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
 import "./UserSearch.css";
 import { useSelector, useDispatch } from "react-redux";
 import { setChatId } from "../../../../store/ui";
+import { createNewChat } from "../../../../store/chat";
+import { SocketContext } from "../../../../context/socket";
+import { joinRoomThunk, leaveRoomThunk, socketRoomSelector } from "../../../../store/socketrooms";
 
 const UserSearch = ({ users }) => {
 
-
+  const dispatch = useDispatch();
+  const socket = useContext(SocketContext);
+  const room = useSelector(socketRoomSelector)
   const sessionUser = useSelector((state) => state.session.user);
   const chats = Object.values(useSelector((state) => state.chat));
-  const dispatch = useDispatch();
+  const workspaceId = useSelector((state) => state.ui.workspaceId);
+
 
   const [searchQuery, setSearchQuery] = useState(""); // The search query
   const [selectedUser, setSelectedUser] = useState(null); // The selected user
@@ -18,6 +24,7 @@ const UserSearch = ({ users }) => {
 
 
   const handleSearchChange = (event) => {
+
 
     const searchQuery = event.target.value;
 
@@ -48,11 +55,20 @@ const UserSearch = ({ users }) => {
 
 
   const handleUserSelect = (user) => {
-    console.log("hello")
     setSelectedUser(user);
     const chatId = checkIfChatExists(user);
     if (chatId !== false){
       dispatch(setChatId(chatId));
+    }
+    else {
+      const chatId = dispatch(createNewChat(workspaceId,user.id));
+
+      dispatch(setChatId(chatId));
+      if(room){
+        dispatch(leaveRoomThunk(room, socket));
+      }
+      const data = { 'id': chatId, 'roomtype': 'chat' };
+      dispatch(joinRoomThunk(data, socket))
     }
 
   };
@@ -66,7 +82,7 @@ const UserSearch = ({ users }) => {
   };
 
   return (
-    <div>
+    <div className="search-bar-container">
       <div className="title-top-message">New message</div>
       <input
         type="text"
