@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
+import "./SignUpForm.css"
 
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
@@ -50,60 +51,81 @@ const SignUpForm = () => {
   }
 
   return (
-    <form onSubmit={onSignUp}>
-      <div>
-        {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
-        ))}
+    <div>
+      <div className="slack-logo-container">
+        <img
+          className="slack-logo-no-workspace"
+          src="https://res.cloudinary.com/dugmjvzmx/image/upload/v1670542918/slack_jy6w8x.svg"
+          alt="slack logo"
+        />
       </div>
-      <div>
-        <label>Email</label>
-        <input
-          type="text"
-          name="email"
-          onChange={updateEmail}
-          value={email}
-        ></input>
+      <div className="header-container-sign-in">
+        <h1 className="sign-in-header">Sign up to Slack</h1>
       </div>
-      <div>
-        <label>First name</label>
-        <input
-          type="text"
-          name="firstName"
-          onChange={updateFirstName}
-          value={firstName}
-        ></input>
-      </div>
-      <div>
-        <label>Last name</label>
-        <input
-          type="text"
-          name="lastName"
-          onChange={updateLastName}
-          value={lastName}
-        ></input>
-      </div>
-      <div>
-        <label>Password</label>
-        <input
-          type="password"
-          name="password"
-          onChange={updatePassword}
-          value={password}
-        ></input>
-      </div>
-      <div>
-        <label>Repeat Password</label>
-        <input
-          type="password"
-          name="repeat_password"
-          onChange={updateRepeatPassword}
-          value={repeatPassword}
-          required={true}
-        ></input>
-      </div>
-      <button type="submit">Sign Up</button>
-    </form>
+      <form onSubmit={onSignUp}>
+        <div>
+          {errors.map((error, ind) => (
+            <div key={ind}>{error}</div>
+          ))}
+        </div>
+        <div className="password-input-container">
+          <input
+            type="text"
+            name="email"
+            placeholder="email"
+            onChange={updateEmail}
+            value={email}
+            className="email-input"
+          ></input>
+        </div>
+        <div className="password-input-container">
+          <input
+            type="text"
+            name="firstName"
+            placeholder="first name"
+            onChange={updateFirstName}
+            value={firstName}
+            className="email-input"
+          ></input>
+        </div>
+        <div className="password-input-container">
+          <input
+            type="text"
+            name="lastName"
+            placeholder="last name"
+            onChange={updateLastName}
+            value={lastName}
+            className="email-input"
+          ></input>
+        </div>
+        <div className="password-input-container">
+          <input
+            type="password"
+            name="password"
+            placeholder="password"
+            onChange={updatePassword}
+            value={password}
+            className="email-input"
+          ></input>
+        </div>
+        <div className="password-input-container">
+          <input
+            type="password"
+            name="repeat_password"
+            placeholder="repeat password"
+            onChange={updateRepeatPassword}
+            value={repeatPassword}
+            required={true}
+            className="email-input"
+          ></input>
+        </div>
+        <div className="btn-container-sign-in">
+          <button type="submit" className="sign-in-btn">
+            Sign Up
+          </button>
+        </div>
+      </form>
+    </div>
   );
 };
 

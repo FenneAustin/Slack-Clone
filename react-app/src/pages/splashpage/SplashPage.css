@@ -1,0 +1,16 @@
+
+.left-right-container {
+    display: flex;
+}
+
+.left-heading {
+    width: 50%;
+}
+.right-heading{
+    width: 50%;
+}
+
+
+.page-content-splash {
+    margin-top: 50px;
+}

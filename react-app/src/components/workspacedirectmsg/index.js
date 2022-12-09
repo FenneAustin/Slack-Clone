@@ -2,10 +2,9 @@ import React, { useEffect, useContext, useState } from "react";
 import "./index.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllWorkspaceChats } from "../../store/chat";
-import { NavLink } from "react-router-dom";
 import { clearMessages, getAllDMMessages } from "../../store/message";
 import { clearWorkspaceChannelId, setChatId, hideAllChannels } from "../../store/ui";
-import { socket, SocketContext } from "../../context/socket";
+import { SocketContext } from "../../context/socket";
 import {
   joinRoomThunk,
   leaveRoomThunk,

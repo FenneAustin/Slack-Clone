@@ -1,0 +1,67 @@
+.email-input, .password-input {
+  font-size:  16px;
+  padding:  20px 0px;
+  height:  56px;
+  border:  none;
+  border-bottom:  solid 1px rgba(0,0,0,.1);
+  background:  #fff;
+  width:  280px;
+  box-sizing:  border-box;
+  transition:  all .3s linear;
+  color:  #000;
+  font-weight:  400;
+  margin: auto;
+}
+
+.email-input:focus, .password-input:focus {
+    border-bottom:  solid 1px #581454;
+    outline: 0;
+    box-shadow:  0 2px 6px -8px rgba(#581454, .45);
+}
+
+
+.email-input-container, .password-input-container {
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.sign-in-btn {
+  margin-top: 40px;
+  background-color: #350d36;
+  border-radius: 5px;
+  color: #FFFFFF;
+  font-weight: bold;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 40px;
+  outline: 0;
+  padding: 0 80px;
+  text-align: center;
+  border: none;
+  margin: auto;
+}
+
+
+.btn-container-sign-in {
+    margin-top: 20px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.sign-in-header {
+    font-size: 45px;
+    margin: auto;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.header-container-sign-in {
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
