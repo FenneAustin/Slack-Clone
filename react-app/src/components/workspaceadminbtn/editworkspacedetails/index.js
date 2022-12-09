@@ -16,6 +16,7 @@ const EditWorkspaceDetails = ({ workspace, closeModal }) => {
   const characterLimit = 50;
   const [isAtCharacterLimitUrl, setIsAtCharacterLimitUrl] = useState(false);
   const urlCharacterLimit = 250;
+
   function isValidUrl(str) {
     const regex =
       /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;

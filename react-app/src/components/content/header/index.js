@@ -23,14 +23,14 @@ const FeedHeader = () => {
     return (
       <div className="feed-header">
         <div className="all-channel-info-container">
-          {chatId && (
+          {chat && (
             <h1>
+              {chat?.user_one.id === sessionUser.id
+                ? chat?.user_two.first_name
+                : chat?.user_one.first_name}{" "}
               {chat.user_one.id === sessionUser.id
-                ? chat.user_two.first_name
-                : chat.user_one.first_name}{" "}
-              {chat.user_one.id === sessionUser.id
-                ? chat.user_two.last_name
-                : chat.user_one.last_name}
+                ? chat?.user_two.last_name
+                : chat?.user_one.last_name}
             </h1>
           )}
           {channelId && <div className="channel-name-top-bar"><h2>{channel.name}</h2></div>}

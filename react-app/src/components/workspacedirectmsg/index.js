@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import "./index.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllWorkspaceChats } from "../../store/chat";
@@ -13,6 +13,7 @@ import {
 } from "../../store/socketrooms";
 import { AiOutlinePlus } from "react-icons/ai";
 import AddPeopleBtn from "../addpeoplebtn";
+import { showAllChannels } from "../../store/ui";
 
 
 const WorkspaceDirectMsg = ({ workspaceId }) => {
@@ -21,6 +22,12 @@ const WorkspaceDirectMsg = ({ workspaceId }) => {
   const chats = Object.values(useSelector((state) => state.chat));
   const sessionUser = useSelector((state) => state.session.user);
   const room = useSelector(socketRoomSelector);
+
+  const [isHovered, setIsHovered] = useState(false);
+
+  const onHover = () => {
+    setIsHovered(!isHovered);
+  };
 
   useEffect(() => {
     if (workspaceId !== null) {
@@ -41,13 +48,24 @@ const WorkspaceDirectMsg = ({ workspaceId }) => {
     dispatch(joinRoomThunk(data, socket))
   }
 
+
+  const handlePlusClick = () => {
+    dispatch(showAllChannels());
+  };
+
   return (
     <div className="messages-container">
-      <div className="messages-title-container">
+      <div
+        className="messages-title-container"
+        onMouseEnter={onHover}
+        onMouseLeave={onHover}
+      >
         <h4 className="column-title">Direct messages</h4>
-        <button className="new-msg-btn">
-          <AiOutlinePlus />
-        </button>
+        {isHovered && (
+          <button className="new-msg-btn">
+            <AiOutlinePlus className="add-channel-btn" onClick={() => handlePlusClick()}/>
+          </button>
+        )}
       </div>
       {chats.map((chat, i) => {
         const selectedUser =
@@ -62,14 +80,14 @@ const WorkspaceDirectMsg = ({ workspaceId }) => {
             onClick={() => handleChatClick(chat.id)}
           >
             <div className="user-avatar-list">
-            <img
-              className="profile-dm"
-              src={selectedUser.profile_image.url}
-              alt="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6sGddmMZFZCqb7aJFx5eV-8FGj2gJWz7abGntj8IuyYdAv7W2HEJyi5WY3xbpLLzf-Zg&usqp=CAU"
-            />
+              <img
+                className="profile-dm"
+                src={selectedUser.profile_image.url}
+                alt="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6sGddmMZFZCqb7aJFx5eV-8FGj2gJWz7abGntj8IuyYdAv7W2HEJyi5WY3xbpLLzf-Zg&usqp=CAU"
+              />
             </div>
             <div className="dm-user-name">
-            {selectedUser.first_name}, {selectedUser.last_name}
+              {selectedUser.first_name}, {selectedUser.last_name}
             </div>
           </div>
         );

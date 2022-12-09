@@ -16,10 +16,21 @@
   display: flex;
 }
 
+.users-full-name {
+  font-size: 17px;
+  font-weight: bolder;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
 .flyout {
   background: none;
   border: none;
   cursor: pointer;
+}
+
+.user-info-container {
+  display: flex;
 }
 
 .user-pic {
@@ -37,6 +48,8 @@
 .profile-dropdown {
   flex-direction: column;
   position: absolute;
+  display: flex;
+  justify-content: space-between;
   background-color: white;
   border-radius: 10px;
   min-width: 200px;
@@ -48,5 +61,34 @@
 }
 
 .logout-btn {
-  margin-bottom: 20px;
+  width: 100%;
+  padding-top: 2px;
+}
+
+.logout-btn:hover {
+  background-color: lightblue;
+}
+
+
+.user-info-container {
+  margin-left: 10px;
+  margin-top: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.change-profile-pic:hover {
+  background-color: lightblue;
+
+}
+.change-profile-pic-text {
+  margin-left: 28px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  cursor: pointer;
+}
+
+
+.users-full-name-and-email {
+  margin-left: 20px;
 }

@@ -34,6 +34,28 @@
     font-size: 20px;
     margin-left: 15px;
 }
+.add-new-channel-parent {
+    position: relative;
+}
+
+.add-new-channel-plus {
+  flex-direction: column;
+  position: absolute;
+  background-color: white;
+  border-radius: 10px;
+  min-width: 200px;
+  min-height: 80px;
+  max-width:200px;
+  max-height: 80px;
+  gap: 10px;
+  right: 10px;
+  top: 0px;
+  border: 1px lightgray solid;
+  align-items: center;
+  display: flex;
+  text-align: left;
+  z-index: 100;
+}
 
 .add-channels-btn {
     background: none;
@@ -51,6 +73,27 @@
     vertical-align: center;
     text-align: center;
     align-content: center;
+    justify-content: space-between;
     margin-left: 20px;
     margin-top: 10px;
+    line-height: 30px;
+}
+
+.add-channel-btn:hover {
+    background: #350d36;
+    border-radius: 5px;
+    max-width: 20px;
+    max-height: 20px;
+    align-items: center;
+    text-align: center;
+    font-size: 25px;
+}
+.add-channel-btn {
+
+    max-width: 20px;
+    max-height: 20px;
+    align-items: center;
+    text-align: center;
+    font-size: 25px;
+    margin-right: 20px;
 }

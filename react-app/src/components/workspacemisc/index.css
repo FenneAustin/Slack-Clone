@@ -3,9 +3,10 @@
     border-left: .5px #cea8d1 solid;
     border-top: .5px #cea8d1 solid;
     justify-content:left;
-    text-align: left;
+    text-align: center;
     align-items: center;
     align-content: center;
+    justify-content: center;
 }
 
 .Dm-btn{
@@ -42,6 +43,11 @@
     display: flex;
     cursor: pointer;
     text-decoration: none;
+    margin-top: 17px;
+}
+
+.all-channels-container-misc:hover {
+    background-color: #350d36;
 }
 
 .all-channels-btn {
@@ -52,4 +58,5 @@
     align-items: center;
     cursor: pointer;
     font-size: 15px;
+
 }

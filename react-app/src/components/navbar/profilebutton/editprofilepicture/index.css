@@ -1,0 +1,24 @@
+.title-prof-pic-container {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-top: 20px;
+}
+
+
+.user-pic-link {
+    margin-left: 20px;
+    margin-top: 10px;
+    width: 90%;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid #E0E0E0;
+    padding-left: 10px;
+}
+
+
+.url-tag {
+    margin-left: 20px;
+    margin-top: 10px;
+}

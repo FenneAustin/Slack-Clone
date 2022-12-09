@@ -54,14 +54,14 @@ const UserSearch = ({ users }) => {
   };
 
 
-  const handleUserSelect = (user) => {
+  const handleUserSelect = async (user) => {
     setSelectedUser(user);
     const chatId = checkIfChatExists(user);
     if (chatId !== false){
       dispatch(setChatId(chatId));
     }
     else {
-      const chatId = dispatch(createNewChat(workspaceId,user.id));
+      const chatId = await dispatch(createNewChat(workspaceId,user.id));
 
       dispatch(setChatId(chatId));
       if(room){

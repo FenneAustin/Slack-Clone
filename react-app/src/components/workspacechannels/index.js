@@ -1,23 +1,50 @@
-import { useEffect, useContext} from "react"
+import React, { useEffect, useContext, useState} from "react"
 import {useDispatch, useSelector} from "react-redux"
 import "./index.css"
 import { getAllWorkspaceChannels, getAllUserChannels } from "../../store/channels"
-import { NavLink } from "react-router-dom"
 import { TbHash } from "react-icons/tb";
-import { setWorkspaceChannelId, clearChatId } from "../../store/ui"
+import { setWorkspaceChannelId, clearChatId, clearWorkspaceChannelId, showAllChannels} from "../../store/ui"
 import { clearMessages, getAllChannelMessages } from "../../store/message"
-import { socket, SocketContext } from "../../context/socket"
+import { SocketContext } from "../../context/socket"
 import { joinRoomThunk, leaveRoomThunk, socketRoomSelector } from "../../store/socketrooms"
 import { AiOutlinePlus } from "react-icons/ai";
 import AddChannelModal from "./addChannels/index.js";
 import { hideAllChannels } from "../../store/ui"
 import { getChannelUsersList } from "../../store/channel"
+import {Modal} from "../../context/Modal"
+import AddChannelForm from "./addChannels/addChannelForm";
+
 
 const WorkspaceChannels = ({workspaceId}) => {
 
     const socket = useContext(SocketContext)
     const dispatch = useDispatch()
     const room = useSelector(socketRoomSelector)
+
+    const [isHovered, setIsHovered] = useState(false)
+    const [showMenu, setShowMenu] = useState(false)
+    const [showModal, setShowModal] = useState(false)
+
+    const openMenu = () => {
+      if (showMenu) return;
+      setShowMenu(true);
+    }
+
+    const onHover = () => {
+      setIsHovered(!isHovered)
+    }
+
+  useEffect(() => {
+    if (!showMenu) return;
+
+    const closeMenu = () => {
+      setShowMenu(false);
+    };
+
+    document.addEventListener("click", closeMenu);
+
+    return () => document.removeEventListener("click", closeMenu);
+  }, [showMenu]);
 
 
     useEffect(async()=> {
@@ -44,12 +71,48 @@ const WorkspaceChannels = ({workspaceId}) => {
 
     }
 
+      const handleBrowse = async () => {
+        await dispatch(clearChatId());
+        await dispatch(clearWorkspaceChannelId());
+        await dispatch(showAllChannels());
+      };
+
     return (
       <div className="channels-container">
-        <div className="channel-title-container">
+        <div
+          className="channel-title-container"
+          onMouseEnter={onHover}
+          onMouseLeave={onHover}
+        >
           <h4 className="column-title">Channels</h4>
-          <button className="add-channels-btn"><AiOutlinePlus /></button>
+          {isHovered && (
+            <button className="add-channels-btn">
+              <AiOutlinePlus className="add-channel-btn" onClick={openMenu} />
+            </button>
+          )}
         </div>
+        {showMenu && (
+          <div className="add-new-channel-parent">
+          <div className="add-new-channel-plus">
+            <div className="buttons-add-new-channels-container">
+              <div
+                className="add-channel-item"
+                onClick={() => setShowModal(true)}
+              >
+                Create a new channel
+              </div>
+              <div className="add-channel-item" onClick={() => handleBrowse()}>
+                Browse channels
+              </div>
+            </div>
+          </div>
+          </div>
+        )}
+        {showModal && (
+          <Modal onClose={() => setShowModal(false)}>
+            <AddChannelForm closeModal={() => setShowModal(false)} />
+          </Modal>
+        )}
         {Object.values(channels).map((channel, i) => {
           return (
             <div

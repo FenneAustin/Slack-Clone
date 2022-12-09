@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "./index.css";
 import LogoutButton from "../../auth/LogoutButton";
+import { MediumModal } from "../../../context/mediumModal.js";
+import EditProfilePicture from "./editprofilepicture";
 
 function ProfileButton({ user }) {
 
   const [showMenu, setShowMenu] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const openMenu = () => {
     if (showMenu) return;
@@ -43,19 +46,37 @@ function ProfileButton({ user }) {
       </button>
       {showMenu && (
         <div className="profile-dropdown">
-          <div>
-            <span>
-              {user.first_name} {user.last_name}
-            </span>
+          <div className="user-info-container">
+            <div
+              style={{ backgroundImage: `url('${profilePic}')` }}
+              alt=""
+              className="user-pic"
+            ></div>
+            <div className="users-full-name-and-email">
+              <div className="users-name">
+                {user.first_name} {user.last_name}{" "}
+              </div>
+              <div className="user-email">{user.email}</div>
+            </div>
           </div>
-          <div>
-            <span>{user.email}</span>
+
+          <div className="seperator-line"></div>
+
+          <div className="change-profile-pic" onClick={() => setShowModal(true)}>
+            <div className="change-profile-pic-text">Change Profile Picture</div>
           </div>
+
+          <div className="seperator-line"></div>
           <div className="logout-btn">
             <LogoutButton />
           </div>
         </div>
       )}
+    {showModal && (
+      <MediumModal onClose={() => setShowModal(false)}>
+        <EditProfilePicture closeModal={() => setShowModal(false)} />
+      </MediumModal>
+    )}
     </div>
   );
 }

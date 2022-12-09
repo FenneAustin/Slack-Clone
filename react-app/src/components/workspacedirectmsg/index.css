@@ -42,8 +42,16 @@
 }
 
 .messages-title-container{
+
     display: flex;
+    align-items: center;
+    vertical-align: center;
+    text-align: center;
+    align-content: center;
+    justify-content: space-between;
     margin-left: 20px;
+    margin-top: 10px;
+    line-height: 30px;
 }
 .new-msg-btn {
     background: none;
