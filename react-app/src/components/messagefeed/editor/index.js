@@ -50,16 +50,25 @@ const MessageEditor = ({messageId, text, editable, handleCancel, handleSave }) =
 
 
     return (
-      <div className="message-container-text">
+      <div
+        className="message-container-text"
+      >
         {/* <input type="checkbox" id="editable" value={editable} onChange={(event) => setEditable(event.target.checked)}/> */}
         <EditorContent editor={editor} />
         {editable ? (
-          <div>
-            <button onClick={() =>
-              {handleCancel()
-              editor.commands.setContent(originalText)}
-              }>Cancel</button>
-            <button onClick={() => handleSave(messageId,messageContext )}>Save</button>
+          <div className="edit-btns-container-text">
+            <button
+              className="cancel-text-edit-btn"
+              onClick={() => {
+                handleCancel();
+                editor.commands.setContent(originalText);
+              }}
+            >
+              Cancel
+            </button>
+            <button className="save-text-edit-btn" onClick={() => handleSave(messageId, messageContext)}>
+              Save
+            </button>
           </div>
         ) : null}
       </div>

@@ -79,7 +79,7 @@ const Message = ({message, user}) => {
 
   return message ? (
     <div
-      className="message-container"
+      className={editable ? "message-container-editing" : "message-container"}
       onMouseOver={handleMouseOver}
       onMouseOut={handleMouseOut}
     >
@@ -100,6 +100,7 @@ const Message = ({message, user}) => {
             {message?.user.first_name} {message?.user.last_name}
           </div>
         </div>
+
         {user.id == message.user.id ? (
           <MessageToolBar
             message={message}

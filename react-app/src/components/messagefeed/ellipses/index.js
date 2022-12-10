@@ -35,7 +35,7 @@ const Ellipse = ({ message, handleEdit, handleDelete }) => {
             </button>
           </li>
           <li>
-            <button className="delete-message-btn" onClick={() => handleDelete()}>
+            <button className="delete-message-btn" onClick={() => handleDelete(message.id)}>
               delete
             </button>
           </li>

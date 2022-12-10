@@ -11,3 +11,43 @@
 .message-container-text{
     margin-left: 65px;
 }
+
+
+.cancel-text-edit-btn {
+  background-color:  white;
+  border-radius: 5px;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 28px;
+  outline: 0;
+  padding: 0 10px;
+  position: relative;
+  text-align: center;
+  border: none;
+  border: 1px solid gray;
+}
+
+.save-text-edit-btn {
+  background-color: #00785b;
+  border-radius: 5px;
+  color: #FFFFFF;
+  font-weight: bold;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 25px;
+  outline: 0;
+  padding: 0 18px;
+  position: relative;
+  text-align: center;
+  border: none;
+  margin-right: 20px;
+  margin-left: 10px;
+}
+
+.edit-btns-container-text {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 20px;
+}

@@ -18,3 +18,8 @@
 .message-container:hover{
     background-color: lightgray;
 }
+
+
+.message-container-editing {
+    background-color: #fff4dc;
+}
