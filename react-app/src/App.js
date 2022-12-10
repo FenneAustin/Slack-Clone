@@ -12,6 +12,7 @@ import SplashPage from './pages/splashpage/SplashPage'
 import Home from "./pages/home/index"
 import { getAllUserWorkspaces } from './store/workspace';
 import NoWorkspaceLandingPage from './components/noworkspacelandingpage';
+import AboutUs from './pages/aboutpage/index';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -40,29 +41,35 @@ function App() {
 
   return (
     <BrowserRouter>
-      {loaded && curr ?
-      (
-        Object.values(workspace).length > 0 ?
-        (
+      {loaded && curr ? (
+        Object.values(workspace).length > 0 ? (
+          <>
+            <Route path="/about" exact={true}>
+              <AboutUs />
+            </Route>
+            <Route path="/" exact={true}>
+              <Home />
+            </Route>
+          </>
+        ) : (
+          <>
+            <Route path="/about" exact={true}>
+              <AboutUs />
+            </Route>
+            <Route path="/" exact={true}>
+              <NoWorkspaceLandingPage />
+            </Route>
+          </>
+        )
+      ) : (
         <>
-          <Route path="/">
-            <Home />
+          <Route path="/" exact={true}>
+            <SplashPage />
+          </Route>
+          <Route path="/about" exact={true}>
+            <AboutUs />
           </Route>
         </>
-      ): (
-        <>
-          <Route path="/">
-            <NoWorkspaceLandingPage />
-          </Route>
-        </>
-      )
-
-      )
-      :
-      (
-        <Route path="/">
-          <SplashPage />
-        </Route>
       )}
     </BrowserRouter>
   );

@@ -12,7 +12,7 @@ import {
 } from "../../store/socketrooms";
 import { AiOutlinePlus } from "react-icons/ai";
 import AddPeopleBtn from "../addpeoplebtn";
-import { showAllChannels } from "../../store/ui";
+import { showWritePage } from "../../store/ui";
 
 
 const WorkspaceDirectMsg = ({ workspaceId }) => {
@@ -49,7 +49,7 @@ const WorkspaceDirectMsg = ({ workspaceId }) => {
 
 
   const handlePlusClick = () => {
-    dispatch(showAllChannels());
+    dispatch(showWritePage());
   };
 
   return (

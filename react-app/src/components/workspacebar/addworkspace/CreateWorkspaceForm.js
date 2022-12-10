@@ -19,6 +19,71 @@ const CreateWorkspaceForm = ({closeModal}) => {
     const [success, setSuccess] = useState(false);
     const [hasSubmitted, setHasSubmitted] = useState(false);
     const curWorkspace = useSelector(state => state.ui.workspaceId);
+    const [hasErrors, setHasErrors] = useState(false);
+    const [firstPageSubmit, setFirstPageSubmit] = useState(false);
+    const characterLimit = 50;
+    const [isAtCharacterLimit, setIsAtCharacterLimit] = useState(false);
+    const [thirdPageSubmit, setThirdPageSubmit] = useState(false);
+
+    useEffect(() => {
+        setErrors([]);
+        setHasErrors(false);
+        setFirstPageSubmit(false);
+
+        if (teamName.replaceAll(".", "") !== teamName) {
+          setHasErrors(true);
+          setErrors(["Workspace name cannot contain periods"]);
+        } else if (teamName.replaceAll(" ", "").length == 0) {
+          setHasErrors(true);
+          setErrors(["Workspace name cannot be empty"]);
+        }
+        // else if (hasSpaceBeforeFirstLetter(teamName) === true) {
+        //   setHasErrors(true);
+        //   setErrors(["Workspace name cannot start with a space"]);
+        // }
+        else if (teamName.length == characterLimit) {
+          setHasErrors(true);
+          setIsAtCharacterLimit(true);
+        } else if (teamName.length < characterLimit) {
+          setIsAtCharacterLimit(false);
+        } else {
+          setHasErrors(false);
+          setFirstPageSubmit(false);
+        }
+      }, [teamName]);
+
+
+  useEffect(() => {
+        setErrors([]);
+        setHasErrors(false);
+        setThirdPageSubmit(false);
+
+        if (channelName.replaceAll(".", "") !== channelName) {
+          setHasErrors(true);
+          setErrors(["Channel name cannot contain periods"]);
+        } else if (channelName.replaceAll(" ", "").length == 0) {
+          setHasErrors(true);
+          setErrors(["Channel name cannot be empty"]);
+        }
+        // else if (hasSpaceBeforeFirstLetter(teamName) === true) {
+        //   setHasErrors(true);
+        //   setErrors(["Workspace name cannot start with a space"]);
+        // }
+        else if (channelName.length == 25) {
+          setHasErrors(true);
+          setIsAtCharacterLimit(true);
+        } else if (channelName.length < 25) {
+          setIsAtCharacterLimit(false);
+        } else {
+          setHasErrors(false);
+          setThirdPageSubmit(false);
+        }
+  }, [channelName]);
+
+  // function hasSpaceBeforeFirstLetter(str) {
+  //     const trimmed = str.trimLeft();
+  //     return /[a-zA-Z]/.test(trimmed.charAt(0));
+  // }
 
    useEffect(() => {
           if (email.length > 0) {
@@ -49,7 +114,7 @@ const CreateWorkspaceForm = ({closeModal}) => {
     }
 
     const handleSubmit = async () => {
-        if (channelName.length > 0) {
+        if (channelName.length > 0 && hasErrors === false && errors.length < 1) {
             const channel = {
                 'name': channelName,
                 'workspace_Id': curWorkspace,
@@ -62,7 +127,8 @@ const CreateWorkspaceForm = ({closeModal}) => {
     }
 
     const handleFirstPageButton = async () => {
-        if (teamName.length > 0) {
+        if (teamName.length > 0 && hasErrors === false && errors.length < 1) {
+
             const workspace = {
                 name: teamName,
                 ownerId: sessionUser.id,
@@ -77,7 +143,7 @@ const CreateWorkspaceForm = ({closeModal}) => {
             setPageNum(2);
         }
         else {
-            setErrors(["Please enter a team name"])
+            setFirstPageSubmit(true);
         }
 
     }
@@ -123,7 +189,7 @@ const CreateWorkspaceForm = ({closeModal}) => {
               that your team will recognize
             </div>
             <div className="error-div-creating-workspace">
-              {teamName.length == 50 && (
+              {isAtCharacterLimit && (
                 <div className="max-char">Max character limit reached</div>
               )}
             </div>
@@ -139,6 +205,17 @@ const CreateWorkspaceForm = ({closeModal}) => {
             >
               Next
             </button>
+            {firstPageSubmit && (
+              <div className="error-handling-div">
+                {hasErrors && (
+                  <div className="error-handling-div">
+                    {errors.map((error) => (
+                      <div>{error}</div>
+                    ))}
+                    </div>
+                )}
+                </div>
+            )}
           </div>
         )}
         {pageNum == 2 && (
@@ -200,11 +277,18 @@ const CreateWorkspaceForm = ({closeModal}) => {
                 <div className="max-char">Max character limit reached</div>
               )}
             </div>
+            {hasErrors && (
+              <div className="error-handling-div">
+                {errors.map((error) => (
+                  <div>{error}</div>
+                ))}
+              </div>
+            )}
             <button
               className={
-                channelName.length < 1
-                  ? "no-input-final-next"
-                  : "final-next-btn"
+                channelName.length > 0
+                  ? "final-next-btn" : "no-input-final-next"
+                  
               }
               onClick={() => handleSubmit()}
             >

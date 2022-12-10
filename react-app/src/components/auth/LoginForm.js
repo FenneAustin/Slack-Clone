@@ -44,7 +44,7 @@ const LoginForm = () => {
         <h1 className="sign-in-header">Sign in to Slack</h1>
       </div>
       <form onSubmit={onLogin}>
-        <div>
+        <div className="errors-list">
           {errors.map((error, ind) => (
             <div key={ind}>{error}</div>
           ))}

@@ -5,60 +5,105 @@ import "./index.css";
 import {editWorkspace, getAllUserWorkspaces} from '../../../store/workspace'
 
 const EditWorkspaceDetails = ({ workspace, closeModal }) => {
+
   const dispatch = useDispatch();
-  const originalName = workspace.name;
-  const [name, setName] = useState(workspace.name);
+  const originalName = workspace?.name;
+  const originalLink = workspace?.workspace_image.url;
+  const [name, setName] = useState(workspace?.name);
   const [hasErrors, setHasErrors] = useState(false);
   const [errors, setErrors] = useState([]);
+
   const [isAtCharacterLimit, setIsAtCharacterLimit] = useState(false);
   const [hasSubmitted, setHasSubmitted] = useState(false);
-  const [imgUrl, setImgUrl] = useState(workspace.workspace_image.url);
+  const [imgUrl, setImgUrl] = useState(workspace?.workspace_image.url);
   const characterLimit = 50;
+
+
   const [isAtCharacterLimitUrl, setIsAtCharacterLimitUrl] = useState(false);
   const urlCharacterLimit = 250;
-
-  function isValidUrl(str) {
-    const regex =
-      /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
-    return regex.test(str);
-  }
+  const [hasImgUrlErrors, setHasImgUrlErrors] = useState(false);
+  const [imgErrors, setImgErrors] = useState([]);
 
   useEffect(() => {
     setErrors("");
     setHasErrors(false);
     setHasSubmitted(false);
+    setIsAtCharacterLimit(false);
 
     if (name.replaceAll(".", "") !== name) {
       setHasErrors(true);
-      setErrors(["Channel name cannot contain periods", ...errors]);
-    } else if (!name.replaceAll(" ", "").length > 0) {
+      setErrors(["Channel name cannot contain periods"]);
+    }
+    else if (name.replaceAll(" ", "").length == 0) {
       setHasErrors(true);
-      setErrors(["Channel name cannot be empty", ...errors]);
-    } else if (name.length >= characterLimit) {
+      setErrors(["Channel name cannot be empty"]);
+    }
+    // else if (hasSpaceBeforeFirstLetter(name) === true) {
+    //   setHasErrors(true);
+    //   setErrors(["Channel name cannot start with a space"]);
+    // }
+    else if (name.length == characterLimit) {
       setHasErrors(true);
       setIsAtCharacterLimit(true);
-    } else if (name.length < characterLimit) {
+    }
+    else if (name.length < characterLimit) {
       setIsAtCharacterLimit(false);
-    } else {
+    }
+    else {
       setHasErrors(false);
       setHasSubmitted(false);
+      setErrors([])
     }
+  }, [name, workspace]);
+
+
+  useEffect(() => {
+
+    setImgErrors([]);
+    setHasImgUrlErrors(false);
+    setHasSubmitted(false);
+
     if (isValidUrl(imgUrl) == false) {
-      setHasErrors(true);
-      setErrors(["Please enter a valid image url", ...errors]);
+      setHasImgUrlErrors(true);
+      setImgErrors(["Please enter a valid image url", ...errors]);
+    } else if (imgUrl.replaceAll(" ", "").length == 0) {
+      setHasImgUrlErrors(true);
+      setImgErrors(["Workspace img url cannot be empty", ...errors]);
     }
-    if (imgUrl.length >= urlCharacterLimit) {
+    if (imgUrl.length == urlCharacterLimit) {
       setIsAtCharacterLimitUrl(true);
     } else {
       setIsAtCharacterLimitUrl(false);
     }
-  }, [name, imgUrl]);
 
+  }, [imgUrl, workspace])
+
+
+
+  // const hasSpaceBeforeFirstLetter = (str) => {
+  //     const firstLetter = str.charAt(0);
+  //     console.log(/^\s*[a-zA-Z]/.test(str))
+  //     return /^\s*[a-zA-Z]/.test(str);
+  //   }
+
+
+
+    const isValidUrl = (urlString) => {
+      var inputElement = document.createElement("input");
+      inputElement.type = "url";
+      inputElement.value = urlString;
+
+      if (!inputElement.checkValidity()) {
+        return false;
+      } else {
+        return true;
+      }
+    };
 
 
   const handleSave = async () => {
     setHasSubmitted(true);
-    if (!hasErrors && errors.length < 1) {
+    if (!hasErrors && errors.length < 1 && !hasImgUrlErrors && imgErrors.length < 1) {
 
       let editedWorkspace = {
         name: name,
@@ -114,6 +159,7 @@ const EditWorkspaceDetails = ({ workspace, closeModal }) => {
         className="channel-name-input-change"
         value={imgUrl}
         onChange={(e) => setImgUrl(e.target.value)}
+        maxLength = "250"
       ></input>
       {isAtCharacterLimitUrl && (
         <div className="character-limit-error">Character limit reached for urls</div>
@@ -121,6 +167,10 @@ const EditWorkspaceDetails = ({ workspace, closeModal }) => {
 
       {hasErrors && hasSubmitted && (
         <div className="error-msg">{errors[0]}</div>
+      )}
+
+      {hasImgUrlErrors && hasSubmitted && (
+        <div className="error-msg">{imgErrors[0]}</div>
       )}
 
       <div className="btns-update-container">

@@ -8,6 +8,9 @@ function SignupFormModal() {
   const [showModal, setShowModal] = useState(false);
   const [switchPage, setSwitchPage] = useState(true);
 
+
+
+
   return (
     <>
       <button

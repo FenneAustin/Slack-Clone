@@ -9,7 +9,7 @@ import { Modal} from "../../context/Modal";
 import CreateChannelForm from "../workspacechannels/addChannels/addChannelForm";
 import FindWorkspace from "../findworkspace";
 import CreateWorkspaceForm from "../workspacebar/addworkspace/CreateWorkspaceForm"
-import EditWorkspaceDetails from "./editworkspacedetails";
+import EditWorkspaceDetails from "./editworkspacedetails/index";
 import ManageUsers from "./managemembers/index";
 import DeleteWorkspaceConfirmation from "./deleteworkspaceconfirmation/index";
 import LeaveWorkspaceConfirmation from "./leaveworkspaceconfirmation/index";
@@ -156,36 +156,55 @@ const WorkspaceAdminBtn = () => {
               </div>
               {settingsIsHovered && (
                 <div className="flyout-settings-workspace">
+                  {workspaces[curWorkspace].owner_id === sessionUser.id && (
                   <div className="settings-title">Settings</div>
+                  )}
+                   {workspaces[curWorkspace].owner_id === sessionUser.id && (
                   <div
                     className="Edit-workspace-details-container"
                     onClick={() => {
-                    setShowEditWorkspace(true)
-                    setSettingsIsHovered(false)
+                      setShowEditWorkspace(true);
+                      setSettingsIsHovered(false);
                     }}
                   >
                     <div className="work-item">Edit workspace details</div>
                   </div>
-                  <div className="seperator-line"> </div>
+                   )}
+                   {workspaces[curWorkspace].owner_id === sessionUser.id && (
+                  <div className="seperator-line"> </div> )}
+
                   <div className="settings-title">Administration</div>
                   {workspaces[curWorkspace].owner_id === sessionUser.id && (
-                    <div className="Edit-workspace-details-container" onClick={() => {
-                      setShowManageUsers(true)
-                      setSettingsIsHovered(false)
-                    }}>
+                    <div
+                      className="Edit-workspace-details-container"
+                      onClick={() => {
+                        setShowManageUsers(true);
+                        setSettingsIsHovered(false);
+                      }}
+                    >
                       <div className="work-item">Manage members</div>
                     </div>
                   )}
                   {workspaces[curWorkspace].owner_id === sessionUser.id && (
-                    <div className="Edit-workspace-details-container" onClick={() => {setShowDeleteModal(true)}}>
+                    <div
+                      className="Edit-workspace-details-container"
+                      onClick={() => {
+                        setShowDeleteModal(true);
+                      }}
+                    >
                       <div className="work-item">Delete workspace</div>
                     </div>
                   )}
-                {workspaces[curWorkspace].owner_id !== sessionUser.id && (
-                  <div className="Edit-workspace-details-container" onClick={() => {setShowLeaveModal(true)}}>
-                    <div className="work-item">Leave workspace</div>
-                  </div>
-                )}
+                  {workspaces[curWorkspace].owner_id !== sessionUser.id && (
+                    <div
+                      className="Edit-workspace-details-container"
+                      onClick={() => {
+                        setShowLeaveModal(true);
+                      }}
+                    >
+                      <div className="work-item">Leave workspace</div>
+                    </div>
+                  )}
                 </div>
               )}
             </div>
@@ -195,10 +214,10 @@ const WorkspaceAdminBtn = () => {
             <div className="switch-to-diff-workspaces">
               <div
                 className="add-workspace-container-panel"
-                onMouseEnter={() =>{
-                  onAddHover()
-                  setSettingsIsHovered(false)}
-                }
+                onMouseEnter={() => {
+                  onAddHover();
+                  setSettingsIsHovered(false);
+                }}
                 onMouseLeave={() => onAddHover()}
               >
                 <button className="add-workspaces-btn-panel">
@@ -304,7 +323,9 @@ const WorkspaceAdminBtn = () => {
         )}
         {showEditWorkspace && (
           <Modal onClose={() => setShowEditWorkspace(false)}>
-            <EditWorkspaceDetails closeModal={() => setShowEditWorkspace(false)} workspace={workspaces[curWorkspace]}
+            <EditWorkspaceDetails
+              closeModal={() => setShowEditWorkspace(false)}
+              workspace={workspaces[curWorkspace]}
             />
           </Modal>
         )}
@@ -329,7 +350,6 @@ const WorkspaceAdminBtn = () => {
             />
           </Modal>
         )}
-
       </div>
     );
 }

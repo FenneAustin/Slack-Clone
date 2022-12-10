@@ -5,12 +5,44 @@
 
 .left-heading {
     width: 50%;
+    max-width: 50%;
 }
 .right-heading{
     width: 50%;
+    max-width: 50%;
+}
+
+.people-image {
+    max-width: 100%;
 }
 
 
 .page-content-splash {
     margin-top: 50px;
+}
+
+
+.github-icon {
+    font-size: 40px;
+}
+
+.github-link {
+    width: 90px;
+    position: fixed;
+    bottom: 0;
+}
+
+a {color: inherit}
+a:visited {
+    color: inherit;
+}
+
+
+.links {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    justify-content: center;
 }

@@ -64,7 +64,6 @@ export const removeChannelUserFromChannel = (channelId, userId) => async (dispat
     });
 
     if (res.ok) {
-        const data = await res.json();
         dispatch(removeChannelUser(userId))
     }
 }
