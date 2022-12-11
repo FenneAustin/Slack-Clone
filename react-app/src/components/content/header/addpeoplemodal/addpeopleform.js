@@ -24,7 +24,7 @@ const AddPeopleForm = ({closeModal}) => {
 
 
     const isInChannel = (curuser) => {
-      if ((Object.values(channelUsers).filter(user => user.user.id == curuser.user.id)).length > 0){
+      if ((Object.values(channelUsers).filter(user => user.user.id == curuser.user_id)).length > 0){
         return false;
       }
       // if(channelUsers[user.user_id]){
