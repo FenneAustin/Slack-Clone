@@ -23,3 +23,7 @@
 .message-container-editing {
     background-color: #fff4dc;
 }
+
+.message-container {
+    overflow-y: none;
+}

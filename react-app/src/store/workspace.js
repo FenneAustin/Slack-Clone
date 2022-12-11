@@ -83,7 +83,7 @@ export const editWorkspace = (workspace, id) => async (dispatch) => {
     })
     if (res.ok){
       const updatedWorkspace = await res.json();
-      dispatch(updateWorkspace(updatedWorkspace))
+      dispatch(updateWorkspace(updatedWorkspace.workspace))
       return res;
     }
 }

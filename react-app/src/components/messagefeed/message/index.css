@@ -12,11 +12,12 @@
 }
 
 
+.msg-header{
+    overflow-y: none;
+}
 
 .message-image-container {
     width: 35px;
     height: 37px;
     margin-right: 10px;
 }
-
-
