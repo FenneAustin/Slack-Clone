@@ -18,7 +18,7 @@ class Message(db.Model, UserMixin):
 
     user = db.relationship("User")
     direct_message = db.relationship("Chat", back_populates="messages")
-
+    channel = db.relationship("Channel", back_populates="messages") # added last second
 
     def to_dict(self):
         return {

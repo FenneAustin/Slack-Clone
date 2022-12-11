@@ -67,9 +67,7 @@ export const getAllPendingWorkspaceInvitations = (workspaceId) => async (dispatc
     const res = await csrfFetch(`/api/invitations/${workspaceId}/invitations`);
 
     if (res.ok) {
-
         const data = await res.json();
-        console.log(data)
         dispatch(setAllPendingWorkspaceInvitations(data.invitations));
     }
 };

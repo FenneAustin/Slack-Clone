@@ -85,7 +85,7 @@ def get_workspace_users(workspace_id):
     if workspace:
         workspace_member_list = WorkspaceMember.query.filter(WorkspaceMember.workspace_id == workspace_id).all()
         workspace_members = [workspace_member.to_dict() for workspace_member in workspace_member_list]
-        return jsonify({'users': workspace_members})
+        return jsonify({'users': workspace_members}), 200
     else:
         return jsonify({'message': 'Workspace could not be found'}), 404
 
