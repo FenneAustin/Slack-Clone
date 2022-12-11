@@ -5,6 +5,7 @@ import { setChatId } from "../../../../store/ui";
 import { createNewChat } from "../../../../store/chat";
 import { SocketContext } from "../../../../context/socket";
 import { joinRoomThunk, leaveRoomThunk, socketRoomSelector } from "../../../../store/socketrooms";
+import { clearMessages, getAllDMMessages } from "../../../../store/message";
 
 const UserSearch = ({ users }) => {
 
@@ -58,11 +59,13 @@ const UserSearch = ({ users }) => {
     setSelectedUser(user);
     const chatId = checkIfChatExists(user);
     if (chatId !== false){
+      dispatch(clearMessages())
+      dispatch(getAllDMMessages(chatId))
       dispatch(setChatId(chatId));
     }
     else {
       const chatId = await dispatch(createNewChat(workspaceId,user.id));
-
+      dispatch(clearMessages());
       dispatch(setChatId(chatId));
       if(room){
         dispatch(leaveRoomThunk(room, socket));

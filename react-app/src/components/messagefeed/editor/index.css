@@ -10,6 +10,12 @@
 
 .message-container-text{
     margin-left: 65px;
+    padding-bottom: 20px;
+}
+
+.editable-btns-container {
+  display: flex;
+  overflow-y: none;
 }
 
 
@@ -44,6 +50,32 @@
   border: none;
   margin-right: 20px;
   margin-left: 10px;
+}
+
+.save-text-edit-btn-err {
+    background-color: lightgray;
+    border: none;
+    color: gray;
+    font-weight: bold;
+    cursor: pointer;
+    display: inline-block;
+    line-height: 25px;
+    outline: 0;
+    padding: 0 18px;
+    position: relative;
+    text-align: center;
+    border-radius: 5px;
+    margin-right: 20px;
+    margin-left: 10px;
+    cursor: not-allowed;
+}
+
+.error-msg-text {
+  margin-right: 100px;
+}
+
+.editor-width-set {
+  max-width: 80%;
 }
 
 .edit-btns-container-text {

@@ -33,6 +33,10 @@ const Message = ({message, user}) => {
 
   const handleSave = (messageId, messageInfo) => {
 
+    if (messageInfo.replaceAll(" ", "").length === 0) {
+      return
+    }
+
     if (chatId) {
       const message = {
             'message': messageInfo,

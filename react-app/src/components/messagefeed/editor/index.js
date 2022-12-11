@@ -10,6 +10,7 @@ const MessageEditor = ({messageId, text, editable, handleCancel, handleSave }) =
     const [messageContext, setMessageContext] = useState(text);
     const [originalText, setOriginalText] = useState(text);
     const message = useSelector((state) => state.message[messageId]);
+    const [isError, setIsError] = useState(false);
 
     useEffect(() => {
       setOriginalText(message.text);
@@ -18,6 +19,16 @@ const MessageEditor = ({messageId, text, editable, handleCancel, handleSave }) =
       if(editor) editor.commands.setContent(message.text);
 
     }, [message]);
+
+
+    useEffect(()=> {
+      if (messageContext.replaceAll(" ", "").length === 0) {
+        setIsError(true);
+      }
+      else {
+        setIsError(false);
+      }
+    }, [messageContext])
 
 
     const editor = useEditor({
@@ -50,28 +61,33 @@ const MessageEditor = ({messageId, text, editable, handleCancel, handleSave }) =
 
 
     return (
-      <div
-        className="message-container-text"
-      >
+      <div className="message-container-text">
         {/* <input type="checkbox" id="editable" value={editable} onChange={(event) => setEditable(event.target.checked)}/> */}
-        <EditorContent editor={editor} />
-        {editable ? (
-          <div className="edit-btns-container-text">
-            <button
-              className="cancel-text-edit-btn"
-              onClick={() => {
-                handleCancel();
-                editor.commands.setContent(originalText);
-              }}
-            >
-              Cancel
-            </button>
-            <button className="save-text-edit-btn" onClick={() => handleSave(messageId, messageContext)}>
-              Save
-            </button>
-          </div>
-        ) : null}
-      </div>
+        <EditorContent editor={editor} className="editor-width-set" />
+
+          {editable ? (
+            <div className="edit-btns-container-text">
+              {isError && <div className="error-msg-text">
+                Text cannot be empty
+              </div> }
+              <button
+                className="cancel-text-edit-btn"
+                onClick={() => {
+                  handleCancel();
+                  editor.commands.setContent(originalText);
+                }}
+              >
+                Cancel
+              </button>
+              <button
+                className={isError ?"save-text-edit-btn-err" : "save-text-edit-btn"  }
+                onClick={() => handleSave(messageId, messageContext)}
+              >
+                Save
+              </button>
+            </div>
+          ) : null}
+        </div>
     );
 
 }

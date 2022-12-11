@@ -19,6 +19,7 @@ const ShowWorkspaceUsers = ({removeUser}) => {
     return (
         <div className="users-container">
          {(users).map((user, i) => {
+         
             return(
             <div className="user" key={i}>
               <div className="user-info">

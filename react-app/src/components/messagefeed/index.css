@@ -4,7 +4,7 @@
 
 .message-feed{
     overflow-y: auto;
-    max-height: 75vh;
+    max-height: 525px;
 }
 
 
