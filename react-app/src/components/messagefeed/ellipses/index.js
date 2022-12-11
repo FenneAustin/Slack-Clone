@@ -29,13 +29,14 @@ const Ellipse = ({ message, handleEdit, handleDelete }) => {
       <HiEllipsisVertical className="edit-ellipse" onClick={openMenu} />
       {showMenu && (
         <ul className="ellipse-dropdown">
-          <li>
-            <button className="edit-message-btn" onClick={() => handleEdit()}>
-              edit
-            </button>
+          <li onClick={() => handleEdit()}>
+            <button className="edit-message-btn">edit</button>
           </li>
-          <li>
-            <button className="delete-message-btn" onClick={() => handleDelete(message.id)}>
+          <li onClick={() => handleEdit()}>
+            <button
+              className="delete-message-btn"
+              onClick={() => handleDelete(message.id)}
+            >
               delete
             </button>
           </li>

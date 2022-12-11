@@ -107,6 +107,7 @@ const Message = ({message, user}) => {
             shown={showToolbar}
             handleEdit={handleEdit}
             handleDelete={handleDelete}
+            editable={editable}
           />
         ) : null}
       </div>

@@ -12,6 +12,10 @@
   border-radius: 5px;
 }
 
+.edit-ellipse-editing {
+  display: none;
+}
+
 .edit-ellipse:hover {
   background-color: lightgray;
 }
