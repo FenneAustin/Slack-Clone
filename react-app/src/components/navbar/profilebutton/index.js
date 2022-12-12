@@ -62,11 +62,11 @@ function ProfileButton({ user }) {
 
           <div className="seperator-line"></div>
 
-          <div className="change-profile-pic" onClick={() => setShowModal(true)}>
+          {/* <div className="change-profile-pic" onClick={() => setShowModal(true)}>
             <div className="change-profile-pic-text">Change Profile Picture</div>
           </div>
 
-          <div className="seperator-line"></div>
+          <div className="seperator-line"></div> */}
           <div className="logout-btn">
             <LogoutButton />
           </div>
