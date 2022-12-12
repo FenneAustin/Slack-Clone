@@ -90,6 +90,9 @@ The application will now be running at http://localhost:3000/
 * User can join a channel
 * User can leave a channel
 
+![channelsex](https://user-images.githubusercontent.com/90361430/207137684-b69236b6-ce21-45d6-a465-02db8cc87982.JPG)
+
+
 ![create a channel](https://user-images.githubusercontent.com/90361430/207136595-31583933-3671-4cee-973a-f334b1a6da18.JPG)
 
 ![editchannel](https://user-images.githubusercontent.com/90361430/207136700-b130b540-bd9d-4946-9ee3-1ddd7a37a361.JPG)
