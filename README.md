@@ -1,5 +1,16 @@
 # Slack-Clone 
 
+# Table of Content
+
+- [Technologies Used](#techonologies-used)
+- [Link to Live Site](#link-to-live-site)
+- [Index](#index)
+- [Getting Started](#getting-started)
+- [Screenshots of Usage](#screenshots-of-usage)
+
+
+
+
 **slack-clone** iis a clone of [Slack](https://slack.com), Slack is a messaging app for business that connects people by allowing them to message eachother privately or in a channel. **slack-clone** I aimed to replicate the features the slack offers in frontend and backend
 
 
@@ -78,6 +89,8 @@ npm start
 ```
 
 The application will now be running at http://localhost:3000/
+
+# Screenshots of Usage
 
 
 ![landing](https://user-images.githubusercontent.com/90361430/207135465-17eac39a-a8ec-466c-ae8c-2ce073e89101.JPG)
