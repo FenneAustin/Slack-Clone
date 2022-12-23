@@ -4,7 +4,6 @@
 
 - [Technologies Used](#techonologies-used)
 - [Link to Live Site](#link-to-live-site)
-- [Index](#index)
 - [Getting Started](#getting-started)
 - [Screenshots of Usage](#screenshots-of-usage)
 
