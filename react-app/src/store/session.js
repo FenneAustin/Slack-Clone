@@ -69,6 +69,26 @@ export const logout = () => async (dispatch) => {
   }
 };
 
+export const updateImageFile = (payload) => async (dispatch) => {
+  const response = await fetch('/api/users/edit/image', {
+    method: 'PUT',
+    body: payload,
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(setUser(data))
+    return null;
+  } else if (response.status < 500) {
+    const data = await response.json();
+    if (data.errors) {
+      return data.errors;
+    }
+  } else {
+    return ['An error occurred. Please try again.']
+  }
+}
+
 
 export const signUp = (email, first_name, last_name, password) => async (dispatch) => {
   const response = await fetch('/api/auth/signup', {

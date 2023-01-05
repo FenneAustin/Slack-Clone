@@ -1,38 +1,32 @@
 import React, {useState, useEffect} from "react"
 import { AiOutlineClose } from "react-icons/ai";
 import "./index.css"
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { updateImageFile } from "../../../../store/session";
 
 const EditProfilePicture = ({closeModal}) => {
 
+const dispatch = useDispatch();
+
 const sessionUser = useSelector(state => state.session.user)
-const [imageUrl, setImageUrl] = useState(sessionUser.profile_image.url)
+const [image, setImage] = useState('')
 const [hasErrors, setHasErrors] = useState(false);
 const [errors, setErrors] = useState([]);
 const [hasSubmitted, setHasSubmitted] = useState(false);
 
-
-function isValidUrl(str) {
-    const regex =
-      /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
-    return regex.test(str);
+const updateImage = (e) => {
+  const file = e.target.files[0];
+  if (file) {
+    setImage(file);
   }
+  setHasSubmitted(true);
+};
 
-useEffect(() => {
-    setErrors("");
-    setHasErrors(false);
-    setHasSubmitted(false);
-
-    if (isValidUrl(imageUrl) == false) {
-      setHasErrors(true);
-      setErrors(["Please enter a valid image url", ...errors]);
-    }
-
-  })
-
-const handleImageChange = (e) => {
-    setImageUrl(e.target.value)
-}
+const handleSubmit = async (e) => {
+  const formData = new FormData();
+  formData.append("image", image);
+  const data = await dispatch(updateImageFile(formData));
+};
 
 
 return (
@@ -41,18 +35,24 @@ return (
       <div>Change profile picture url</div>
       <AiOutlineClose className="close-modal" onClick={closeModal} />
     </div>
-    <div className="url-tag">Url:</div>
-    <input className="user-pic-link"></input>
+    <label htmlFor="images" className="drop-container">
+      <span className="drop-title">Drop files here</span>
+      or
+      <input type="file" name="file" onChange={e => updateImage(e)} required />
+    </label>
     <div className="change-profile-container">
+
+
+
       <button
         className={
-          imageUrl.length < 1
+          image.length < 1
             ? "send-invite-to-workspace-noinput"
             : "send-invite-to-workspace"
         }
-        
+        onClick={handleSubmit}
       >
-        Change profile picture
+        Submit
       </button>
     </div>
   </div>

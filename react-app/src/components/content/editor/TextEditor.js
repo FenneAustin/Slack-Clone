@@ -62,7 +62,8 @@ const TextEditor = () => {
             const data = { 'id': chatId, 'roomtype': 'chat'}
             socket.emit("UPDATE_CHAT_MESSAGES", data);
             editor.commands.setContent("");
-          } else if (channelId) {
+          }
+          else if (channelId) {
             const message = {
             'message': text,
             'user_id': sessionUser.id,
