@@ -29,4 +29,5 @@ werkzeug==2.0.1
 wtforms==2.3.3
 flask-socketio==5.3.2
 eventlet==0.30.2
-boto3==1.26.43
+boto3==1.26.13
+botocore==1.29.13; python_version >= '3.7'
