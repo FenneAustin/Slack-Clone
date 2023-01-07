@@ -7,6 +7,8 @@
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "@tiptap/extension-character-count": "^2.0.0-beta.202",
+    "@tiptap/extension-link": "^2.0.0-beta.209",
+    "@tiptap/extension-placeholder": "^2.0.0-beta.209",
     "@tiptap/react": "^2.0.0-beta.202",
     "@tiptap/starter-kit": "^2.0.0-beta.202",
     "http-proxy-middleware": "^1.0.5",
