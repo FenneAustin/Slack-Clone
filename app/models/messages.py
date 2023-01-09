@@ -1,6 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from flask_login import UserMixin
-import datetime
+from datetime import datetime
 
 
 class Message(db.Model, UserMixin):
@@ -19,8 +19,8 @@ class Message(db.Model, UserMixin):
     parent_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('messages.id')))
     direct_message = db.relationship("Chat", back_populates="messages")
     channel = db.relationship("Channel", back_populates="messages") # added last second
-    created_date = db.Column(db.Date, default=datetime.datetime.now, nullable=False)
-    updated_date = db.Column(db.Date, default=datetime.datetime.now, nullable=False)
+    created_date = db.Column(db.Date, default=datetime.utcnow, nullable=False)
+    updated_date = db.Column(db.Date, default=datetime.utcnow, nullable=False)
 
 
     replies = db.relationship(
