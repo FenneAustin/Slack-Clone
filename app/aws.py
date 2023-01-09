@@ -3,11 +3,11 @@ import botocore
 import os
 import uuid
 import eventlet
-from boto3.s3.transfer import TransferConfig
+# from boto3.s3.transfer import TransferConfig
 
 eventlet.monkey_patch()
 
-CONFIG = TransferConfig(use_threads_False)
+# CONFIG = TransferConfig(use_threads_False)
 
 ALLOWED_EXTENSIONS = {"pdf", "png", "jpg", "jpeg", "gif"}
 BUCKET_NAME = os.environ.get("S3_BUCKET")
