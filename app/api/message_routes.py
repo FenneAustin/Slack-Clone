@@ -94,3 +94,37 @@ def edit_message(message_Id):
             return jsonify({'message': 'none'}), 404
     else:
         return jsonify({'message': 'none'}), 404
+
+
+# get all replies to a message
+@message_routes.route('/<int:message_Id>/replies')
+def get_message_replies(message_Id):
+  message = Message.query.get(message_Id)
+  if message:
+    res = message.to_dict_special(int(current_user.is_authenticated) and current_user.id)
+    res['replies'] = {reply.id: reply.to_dict(int(current_user.is_authenticated) and current_user.id) for reply in message.replies}
+    return jsonify(res)
+  else:
+    return jsonify({'message': 'Comment could not be found'}), 404
+
+
+# reply to a message
+@message_routes.route('/<int:message_Id>/reply', methods=['POST'])
+@login_required
+def reply_to_message(message_Id):
+    current_user = User.query.get(current_user.id)
+    form = request.get_json()
+    message = Message.query.get(message_Id)
+    if message:
+        reply = Message(
+        user_id = form['user_id'],
+        chat_id = form['chat_id'],
+        channel_id = form['channel_id'],
+        text = form['message'],
+        parent_id = message_Id
+        )
+        db.session.add(reply)
+        db.session.commit()
+        return jsonify(reply.to_dict_special(int(current_user.is_authenticated) and current_user.id))
+    else:
+        return jsonify({'message': 'Comment could not be found'}), 404
