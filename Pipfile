@@ -28,7 +28,7 @@ wtforms = "==2.3.3"
 flask-socketio = "*"
 eventlet = "==0.30.2"
 boto3 = "*"
-dnspython = "1.16.0"
+dnspython = "==1.16.0"
 
 [dev-packages]
 
