@@ -7,6 +7,7 @@ import {
   AiOutlineItalic,
   AiOutlineStrikethrough,
 } from "react-icons/ai";
+import Link from "@tiptap/extension-link";
 
 import { HiCode } from "react-icons/hi";
 
@@ -15,7 +16,7 @@ const MenuBar = ({editor}) => {
        return null;
      }
     return (
-      <div>
+      <div className="text-editing-bar">
         <button
           onClick={() => editor.chain().focus().toggleBold().run()}
           disabled={!editor.can().chain().focus().toggleBold().run()}
