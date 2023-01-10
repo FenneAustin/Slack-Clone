@@ -25,7 +25,8 @@ const updateImage = (e) => {
 const handleSubmit = async (e) => {
   const formData = new FormData();
   formData.append("image", image);
-  const data = await dispatch(updateImageFile(formData));
+  await dispatch(updateImageFile(formData));
+  closeModal();
 };
 
 
@@ -50,7 +51,7 @@ return (
             ? "send-invite-to-workspace-noinput"
             : "send-invite-to-workspace"
         }
-        onClick={handleSubmit}
+        onClick={(e) => handleSubmit(e)}
       >
         Submit
       </button>

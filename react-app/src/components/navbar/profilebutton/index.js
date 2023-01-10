@@ -8,7 +8,7 @@ function ProfileButton({ user }) {
 
   const [showMenu, setShowMenu] = useState(false);
   const [showModal, setShowModal] = useState(false);
-
+  
   const openMenu = () => {
     if (showMenu) return;
     setShowMenu(true);

@@ -33,7 +33,7 @@ const FeedHeader = () => {
                 : chat?.user_one.last_name}
             </h1>
           )}
-          {channelId && <div className="channel-name-top-bar"><h2>{channel.name}</h2></div>}
+          {channelId && <div className="channel-name-top-bar"><h2>{channel?.name}</h2></div>}
           {channelId && (
             <div className="channel-add-info-container">
               <div className="channel-edit-button">
