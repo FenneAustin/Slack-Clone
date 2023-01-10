@@ -14,7 +14,6 @@
   vertical-align: middle;
   justify-content: center;
   display: flex;
-  z-index: 999;
 }
 
 .users-full-name {
@@ -59,7 +58,6 @@
   right: 50px;
   top: 50px;
   border: 1px lightgray solid;
-  z-index: 999;
 }
 
 .logout-btn {

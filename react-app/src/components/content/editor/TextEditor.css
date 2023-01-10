@@ -20,27 +20,17 @@
     cursor: pointer;
     float: right;
     margin-right: 10px;
-
     margin-bottom: 4px;
 }
 
 .blank-msg {
     color: lightgray;
-    font-size: 18px;
+    font-size: 16px;
     cursor: not-allowed;
 }
 
 .btn-send {
     color: green;
-    font-size: 18px;
+    font-size: 16px;
     cursor: pointer;
-}
-
-
-.ProseMirror p.is-editor-empty:first-child::before {
-  color: #adb5bd;
-  content: attr(data-placeholder);
-  float: left;
-  height: 0;
-  pointer-events: none;
 }

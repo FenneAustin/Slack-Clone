@@ -15,6 +15,7 @@ class Message(db.Model, UserMixin):
     channel_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('channels.id')))
     text = db.Column(db.String(255))
     sent_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+
     user = db.relationship("User")
     parent_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('messages.id')))
     direct_message = db.relationship("Chat", back_populates="messages")

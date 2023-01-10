@@ -4,7 +4,6 @@ import CharacterCount from "@tiptap/extension-character-count";
 import StarterKit from "@tiptap/starter-kit";
 import MenuBar from "./MenuBar";
 import {useDispatch, useSelector} from 'react-redux';
-import Placeholder from "@tiptap/extension-placeholder";
 import "./TextEditor.css"
 import { GrSend } from "react-icons/gr";
 import { IoMdSend } from "react-icons/io";
@@ -18,28 +17,10 @@ const TextEditor = () => {
         const [blankMsg, setBlankMsg] = useState(true);
 
         const sessionUser = useSelector((state) => state.session.user);
+        // get the current chat id
         const chatId = useSelector((state) => state.ui.chatId);
+        // get the current channel id
         const channelId = useSelector((state) => state.ui.channelId);
-        const channelName= useSelector((state) => state.channel[channelId]?.name);
-        const chat = useSelector((state) => state.chat[chatId]);
-        const [chatName, setChatName] = useState(null);
-        const [roomType, setRoomType] = useState(null);
-
-        useEffect(() => {
-          if (chatId) {
-            setRoomType('chat')
-            // check if user_one or user_two is the current user and assign the other user's name to chatName
-            if (chat.user_one.id == sessionUser.id) {
-              setChatName(chat.user_two.first_name)
-            }
-            else {
-              setChatName(chat.user_one.first_name)
-            }
-          }
-          else if (channelId) {
-            setRoomType('channel')
-          }
-        },[chatId, channelId, chat])
 
 
         useEffect(() => {
@@ -58,10 +39,6 @@ const TextEditor = () => {
             StarterKit,
             CharacterCount.configure({
               limit: 200,
-            }),
-            Placeholder.configure({
-              placeholder: 'write something...'
-            
             }),
           ],
           onUpdate({ editor }) {
