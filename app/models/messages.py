@@ -16,16 +16,11 @@ class Message(db.Model, UserMixin):
     text = db.Column(db.String(255))
     sent_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     user = db.relationship("User")
-    parent_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('messages.id')))
+    
     direct_message = db.relationship("Chat", back_populates="messages")
     channel = db.relationship("Channel", back_populates="messages") # added last second
-    created_date = db.Column(db.Date, default=datetime.utcnow, nullable=False)
-    updated_date = db.Column(db.Date, default=datetime.utcnow, nullable=False)
 
 
-    replies = db.relationship(
-        'Message', backref=db.backref('parent', remote_side=[id]),
-        lazy='dynamic', cascade='all, delete-orphan')
 
     def to_dict(self):
         return {
