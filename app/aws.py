@@ -3,9 +3,10 @@ import botocore
 import os
 import uuid
 import eventlet
+eventlet.monkey_patch()
 from boto3.s3.transfer import TransferConfig
 
-eventlet.monkey_patch()
+
 
 CONFIG = TransferConfig(use_threads=False)
 
