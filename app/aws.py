@@ -1,9 +1,9 @@
+import eventlet
+eventlet.monkey_patch()
 import boto3
 import botocore
 import os
 import uuid
-import eventlet
-eventlet.monkey_patch()
 from boto3.s3.transfer import TransferConfig
 
 
