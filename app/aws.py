@@ -5,7 +5,7 @@ import uuid
 import eventlet
 # from boto3.s3.transfer import TransferConfig
 
-# eventlet.monkey_patch()
+eventlet.monkey_patch()
 
 # CONFIG = TransferConfig(use_threads_False)
 
