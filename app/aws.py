@@ -3,11 +3,11 @@ import botocore
 import os
 import uuid
 import eventlet
-# from boto3.s3.transfer import TransferConfig
+from boto3.s3.transfer import TransferConfig
 
 eventlet.monkey_patch()
 
-# CONFIG = TransferConfig(use_threads_False)
+CONFIG = TransferConfig(use_threads=False)
 
 ALLOWED_EXTENSIONS = {"pdf", "png", "jpg", "jpeg", "gif"}
 BUCKET_NAME = os.environ.get("S3_BUCKET")
@@ -37,7 +37,8 @@ def upload_file_to_s3(file, acl="public-read"):
             ExtraArgs={
                 "ACL": acl,
                 "ContentType": file.content_type
-            }
+            },
+            config=CONFIG
         )
     except Exception as e:
         # in case the our s3 upload fails
