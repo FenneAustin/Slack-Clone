@@ -14,12 +14,14 @@ class Message(db.Model, UserMixin):
     chat_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('chats.id')))
     channel_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('channels.id')))
     text = db.Column(db.String(255))
+    parent_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('messages.id')))
     sent_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     user = db.relationship("User")
-    
     direct_message = db.relationship("Chat", back_populates="messages")
     channel = db.relationship("Channel", back_populates="messages") # added last second
-
+    replies = db.relationship(
+        'Message', backref=db.backref('parent', remote_side=[id]),
+        lazy='dynamic', cascade='all, delete-orphan')
 
 
     def to_dict(self):
