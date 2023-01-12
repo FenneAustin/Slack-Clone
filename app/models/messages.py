@@ -25,11 +25,13 @@ class Message(db.Model, UserMixin):
 
 
     def to_dict(self):
+        num_replies = db.session.query(Message).filter(Message.parent_id == self.id).count()
         return {
             'id': self.id,
             'user' : self.user.to_dict(),
             'text': self.text,
             'sent_date': self.sent_date,
+            'num_replies': num_replies,
         }
 
 

@@ -23,6 +23,7 @@ class Channel(db.Model, UserMixin):
     messages = db.relationship("Message", cascade="all, delete-orphan") # added last second
 
     def to_dict(self):
+
         return {
             'id': self.id,
             'workspace_id': self.workspace_id,

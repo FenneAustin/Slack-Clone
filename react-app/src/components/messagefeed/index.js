@@ -1,11 +1,8 @@
 import React,{useEffect, useState, useContext} from "react";
-import {useLocation, useParams} from 'react-router-dom'
 import { getAllDMMessages, getAllChannelMessages } from "../../store/message";
 import {useDispatch, useSelector} from 'react-redux'
-import MessageEditor from "./editor/index.js"
 import './index.css';
 import {SocketContext} from '../../context/socket'
-import MessageToolbar from "./messagetoolbar/index.js"
 import Message from "./message/index.js";
 
 const MessageFeed = () => {

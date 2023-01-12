@@ -6,6 +6,7 @@ import { updateExistingMessage, deleteExistingMessage } from "../../../store/mes
 import { useDispatch, useSelector } from "react-redux";
 import {SocketContext} from "../../../context/socket";
 
+
 const Message = ({message, user}) => {
   const dispatch = useDispatch();
 
@@ -122,6 +123,7 @@ const Message = ({message, user}) => {
         handleCancel={handleCancel}
         handleSave={handleSave}
       />
+
     </div>
   ) : null;
 }
