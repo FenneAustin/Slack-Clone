@@ -38,7 +38,7 @@ const FeedHeader = () => {
             <div className="channel-add-info-container">
               <div className="channel-edit-button">
                 <PeopleList channelId={channelId} />
-                <div>{channel.total_members}</div>
+                <div>{channel?.total_members}</div>
               </div>
               <div className="add-people-btn-container">
                 <AddPeopleModal className="add-people-btn" />
