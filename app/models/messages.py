@@ -39,24 +39,24 @@ class Message(db.Model, UserMixin):
             'text': self.text,
             'channel_id': self.channel_id,
             'chat_id': self.chat_id,
-            # 'parent_id': self.parent_id,
+            'parent_id': self.parent_id,
             'created_date': self.created_date,
             'updated_date': self.updated_date
         }
 
-    # def to_dict_special(self, session_user_id):
+    def to_dict_special(self, session_user_id):
 
-    #     num_replies = db.session.query(Message).filter(Message.parent_id == self.id).count()
-    #     return {
-    #         'id': self.id,
-    #         'author': {
-    #                 'user': self.user.to_dict()
-    #         },
-    #         'text': self.text,
-    #         'num_replies': num_replies,
-    #         # 'parent_id': self.parent_id,
-    #         'channel_id': self.channel_id,
-    #         'chat_id': self.chat_id,
-    #         'created_date': self.created_date,
-    #         'updated_date': self.updated_date
-    #     }
+        num_replies = db.session.query(Message).filter(Message.parent_id == self.id).count()
+        return {
+            'id': self.id,
+            'author': {
+                    'user': self.user.to_dict()
+            },
+            'text': self.text,
+            'num_replies': num_replies,
+            'parent_id': self.parent_id,
+            'channel_id': self.channel_id,
+            'chat_id': self.chat_id,
+            'created_date': self.created_date,
+            'updated_date': self.updated_date
+        }
